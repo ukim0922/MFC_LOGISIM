@@ -46,13 +46,13 @@ BOOL CLogiSim_KKLView::PreCreateWindow(CREATESTRUCT& cs)
 
 // CLogiSim_KKLView 그리기
 
-void CLogiSim_KKLView::OnDraw(CDC* /*pDC*/)
+void CLogiSim_KKLView::OnDraw(CDC* pDC)
 {
 	CLogiSim_KKLDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
-	TextOut(NULL, 100, 100, _T("Hello KKL World!"), 1);
+	pDoc->TextOut(NULL, 100, 100, _T("Hello KKL World!"), 1);
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 }
 
