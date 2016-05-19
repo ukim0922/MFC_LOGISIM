@@ -48,7 +48,7 @@ void CChildView::OnPaint()
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 	
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
-	dc.TextOutW(100, 100, _T("Hello KKL World!"));
+	dc.TextOutW(100, 100, _T("수정"));
 	// 그리기 메시지에 대해서는 CWnd::OnPaint()를 호출하지 마십시오.
 }
 
