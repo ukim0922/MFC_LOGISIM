@@ -212,10 +212,17 @@
     <None Include="res\KKL_LOGISIM.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\bmp00001.bmp" />
     <Image Include="res\KKL_LOGISIM.ico" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="KKL_LOGISIM.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
