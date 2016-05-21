@@ -86,3 +86,9 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 void CChildView::twoInputoneOutput() {
 	//두입력한출력 인식하도록?
 }
+
+void CChildView::rotate(CClientDC dc, CDC dcmem, BITMAP bmpinfo) { // 유진 회전
+	dc.StretchBlt(10 + bmpinfo.bmWidth - 1, 10 + bmpinfo.bmHeight - 1,
+		-bmpinfo.bmWidth, -bmpinfo.bmHeight,
+		&dcmem, 0, 0, bmpinfo.bmWidth, bmpinfo.bmHeight, SRCCOPY);
+}
