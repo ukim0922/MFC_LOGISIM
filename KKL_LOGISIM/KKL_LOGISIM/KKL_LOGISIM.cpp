@@ -85,6 +85,8 @@ BOOL CKKL_LOGISIMApp::InitInstance()
 	pFrame->ShowWindow(m_nCmdShow);
 	pFrame->UpdateWindow();
 
+	OnFileNew();
+
 	return TRUE;
 }
 

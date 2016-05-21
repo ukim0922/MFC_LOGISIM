@@ -35,6 +35,8 @@ protected:
 public:
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	void twoInputoneOutput();//유진
+	void twoInputoneOutput();	//유진
+	// not 논리 게이트
+	int GateNOT(CPaintDC & dc, int & InPut);
 };
 

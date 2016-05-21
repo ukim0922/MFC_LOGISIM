@@ -55,10 +55,10 @@ void CChildView::OnPaint()
 	BITMAP andGateinfo;
 	andGate.GetBitmap(&andGateinfo);
 
-	if (/*게이트 추가되면*/1)
-	{
-		gate_result[gate_num - 1] = 'F';  //게이트 생성번호 == 출력번호 하고싶은데 string이 왜안써질까
-	}
+	//if (/*게이트 추가되면*/1)
+	//{
+	//	gate_result[gate_num - 1] = 'F';  //게이트 생성번호 == 출력번호 하고싶은데 string이 왜안써질까
+	//}
 
 	
 	// 그리기 메시지에 대해서는 CWnd::OnPaint()를 호출하지 마십시오.
@@ -85,4 +85,20 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 
 void CChildView::twoInputoneOutput() {
 	//두입력한출력 인식하도록?
+}
+
+// not 논리 게이트
+int CChildView::GateNOT(CPaintDC& dc ,int & InPut)
+{	
+	switch (InPut)
+	{
+	case 0:
+		InPut = 1;
+	case 1:
+		InPut = 0;
+	default:
+		ERROR;
+	}
+	
+	return InPut;
 }
