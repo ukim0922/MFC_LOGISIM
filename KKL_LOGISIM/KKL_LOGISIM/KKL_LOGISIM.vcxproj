@@ -216,7 +216,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\bitmapOR.bmp" />
     <Image Include="res\bitmapNOT.bmp" />
+    <Image Include="res\bitmapAND.bmp" />
     <Image Include="res\bmp00001.bmp" />
     <Image Include="res\KKL_LOGISIM.ico" />
     <Image Include="res\Toolbar.bmp" />

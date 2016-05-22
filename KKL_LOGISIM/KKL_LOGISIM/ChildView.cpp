@@ -79,13 +79,9 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CClientDC dc(this);
 
-	twoInputoneOutput();
 	CWnd::OnLButtonDown(nFlags, point);
 }
 
-void CChildView::twoInputoneOutput() {
-	//두입력한출력 인식하도록?
-}
 
 // not 논리 게이트
 int CChildView::GateNOT(CPaintDC& dc, int & InPut)
@@ -101,6 +97,16 @@ int CChildView::GateNOT(CPaintDC& dc, int & InPut)
 	}
 
 	return InPut;
+}
+
+int CChildView::GateAND(CPaintDC& dc, int Input1, int Input2, int Output) {
+	if (Input1&&Input2) {
+		Output = 1;
+	}
+	else {
+		Output = 0;
+	}
+	return Output;
 }
 void CChildView::rotate(CClientDC dc, CDC dcmem, BITMAP bmpinfo) { // 유진 회전
 	dc.StretchBlt(10 + bmpinfo.bmWidth - 1, 10 + bmpinfo.bmHeight - 1,

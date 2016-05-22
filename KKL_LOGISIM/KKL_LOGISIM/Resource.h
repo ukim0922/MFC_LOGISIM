@@ -7,6 +7,7 @@
 #define IDR_KKL_LOGISIMTYPE             130
 #define ID_WINDOW_MANAGER               131
 #define IDB_BITMAP1                     310
+#define IDB_BITMAP_OR                   310
 #define IDB_BITMAP_AND                  311
 #define IDB_BITMAP_NOT                  312
 

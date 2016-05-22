@@ -81,13 +81,19 @@
     <Image Include="res\Toolbar.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bmp00001.bmp">
+    <Image Include="res\bitmapNOT.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmapAND.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmapOR.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="res\bitmap1.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bitmapNOT.bmp">
+    <Image Include="res\bmp00001.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
