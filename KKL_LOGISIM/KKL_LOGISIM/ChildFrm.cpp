@@ -98,3 +98,11 @@ BOOL CChildFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO
 	// 그렇지 않으면 기본 처리합니다.
 	return CMDIChildWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
+
+//새창 열때 크기 최대화 하여 열기
+void CChildFrame::ActivateFrame(int nCmdShow)
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	nCmdShow = SW_SHOWMAXIMIZED;
+	CMDIChildWnd::ActivateFrame(nCmdShow);
+}
