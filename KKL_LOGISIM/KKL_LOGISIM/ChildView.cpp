@@ -50,11 +50,16 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 void CChildView::OnPaint() 
 {
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
-	CBitmap andGate;
-	andGate.LoadBitmap(IDB_BITMAP_AND);
-	BITMAP andGateinfo;
-	andGate.GetBitmap(&andGateinfo);
+	CBitmap bitmapAND;
+	bitmapAND.LoadBitmap(IDB_BITMAP_AND);
+	BITMAP bmpinfoAND;
+	bitmapAND.GetBitmap(&bmpinfoAND);
 
+	CDC dcmemAND;
+	dcmemAND.CreateCompatibleDC(&dc);
+	dcmemAND.SelectObject(&bitmapAND);	//AND 게이트
+
+	dc.BitBlt(100, 100, bmpinfoAND.bmWidth, bmpinfoAND.bmHeight, &dcmemAND, 0, 0, SRCCOPY);
 	//if (/*게이트 추가되면*/1)
 	//{
 	//	gate_result[gate_num - 1] = 'F';  //게이트 생성번호 == 출력번호 하고싶은데 string이 왜안써질까
@@ -108,7 +113,13 @@ int CChildView::GateAND(CPaintDC& dc, int Input1, int Input2, int Output) {
 	}
 	return Output;
 }
-void CChildView::rotate(CClientDC dc, CDC dcmem, BITMAP bmpinfo) { // 유진 회전
+void CChildView::rotate(CBitmap & bitmap, BITMAP & bmpinfo) { // 유진 회전
+	//http://redstory2010.tistory.com/157
+	CClientDC dc(this);
+	CDC dcmem;
+	dcmem.CreateCompatibleDC(&dc);
+	dcmem.SelectObject(&bitmap);	//AND 게이트
+
 	dc.StretchBlt(10 + bmpinfo.bmWidth - 1, 10 + bmpinfo.bmHeight - 1,
 		-bmpinfo.bmWidth, -bmpinfo.bmHeight,
 		&dcmem, 0, 0, bmpinfo.bmWidth, bmpinfo.bmHeight, SRCCOPY);

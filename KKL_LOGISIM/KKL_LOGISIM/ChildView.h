@@ -35,7 +35,7 @@ protected:
 public:
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	void rotate(CClientDC dc, CDC dcmem, BITMAP bmpinfo);//유진
+	void rotate(CBitmap & bitmap, BITMAP & bmpinfo);//유진
 	// not 논리 게이트
 	int GateNOT(CPaintDC & dc, int & InPut);
 	// and 논리 게이트
