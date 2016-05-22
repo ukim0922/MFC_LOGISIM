@@ -79,3 +79,12 @@ CLogisim_KKLDoc* CLogisim_KKLView::GetDocument() const // 디버그되지 않은 버전은
 
 
 // CLogisim_KKLView 메시지 처리기
+bool CLogisim_KKLView::GateAND(CPaintDC& dc, bool Input1, bool Input2, bool & Output) {
+	if ((Input1&&Input2) == TRUE) {
+		Output = TRUE;
+	}
+	else {
+		Output = FALSE;
+	}
+	return Output;
+}
