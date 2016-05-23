@@ -213,6 +213,7 @@
     <ResourceCompile Include="Logisim_KKL.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\bitmap1.bmp" />
     <Image Include="res\Logisim_KKL.ico" />
     <Image Include="res\Logisim_KKLDoc.ico" />
     <Image Include="res\Toolbar.bmp" />

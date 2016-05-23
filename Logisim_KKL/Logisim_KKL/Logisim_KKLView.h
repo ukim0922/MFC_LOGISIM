@@ -31,6 +31,7 @@ public:
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
 	bool GateAND(CPaintDC& dc, bool Input1, bool Input2, bool & Output);
+	bool GateOR(CPaintDC& dc, bool Input1, bool Input2, bool & Output);
 #endif
 
 protected:
