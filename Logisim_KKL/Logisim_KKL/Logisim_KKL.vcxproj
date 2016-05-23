@@ -185,6 +185,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FixedSplitterWnd.h" />
+    <ClInclude Include="LogisimTree.h" />
     <ClInclude Include="Logisim_KKL.h" />
     <ClInclude Include="Logisim_KKLDoc.h" />
     <ClInclude Include="Logisim_KKLView.h" />
@@ -194,6 +196,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FixedSplitterWnd.cpp" />
+    <ClCompile Include="LogisimTree.cpp" />
     <ClCompile Include="Logisim_KKL.cpp" />
     <ClCompile Include="Logisim_KKLDoc.cpp" />
     <ClCompile Include="Logisim_KKLView.cpp" />
@@ -221,4 +225,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="Logisim_KKL.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
