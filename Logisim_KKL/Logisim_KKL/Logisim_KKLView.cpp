@@ -88,3 +88,14 @@ bool CLogisim_KKLView::GateAND(CPaintDC& dc, bool Input1, bool Input2, bool & Ou
 	}
 	return Output;
 }
+
+bool CLogisim_KKLView::GateOR(CPaintDC& dc, bool Input1, bool Input2, bool & Output) {
+	if ((Input1 == TRUE) || (Input2 == TRUE)) {
+		Output = TRUE;
+	}
+	else 
+	{
+		Output = FALSE;
+	}
+	return Output;
+}
