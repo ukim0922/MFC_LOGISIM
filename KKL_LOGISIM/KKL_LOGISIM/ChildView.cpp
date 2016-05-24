@@ -113,6 +113,18 @@ int CChildView::GateAND(CPaintDC& dc, int Input1, int Input2, int Output) {
 	}
 	return Output;
 }
+
+int CChildView::GateOR(CPaintDC& dc, int Input1, int Input2, int Output) {
+	if ((Input1 == 1) || (Input2 == 1)) {
+		Output = 1;
+	}
+	else {
+		Output = 0;
+	}
+	return Output;
+}
+
+
 void CChildView::rotate(CBitmap & bitmap, BITMAP & bmpinfo) { // 유진 회전
 	//http://redstory2010.tistory.com/157
 	CClientDC dc(this);

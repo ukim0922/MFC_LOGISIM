@@ -39,5 +39,6 @@ public:
 	int GateNOT(CPaintDC & dc, int & InPut);
 	// and 논리 게이트
 	int GateAND(CPaintDC & dc, int Input1, int Input2, int Output);
+	int GateOR(CPaintDC & dc, int Input1, int Input2, int Output);
 };
 
