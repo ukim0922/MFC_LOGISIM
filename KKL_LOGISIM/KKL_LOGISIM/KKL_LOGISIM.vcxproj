@@ -188,6 +188,7 @@
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="KKL_LOGISIM.h" />
+    <ClInclude Include="LibraryTreeCtrl.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="KKL_LOGISIM.cpp" />
+    <ClCompile Include="LibraryTreeCtrl.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -209,14 +211,24 @@
     <ResourceCompile Include="KKL_LOGISIM.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="res\KKL_LOGISIM.rc2" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\bitmapOR.bmp" />
+    <Image Include="res\bitmapNOT.bmp" />
+    <Image Include="res\bitmapAND.bmp" />
+    <Image Include="res\bmp00001.bmp" />
     <Image Include="res\KKL_LOGISIM.ico" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="KKL_LOGISIM.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

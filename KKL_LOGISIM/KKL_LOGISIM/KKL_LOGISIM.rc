@@ -78,7 +78,11 @@ IDR_MAINFRAME           ICON                    "res\\KKL_LOGISIM.ico"
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
-IDB_BITMAP1             BITMAP                  "res\\bitmap1.bmp"
+IDB_BITMAP_OR           BITMAP                  "res\\bitmapOR.bmp"
+
+IDB_BITMAP_AND          BITMAP                  "res\\bitmapAND.bmp"
+
+IDB_BITMAP_NOT          BITMAP                  "res\\bitmapNOT.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

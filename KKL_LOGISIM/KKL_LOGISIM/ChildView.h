@@ -31,5 +31,13 @@ public:
 protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	void rotate(CBitmap & bitmap, BITMAP & bmpinfo);//유진
+	// not 논리 게이트
+	int GateNOT(CPaintDC & dc, int & InPut);
+	// and 논리 게이트
+	int GateAND(CPaintDC & dc, int Input1, int Input2, int Output);
 };
 
