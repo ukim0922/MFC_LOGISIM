@@ -212,6 +212,7 @@
     <None Include="res\KKL_LOGISIM.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\bitmap1.bmp" />
     <Image Include="res\KKL_LOGISIM.ico" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
