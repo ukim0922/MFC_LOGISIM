@@ -186,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FixedSplitterWnd.h" />
+    <ClInclude Include="LogicEngine.h" />
     <ClInclude Include="LogisimTree.h" />
     <ClInclude Include="Logisim_KKL.h" />
     <ClInclude Include="Logisim_KKLDoc.h" />
@@ -197,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FixedSplitterWnd.cpp" />
+    <ClCompile Include="LogicEngine.cpp" />
     <ClCompile Include="LogisimTree.cpp" />
     <ClCompile Include="Logisim_KKL.cpp" />
     <ClCompile Include="Logisim_KKLDoc.cpp" />

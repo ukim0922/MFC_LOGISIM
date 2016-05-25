@@ -14,6 +14,8 @@ protected: // serialization에서만 만들어집니다.
 // 특성입니다.
 public:
 	CLogisim_KKLDoc* GetDocument() const;
+	int x; // 
+	int y; //
 
 // 작업입니다.
 public:
@@ -30,8 +32,6 @@ public:
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
-	bool GateAND(CPaintDC& dc, bool Input1, bool Input2, bool & Output);
-	bool GateOR(CPaintDC& dc, bool Input1, bool Input2, bool & Output);
 #endif
 
 protected:

@@ -11,6 +11,7 @@
 
 #include "Logisim_KKLDoc.h"
 #include "Logisim_KKLView.h"
+#include "LogicEngine.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -48,13 +49,22 @@ BOOL CLogisim_KKLView::PreCreateWindow(CREATESTRUCT& cs)
 
 // CLogisim_KKLView 그리기
 
-void CLogisim_KKLView::OnDraw(CDC* /*pDC*/)
+void CLogisim_KKLView::OnDraw(CDC* pDC)
 {
 	CLogisim_KKLDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
+	//TEST
+	LogicEngine a,b;
+	bool input1 = TRUE;
+	bool input2 = TRUE;
+	a.gate(AND, input1, input2);
+	b.gate(OR, a.Output, a.Output);
 
+	CString str;
+	str.Format(_T("%d %d"), a.Output,b.Output);
+	pDC->TextOut(200, 30, str);
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 }
 
@@ -79,28 +89,6 @@ CLogisim_KKLDoc* CLogisim_KKLView::GetDocument() const // 디버그되지 않은 버전은
 }
 #endif //_DEBUG
 
-
-// CLogisim_KKLView 메시지 처리기
-bool CLogisim_KKLView::GateAND(CPaintDC& dc, bool Input1, bool Input2, bool & Output) {
-	if ((Input1&&Input2) == TRUE) {
-		Output = TRUE;
-	}
-	else {
-		Output = FALSE;
-	}
-	return Output;
-}
-
-bool CLogisim_KKLView::GateOR(CPaintDC& dc, bool Input1, bool Input2, bool & Output) {
-	if ((Input1 == TRUE) || (Input2 == TRUE)) {
-		Output = TRUE;
-	}
-	else 
-	{
-		Output = FALSE;
-	}
-	return Output;
-}
 
 
 void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
