@@ -84,6 +84,8 @@ IDB_BITMAP1             BITMAP                  "res\\bitmap1.bmp"
 
 IDB_BITMAP2             BITMAP                  "res\\bitmap2.bmp"
 
+IDB_BITMAP_NOT          BITMAP                  "res\\bitmapNOT.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

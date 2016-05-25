@@ -14,13 +14,11 @@ public:
 	int Px, Py; //클릭 좌표값 받음
 
 
-	void gate(GateSelect Select, bool& input1, bool& input2); // gate 기능 구현
+	void Gate(GateSelect Select, bool& input1, bool& input2); // gate 기능 구현
+	void Gate(GateSelect Select, bool& input1);
 
-	/*bool GetOutput() {
-		return Output;
-	}*/
 	bool Output;
-	//bool Set
+
 
 private:
 	

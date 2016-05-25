@@ -11,7 +11,7 @@
 
 #include "Logisim_KKLDoc.h"
 #include "Logisim_KKLView.h"
-#include "LogicEngine.h"
+#include "LogicEngine.h"    //엔진 추가
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -56,14 +56,16 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 	//TEST
-	LogicEngine a,b;
-	bool input1 = TRUE;
+	LogicEngine a, b, c;
+	bool input1 = FALSE;
 	bool input2 = TRUE;
-	a.gate(AND, input1, input2);
-	b.gate(OR, a.Output, a.Output);
+	//a.Gate(AND, input1);
+	//b.Gate(OR, a.Output, a.Output);
+	c.Gate(NOT, input1);
+
 
 	CString str;
-	str.Format(_T("%d %d"), a.Output,b.Output);
+	str.Format(_T("ouput : %d"),c.Output);
 	pDC->TextOut(200, 30, str);
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 }
@@ -105,3 +107,4 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 
 	CView::OnLButtonUp(nFlags, point);
 }
+

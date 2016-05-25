@@ -7,6 +7,7 @@
 #define IDR_Logisim_KKLTYPE             130
 #define IDB_BITMAP1                     310
 #define IDB_BITMAP2                     311
+#define IDB_BITMAP_NOT                  312
 
 // Next default values for new objects
 // 
