@@ -107,4 +107,3 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 
 	CView::OnLButtonUp(nFlags, point);
 }
-

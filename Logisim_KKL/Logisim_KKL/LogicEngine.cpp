@@ -18,6 +18,7 @@ void LogicEngine::Gate(GateSelect Select, bool & Input1, bool & Input2)
 	case AND:
 		break;
 	case OR:
+		LOR(Input1, Input2);
 		break;
 	case NAND:
 		break;
@@ -50,3 +51,14 @@ void LogicEngine::Gate(GateSelect Select, bool & input1)
 	}
 
 }
+void LogicEngine::LOR(bool Input1, bool Input2)  // OR게이트 함수구현
+{
+	if ((Input1 == TRUE) || (Input2 == TRUE)) {
+		Output = TRUE;
+	}
+	else
+	{
+		Output = FALSE;
+	}
+}
+
