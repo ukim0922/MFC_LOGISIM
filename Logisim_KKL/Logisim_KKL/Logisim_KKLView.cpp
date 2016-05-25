@@ -60,7 +60,7 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 	bool input1 = TRUE;
 	bool input2 = TRUE;
 	a.gate(AND, input1, input2);
-	b.gate(OR, a.Output, a.Output);
+	b.gate(OR, input1, input2);
 
 	CString str;
 	str.Format(_T("%d %d"), a.Output,b.Output);

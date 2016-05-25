@@ -12,16 +12,9 @@ public:
 	LogicEngine();
 	virtual ~LogicEngine();
 	int Px, Py; //클릭 좌표값 받음
-
-
 	void gate(GateSelect Select, bool& input1, bool& input2); // gate 기능 구현
-
-	/*bool GetOutput() {
-		return Output;
-	}*/
+	void LOR(bool Input, bool Input2);   // OR게이트 선언
 	bool Output;
-	//bool Set
-
 private:
 	
 	CString Label;

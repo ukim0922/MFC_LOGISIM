@@ -19,7 +19,7 @@ void LogicEngine::gate(GateSelect Select, bool & Input1, bool & Input2)
 
 		break;
 	case OR:
-
+		LOR(Input1,Input2);
 		break;
 	case NOT:
 		break;
@@ -33,6 +33,17 @@ void LogicEngine::gate(GateSelect Select, bool & Input1, bool & Input2)
 		break;
 	}
 
+}
+
+void LogicEngine::LOR(bool Input1, bool Input2)  // OR게이트 함수구현
+{
+	if ((Input1 == TRUE) || (Input2 == TRUE)) {
+		Output = TRUE;
+	}
+	else
+	{
+		Output = FALSE;
+	}
 }
 
 //LogicEngine a;
