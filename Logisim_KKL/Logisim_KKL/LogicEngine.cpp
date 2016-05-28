@@ -16,6 +16,12 @@ void LogicEngine::Gate(GateSelect Select, bool & Input1, bool & Input2)
 	switch (Select)
 	{
 	case AND:
+		if ((Input1&&Input2) == TRUE) {
+			Output = TRUE;
+		}
+		else {
+			Output = FALSE;
+		}
 		break;
 	case OR:
 		LOR(Input1, Input2);
