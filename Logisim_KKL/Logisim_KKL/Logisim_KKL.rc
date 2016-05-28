@@ -86,6 +86,12 @@ IDB_BITMAP2             BITMAP                  "res\\bitmap2.bmp"
 
 IDB_BITMAP_NOT          BITMAP                  "res\\bitmapNOT.bmp"
 
+IDB_BITMAP_NAND         BITMAP                  "res\\bitmapNAND.bmp"
+
+IDB_BITMAP_NOR          BITMAP                  "res\\bitmapNOR.bmp"
+
+IDB_BITMAP_XOR          BITMAP                  "res\\bitmapXOR.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

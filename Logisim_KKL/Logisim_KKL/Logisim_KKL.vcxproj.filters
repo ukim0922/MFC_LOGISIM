@@ -105,5 +105,17 @@
     <Image Include="res\bitmapNOT.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="res\bitmapNAND.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmapNOR.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmap3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmapXOR.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>
