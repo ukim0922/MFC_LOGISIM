@@ -27,8 +27,8 @@ public:
 
 	void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1);	//FF기능 구현
 	void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1, bool & input2);
-	bool Output_Q1;		//플립플롭용 output 변수
-	bool Output_Q2;
+	bool Output_Q1 = TRUE;		//플립플롭용 output 변수
+	bool Output_Q2 = FALSE;
 
 
 private:
