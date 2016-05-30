@@ -69,6 +69,32 @@ void LogicEngine::Gate(GateSelect Select, bool & input1)
 	}
 
 }
+
+void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1) {		//d, t플립플롭
+	switch(Select)
+	{
+	case T_FF:
+		if (input1) {
+			bool temp;
+			temp = Output_Q1;
+			Output_Q1 = Output_Q2;
+			Output_Q2 = temp;
+		}
+		else {
+			//변함이 없음.
+		}
+		break;
+	default:
+		AfxMessageBox(_T("Overloding ERROR"), MB_OKCANCEL); //NOT gate 아닌 경우
+		break;
+
+	}
+}
+
+void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1, bool & input2) {		//jk플립플롭
+
+}
+
 void LogicEngine::LOR(bool Input1, bool Input2)  // OR게이트 함수구현
 {
 	if ((Input1 == TRUE) || (Input2 == TRUE)) {
