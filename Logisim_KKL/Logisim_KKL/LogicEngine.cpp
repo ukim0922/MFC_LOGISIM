@@ -28,21 +28,21 @@ void LogicEngine::Gate(GateSelect Select, bool & Input1, bool & Input2)
 		break;
 	case NAND:
 		if (Input1 && Input2)
-			Output == FALSE;
+			Output = FALSE;
 		else
-			Output == TRUE;
+			Output = TRUE;
 		break;
 	case NOR:
 		if (Input1 || Input2)
-			Output == FALSE;
+			Output = FALSE;
 		else
-			Output == TRUE;
+			Output = TRUE;
 		break;
 	case XOR:
 		if (Input1 == Input2)
-			Output == FALSE;
+			Output = FALSE;
 		else
-			Output == TRUE;
+			Output = TRUE;
 		break;
 	default:
 		AfxMessageBox(_T("Overloding ERROR"), MB_OKCANCEL); //NOT gate ÀÎ °æ¿ì
