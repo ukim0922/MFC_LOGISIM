@@ -12,14 +12,16 @@
 #define IDB_BITMAP_NOR                  314
 #define IDB_BITMAP_XOR                  315
 #define IDB_BITMAP3                     316
+#define IDD_TREEFORMVIEW                317
+#define IDC_TREE1                       1002
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        317
+#define _APS_NEXT_RESOURCE_VALUE        318
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1000
-#define _APS_NEXT_SYMED_VALUE           310
+#define _APS_NEXT_CONTROL_VALUE         1003
+#define _APS_NEXT_SYMED_VALUE           318
 #endif
 #endif

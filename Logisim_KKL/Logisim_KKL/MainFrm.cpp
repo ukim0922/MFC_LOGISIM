@@ -6,7 +6,7 @@
 #include "Logisim_KKL.h"
 #include "Logisim_KKLDoc.h"
 #include "Logisim_KKLView.h"
-#include "LogisimTree.h"
+#include "TreeFormView.h"
 #include "MainFrm.h"
 
 #ifdef _DEBUG
@@ -68,25 +68,25 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
+BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT /*lpcs*/, CCreateContext* pContext)
 {
-	CRect rect;
-	GetClientRect(rect);
-	CSize size1(MulDiv(rect.Width(), 20, 100), ::GetSystemMetrics(SM_CYSCREEN)); // 폭(30%)
-	CSize size2(MulDiv(rect.Width(), 80, 100), ::GetSystemMetrics(SM_CYSCREEN)); // 폭(70%)
-	
+	//CRect rect;
+	//GetClientRect(rect);
+	//CSize size1(MulDiv(rect.Width(), 20, 100), ::GetSystemMetrics(SM_CYSCREEN)); // 폭(30%)
+	//CSize size2(MulDiv(rect.Width(), 80, 100), ::GetSystemMetrics(SM_CYSCREEN)); // 폭(70%)
+	//
 	// create a splitter with 1 row, 2 columns
 	if (!m_wndSplitter.CreateStatic(this, 1, 2)) {
 		TRACE0("Failed to CreateStatic Splitter \n");
 		return FALSE;
 	}
 	// 사용자가 만든 CFormView1 을 좌측에 배치합니다...
-	if (!m_wndSplitter.CreateView(0, 0, RUNTIME_CLASS(CLogisimTree), size1, pContext)) {
+	if (!m_wndSplitter.CreateView(0, 0, RUNTIME_CLASS(CTreeFormView), CSize(300,0), pContext)) {
 		TRACE0("Failed to create CFormView1 pane \n");
 		return FALSE;
 	}
 	// 사용자가 만든 CFormView2 을 우측에 배치합니다...
-	if (!m_wndSplitter.CreateView(0, 1, RUNTIME_CLASS(CLogisim_KKLView), size2, pContext)) {
+	if (!m_wndSplitter.CreateView(0, 1, RUNTIME_CLASS(CLogisim_KKLView), CSize(0,0), pContext)) {
 		TRACE0("Failed to create CFormView2 pane \n");
 		return FALSE;
 	}
