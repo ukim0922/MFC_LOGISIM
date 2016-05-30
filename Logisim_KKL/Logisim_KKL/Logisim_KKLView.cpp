@@ -17,7 +17,23 @@
 #define new DEBUG_NEW
 #endif
 
+struct ANDGATE {
+	CPoint point;
+	ANDGATE(CPoint &point) {
+		this->point = point;
+	}
+	void Paint(CClientDC &dc) {
+		CBitmap bitmap;
+		bitmap.LoadBitmap(IDB_BITMAP2);
+		BITMAP bmpinfo;
+		bitmap.GetBitmap(&bmpinfo);
+		CDC dcmem;
 
+		dcmem.CreateCompatibleDC(&dc);
+		dcmem.SelectObject(&bitmap);
+		dc.BitBlt(point.x, point.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+	}
+};
 // CLogisim_KKLView
 
 IMPLEMENT_DYNCREATE(CLogisim_KKLView, CView)
@@ -53,6 +69,18 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 {
 	CLogisim_KKLDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
+
+	//좌표 표현
+	CRect rect;
+	GetWindowRect(&rect);
+	locPoint.SetSize(0);
+	for (int i = 0; i < rect.Width(); i = i + 15) {
+		for (int j = 0; j < rect.Height(); j = j + 15) {
+			pDC->SetPixelV(i, j, RGB(143, 216, 230));
+			locPoint.Add(CPoint(i, j));
+		}
+	}
+
 	if (!pDoc)
 		return;
 	//TEST
@@ -65,8 +93,10 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 
 
 	CString str;
-	str.Format(_T("ouput : %d"),c.Output);
-	pDC->TextOut(200, 30, str);
+	str.Format(_T("output : %d"),c.Output);
+	pDC->TextOut(200, 200, str);
+
+
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 }
 
@@ -104,6 +134,10 @@ void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
 void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	CClientDC dc(this);
+
+	ANDGATE and(point);
+	and.Paint(dc);
 
 	CView::OnLButtonUp(nFlags, point);
 }

@@ -40,6 +40,7 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
+	CArray<CPoint, CPoint&> locPoint;
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 };

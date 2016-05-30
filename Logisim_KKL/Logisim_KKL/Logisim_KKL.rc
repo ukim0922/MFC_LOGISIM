@@ -92,6 +92,8 @@ IDB_BITMAP_NOR          BITMAP                  "res\\bitmapNOR.bmp"
 
 IDB_BITMAP_XOR          BITMAP                  "res\\bitmapXOR.bmp"
 
+IDB_BITMAP3             BITMAP                  "res\\bitmap3.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
