@@ -11,6 +11,7 @@
 #define IDB_BITMAP_NAND                 313
 #define IDB_BITMAP_NOR                  314
 #define IDB_BITMAP_XOR                  315
+#define IDB_BITMAP3                     316
 #define IDD_TREEFORMVIEW                317
 #define IDC_TREE1                       1002
 

@@ -79,4 +79,3 @@ void LogicEngine::LOR(bool Input1, bool Input2)  // OR게이트 함수구현
 		Output = FALSE;
 	}
 }
-
