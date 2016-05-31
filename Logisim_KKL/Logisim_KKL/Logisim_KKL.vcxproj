@@ -186,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FixedSplitterWnd.h" />
+    <ClInclude Include="GateTreeView.h" />
     <ClInclude Include="LogicEngine.h" />
     <ClInclude Include="Logisim_KKL.h" />
     <ClInclude Include="Logisim_KKLDoc.h" />
@@ -194,10 +195,10 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TreeFormView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FixedSplitterWnd.cpp" />
+    <ClCompile Include="GateTreeView.cpp" />
     <ClCompile Include="LogicEngine.cpp" />
     <ClCompile Include="Logisim_KKL.cpp" />
     <ClCompile Include="Logisim_KKLDoc.cpp" />
@@ -209,7 +210,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TreeFormView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Logisim_KKL.reg" />
