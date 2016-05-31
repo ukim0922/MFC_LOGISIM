@@ -13,6 +13,8 @@
 #include "Logisim_KKLView.h"
 #include "LogicEngine.h"    //엔진 추가
 
+#include <gdiplus.h>
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -34,6 +36,25 @@ struct ANDGATE {
 		dc.BitBlt(point.x, point.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
 	}
 };
+
+void Rotate(CClientDC &dc, CPoint &point) {
+	Bitmap *pBitmap;
+	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(),(WCHAR*)MAKEINTRESOURCE(IDB_BITMAP2));
+	Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
+	int ix, iy;
+	ix = int(pBitmap->GetWidth() / (-2.0));
+	iy = int(pBitmap->GetHeight() / (-2.0));
+
+	Graphics graphics(dc);
+	graphics.SetSmoothingMode(SmoothingModeHighQuality);
+	Graphics tempgx(&tempbmp);
+	tempgx.RotateTransform(90);
+	tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
+	Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth(), iy), Point(ix,iy + pBitmap->GetHeight()) };
+	tempgx.DrawImage(&(*pBitmap), dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
+	graphics.DrawImage(&tempbmp, point.x, point.y);
+
+}
 // CLogisim_KKLView
 
 IMPLEMENT_DYNCREATE(CLogisim_KKLView, CView)
@@ -126,7 +147,7 @@ CLogisim_KKLDoc* CLogisim_KKLView::GetDocument() const // 디버그되지 않은 버전은
 void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-
+	CClientDC dc(this);
 	CView::OnLButtonDown(nFlags, point);
 }
 
@@ -139,5 +160,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	ANDGATE and(point);
 	and.Paint(dc);
 
+
+	Rotate(dc, point);
 	CView::OnLButtonUp(nFlags, point);
 }

@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "LogicEngine.h"
 
+bool clock_pre = TRUE; //클럭변수
+bool clock_cur = TRUE;
+bool h_ck = TRUE; //에지트리거방식 (상승이면true, 하강이면false) 클릭으로받아올예정
 
 LogicEngine::LogicEngine()
 {
@@ -24,7 +27,13 @@ void LogicEngine::Gate(GateSelect Select, bool & Input1, bool & Input2)
 		}
 		break;
 	case OR:
-		LOR(Input1, Input2);
+		if ((Input1 == TRUE) || (Input2 == TRUE)) {
+			Output = TRUE;
+		}
+		else
+		{
+			Output = FALSE;
+		}
 		break;
 	case NAND:
 		if (Input1 && Input2)
@@ -75,13 +84,47 @@ void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1) {		//d, t플립플
 	{
 	case T_FF:
 		if (input1) {
-			bool temp;
-			temp = Output_Q1;
-			Output_Q1 = Output_Q2;
-			Output_Q2 = temp;
+
+			if (h_ck == TRUE) //상승 에지트리거
+			{
+				if (clock_pre == TRUE && clock_cur == FALSE)
+				{
+					bool temp;
+					temp = Output_Q1;
+					Output_Q1 = Output_Q2;
+					Output_Q2 = temp;
+				}
+			}
+			else //하강 에지트리거
+			{
+				if (clock_pre == FALSE && clock_cur == TRUE)
+				{
+					bool temp;
+					temp = Output_Q1;
+					Output_Q1 = Output_Q2;
+					Output_Q2 = temp;
+				}
+			}
 		}
 		else {
 			//변함이 없음.
+		}
+		break;
+
+	case D_FF: //입력 그대로 출력
+		if (h_ck == TRUE) //상승 에지트리거
+		{
+			if (clock_pre == TRUE && clock_cur == FALSE)
+			{
+				Output_Q1 = input1;
+			}
+		}
+		else //하강 에지트리거
+		{
+			if (clock_pre == FALSE && clock_cur == TRUE)
+			{
+				Output_Q1 = input1;
+			}
 		}
 		break;
 	default:
@@ -95,13 +138,3 @@ void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1, bool & input2) 
 
 }
 
-void LogicEngine::LOR(bool Input1, bool Input2)  // OR게이트 함수구현
-{
-	if ((Input1 == TRUE) || (Input2 == TRUE)) {
-		Output = TRUE;
-	}
-	else
-	{
-		Output = FALSE;
-	}
-}

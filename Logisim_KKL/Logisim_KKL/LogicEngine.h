@@ -20,8 +20,6 @@ public:
 
 	void Gate(GateSelect Select, bool& input1, bool& input2); // gate 기능 구현
 	void Gate(GateSelect Select, bool& input1);
-
-	void LOR(bool Input, bool Input2);   // OR게이트 선언
 	bool Output;
 
 
