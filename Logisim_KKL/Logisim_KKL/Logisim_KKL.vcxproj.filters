@@ -117,5 +117,8 @@
     <Image Include="res\bitmapXOR.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="res\MAINFRAME.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>

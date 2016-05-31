@@ -228,6 +228,7 @@
     <Image Include="res\bitmapXOR.bmp" />
     <Image Include="res\Logisim_KKL.ico" />
     <Image Include="res\Logisim_KKLDoc.ico" />
+    <Image Include="res\MAINFRAME.bmp" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
