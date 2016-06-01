@@ -34,7 +34,7 @@ private:
 	CString Label;
 };
 
-
+//게이트
 class ANDGATE {
 public:
 	CPoint point;
@@ -77,6 +77,9 @@ public:
 	void Paint(CClientDC &dc);
 	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
 };
+
+
+//플립플롭
 class TFF {
 public:
 	CPoint point;
@@ -84,6 +87,9 @@ public:
 	void Paint(CClientDC &dc);
 	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
 };
+
+
+//1비트출력램프
 class BITLAMP {
 public:
 	CPoint point;
