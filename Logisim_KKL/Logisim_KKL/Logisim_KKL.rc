@@ -98,6 +98,8 @@ IDB_BITMAP_TFF          BITMAP                  "res\\bitmap4.bmp"
 
 IDB_BITMAP_LOFF         BITMAP                  "res\\bmp00001.bmp"
 
+IDB_BITMAP_JKFF             BITMAP                  "res\\bitmapJKFF.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -228,6 +228,8 @@
     <Image Include="res\bitmapNOT.bmp" />
     <Image Include="res\bitmapXOR.bmp" />
     <Image Include="res\bmp00001.bmp" />
+    <Image Include="res\bitmapJKFF.bmp" />
+    <Image Include="res\bmp00002.bmp" />
     <Image Include="res\Logisim_KKL.ico" />
     <Image Include="res\Logisim_KKLDoc.ico" />
     <Image Include="res\Toolbar.bmp" />

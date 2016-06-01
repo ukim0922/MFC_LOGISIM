@@ -10,6 +10,37 @@ LogicEngine::LogicEngine()
 {
 }
 
+void LogicEngine::Paint(CClientDC & dc)
+{
+	CBitmap bitmap;
+	bitmap.LoadBitmap(BITMAPID);
+	BITMAP bmpinfo;
+	bitmap.GetBitmap(&bmpinfo);
+	CDC dcmem;
+
+	dcmem.CreateCompatibleDC(&dc);
+	dcmem.SelectObject(&bitmap);
+	dc.BitBlt(MPoint.x, MPoint.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+}
+
+void LogicEngine::Rotate(CClientDC & dc, CPoint & point, Gdiplus::REAL angle)
+{
+	Bitmap *pBitmap;
+	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(BITMAPID));
+	Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
+	int ix, iy;
+	ix = int(pBitmap->GetWidth() / (-2.0));
+	iy = int(pBitmap->GetHeight() / (-2.0));
+
+	Graphics graphics(dc);
+	graphics.SetSmoothingMode(SmoothingModeHighQuality);
+	Graphics tempgx(&tempbmp);
+	tempgx.RotateTransform(angle);
+	tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
+	Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
+	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
+	graphics.DrawImage(&tempbmp, point.x, point.y);
+}
 
 LogicEngine::~LogicEngine()
 {
@@ -140,38 +171,38 @@ void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1, bool & input2) 
 }
 
 //AND게이트
-ANDGATE::ANDGATE(CPoint &point) {
-	this->point = point;
-}
-void ANDGATE::Paint(CClientDC &dc) {
-	CBitmap bitmap;
-	bitmap.LoadBitmap(IDB_BITMAP_AND);
-	BITMAP bmpinfo;
-	bitmap.GetBitmap(&bmpinfo);
-	CDC dcmem;
-
-	dcmem.CreateCompatibleDC(&dc);
-	dcmem.SelectObject(&bitmap);
-	dc.BitBlt(point.x, point.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
-}
-void ANDGATE::Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle) {
-	Bitmap *pBitmap;
-	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP_AND));
-	Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
-	int ix, iy;
-	ix = int(pBitmap->GetWidth() / (-2.0));
-	iy = int(pBitmap->GetHeight() / (-2.0));
-
-	Graphics graphics(dc);
-	graphics.SetSmoothingMode(SmoothingModeHighQuality);
-	Graphics tempgx(&tempbmp);
-	tempgx.RotateTransform(angle);
-	tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
-	Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
-	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
-	graphics.DrawImage(&tempbmp, point.x, point.y);
-
-}
+//ANDGATE::ANDGATE(CPoint MPoint) {
+//	this->MPoint = MPoint;
+//}
+//void ANDGATE::Paint(CClientDC &dc) {
+//	CBitmap bitmap;
+//	bitmap.LoadBitmap(IDB_BITMAP_AND);
+//	BITMAP bmpinfo;
+//	bitmap.GetBitmap(&bmpinfo);
+//	CDC dcmem;
+//
+//	dcmem.CreateCompatibleDC(&dc);
+//	dcmem.SelectObject(&bitmap);
+//	dc.BitBlt(point.x, point.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+//}
+//void ANDGATE::Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle) {
+//	Bitmap *pBitmap;
+//	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP_AND));
+//	Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
+//	int ix, iy;
+//	ix = int(pBitmap->GetWidth() / (-2.0));
+//	iy = int(pBitmap->GetHeight() / (-2.0));
+//
+//	Graphics graphics(dc);
+//	graphics.SetSmoothingMode(SmoothingModeHighQuality);
+//	Graphics tempgx(&tempbmp);
+//	tempgx.RotateTransform(angle);
+//	tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
+//	Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
+//	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
+//	graphics.DrawImage(&tempbmp, point.x, point.y);
+//
+//}
 
 
 //OR게이트
@@ -411,3 +442,7 @@ void BITLAMP::Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle) {
 	graphics.DrawImage(&tempbmp, point.x, point.y);
 
 }
+
+//ANDGATE::~ANDGATE()
+//{
+//}
