@@ -17,7 +17,6 @@
 #define new DEBUG_NEW
 #endif
 
-
 struct ANDGATE {
 	CPoint point;
 	ANDGATE(CPoint &point) {
@@ -34,96 +33,6 @@ struct ANDGATE {
 		dcmem.SelectObject(&bitmap);
 		dc.BitBlt(point.x, point.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
 	}
-	void Rotate(CClientDC &dc, CPoint &point, int angle) {
-		Bitmap *pBitmap;
-		pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP2));
-		Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
-		int ix, iy;
-		ix = int(pBitmap->GetWidth() / (-2.0));
-		iy = int(pBitmap->GetHeight() / (-2.0));
-
-		Graphics graphics(dc);
-		graphics.SetSmoothingMode(SmoothingModeHighQuality);
-		Graphics tempgx(&tempbmp);
-		tempgx.RotateTransform(angle);
-		tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
-		Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
-		tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
-		graphics.DrawImage(&tempbmp, point.x, point.y);
-
-	}
-};
-
-struct ORGATE {
-	CPoint point;
-	ORGATE(CPoint &point) {
-		this->point = point;
-	}
-	void Paint(CClientDC &dc) {
-		CBitmap bitmap;
-		bitmap.LoadBitmap(IDB_BITMAP1);
-		BITMAP bmpinfo;
-		bitmap.GetBitmap(&bmpinfo);
-		CDC dcmem;
-
-		dcmem.CreateCompatibleDC(&dc);
-		dcmem.SelectObject(&bitmap);
-		dc.BitBlt(point.x, point.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
-	}
-	void Rotate(CClientDC &dc, CPoint &point, int angle) {
-		Bitmap *pBitmap;
-		pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP1));
-		Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
-		int ix, iy;
-		ix = int(pBitmap->GetWidth() / (-2.0));
-		iy = int(pBitmap->GetHeight() / (-2.0));
-
-		Graphics graphics(dc);
-		graphics.SetSmoothingMode(SmoothingModeHighQuality);
-		Graphics tempgx(&tempbmp);
-		tempgx.RotateTransform(angle);
-		tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
-		Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
-		tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
-		graphics.DrawImage(&tempbmp, point.x, point.y);
-
-	}
-};
-
-struct XORGATE {
-	CPoint point;
-	XORGATE(CPoint &point) {
-		this->point = point;
-	}
-	void Paint(CClientDC &dc) {
-		CBitmap bitmap;
-		bitmap.LoadBitmap(IDB_BITMAP1);
-		BITMAP bmpinfo;
-		bitmap.GetBitmap(&bmpinfo);
-		CDC dcmem;
-
-		dcmem.CreateCompatibleDC(&dc);
-		dcmem.SelectObject(&bitmap);
-		dc.BitBlt(point.x, point.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
-	}
-	void Rotate(CClientDC &dc, CPoint &point, int angle) {
-		Bitmap *pBitmap;
-		pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP1));
-		Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
-		int ix, iy;
-		ix = int(pBitmap->GetWidth() / (-2.0));
-		iy = int(pBitmap->GetHeight() / (-2.0));
-
-		Graphics graphics(dc);
-		graphics.SetSmoothingMode(SmoothingModeHighQuality);
-		Graphics tempgx(&tempbmp);
-		tempgx.RotateTransform(angle);
-		tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
-		Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
-		tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
-		graphics.DrawImage(&tempbmp, point.x, point.y);
-
-	}
 };
 // CLogisim_KKLView
 
@@ -132,8 +41,6 @@ IMPLEMENT_DYNCREATE(CLogisim_KKLView, CView)
 BEGIN_MESSAGE_MAP(CLogisim_KKLView, CView)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_LBUTTONUP()
-//	ON_WM_LBUTTONDBLCLK()
-ON_WM_RBUTTONUP()
 END_MESSAGE_MAP()
 
 // CLogisim_KKLView 생성/소멸
@@ -224,7 +131,7 @@ CLogisim_KKLDoc* CLogisim_KKLView::GetDocument() const // 디버그되지 않은 버전은
 void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	CClientDC dc(this);
+
 	CView::OnLButtonDown(nFlags, point);
 }
 
@@ -238,15 +145,4 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	and.Paint(dc);
 
 	CView::OnLButtonUp(nFlags, point);
-}
-
-
-
-
-void CLogisim_KKLView::OnRButtonUp(UINT nFlags, CPoint point)
-{
-	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	CClientDC dc(this);
-	//Rotate(dc, point);
-	CView::OnRButtonUp(nFlags, point);
 }

@@ -45,7 +45,7 @@
     <ClInclude Include="LogicEngine.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GateTreeView.h">
+    <ClInclude Include="TreeFormView.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,7 +71,7 @@
     <ClCompile Include="LogicEngine.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GateTreeView.cpp">
+    <ClCompile Include="TreeFormView.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -115,6 +115,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="res\bitmapXOR.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\MAINFRAME.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
