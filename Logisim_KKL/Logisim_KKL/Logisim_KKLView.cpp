@@ -83,7 +83,7 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 	str.Format(_T("output : %d"),c.Output);
 	pDC->TextOut(200, 200, str);
 	
-	pDC->TextOutW(200, 250, gatename);
+
 
 	
 
@@ -118,6 +118,12 @@ void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CClientDC dc(this);
+	/*if (selected == true) {*/
+		dc.TextOut(200, 250, gatename);
+	/*	selected = false;
+		Invalidate();
+	}*/
+	//Invalidate();
 	CView::OnLButtonDown(nFlags, point);
 }
 

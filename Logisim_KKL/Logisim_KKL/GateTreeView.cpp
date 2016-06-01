@@ -22,8 +22,8 @@ CGateTreeView::~CGateTreeView()
 
 BEGIN_MESSAGE_MAP(CGateTreeView, CTreeView)
 	ON_WM_CREATE()
-//	ON_NOTIFY_REFLECT(TVN_SELCHANGED, &CGateTreeView::OnTvnSelchanged)
 	ON_NOTIFY_REFLECT(TVN_SELCHANGING, &CGateTreeView::OnTvnSelchanging)
+	ON_NOTIFY_REFLECT(TVN_SELCHANGED, &CGateTreeView::OnTvnSelchanged)
 END_MESSAGE_MAP()
 
 
@@ -98,19 +98,21 @@ BOOL CGateTreeView::PreCreateWindow(CREATESTRUCT& cs)
 }
 
 
-//void CGateTreeView::OnTvnSelchanged(NMHDR *pNMHDR, LRESULT *pResult)
-//{
-//	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
-//	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-//
-//	
-//	*pResult = 0;
-//}
-
 
 void CGateTreeView::OnTvnSelchanging(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+
+	*pResult = 0;
+}
+
+
+void CGateTreeView::OnTvnSelchanged(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CTreeCtrl & tree = GetTreeCtrl();
 	HTREEITEM hItem = tree.GetSelectedItem();
@@ -118,6 +120,7 @@ void CGateTreeView::OnTvnSelchanging(NMHDR *pNMHDR, LRESULT *pResult)
 	CString str = tree.GetItemText(hItem);
 
 	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
+	pFrame->m_pLogisimView->selected = tree.GetItemData(pNMTreeView->itemNew.hItem);
 	pFrame->m_pLogisimView->gatename = str;
 
 	*pResult = 0;
