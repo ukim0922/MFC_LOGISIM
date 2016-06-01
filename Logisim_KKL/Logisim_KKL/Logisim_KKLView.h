@@ -45,6 +45,7 @@ public:
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 //	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
+	CString gatename;
 };
 
 #ifndef _DEBUG  // Logisim_KKLView.cpp의 디버그 버전
