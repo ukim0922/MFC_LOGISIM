@@ -46,6 +46,7 @@ END_MESSAGE_MAP()
 // CLogisim_KKLView 생성/소멸
 
 CLogisim_KKLView::CLogisim_KKLView()
+	: gatename(_T(""))
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
 
@@ -95,6 +96,10 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 	CString str;
 	str.Format(_T("output : %d"),c.Output);
 	pDC->TextOut(200, 200, str);
+	
+	pDC->TextOutW(200, 250, gatename);
+
+	
 
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
