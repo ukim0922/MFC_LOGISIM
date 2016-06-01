@@ -5,13 +5,13 @@
 #define IDD_ABOUTBOX                    100
 #define IDR_MAINFRAME                   128
 #define IDR_Logisim_KKLTYPE             130
-#define IDB_BITMAP1                     310
-#define IDB_BITMAP2                     311
+#define IDB_BITMAP_OR                   310
+#define IDB_BITMAP_AND                  311
 #define IDB_BITMAP_NOT                  312
 #define IDB_BITMAP_NAND                 313
 #define IDB_BITMAP_NOR                  314
 #define IDB_BITMAP_XOR                  315
-#define IDB_BITMAP3                     316
+#define IDB_BITMAP_LON                  316
 #define IDD_TREEFORMVIEW                317
 
 // Next default values for new objects
