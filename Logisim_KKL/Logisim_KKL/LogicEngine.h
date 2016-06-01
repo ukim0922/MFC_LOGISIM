@@ -32,6 +32,62 @@ public:
 private:
 	
 	CString Label;
-	
 };
 
+
+class ANDGATE {
+public:
+	CPoint point;
+	ANDGATE(CPoint &point);
+	void Paint(CClientDC &dc);
+	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+};
+class ORGATE {
+public:
+	CPoint point;
+	ORGATE(CPoint &point);
+	void Paint(CClientDC &dc);
+	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+};
+class XORGATE {
+public:
+	CPoint point;
+	XORGATE(CPoint &point);
+	void Paint(CClientDC &dc);
+	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+};
+class NANDGATE {
+public:
+	CPoint point;
+	NANDGATE(CPoint &point);
+	void Paint(CClientDC &dc);
+	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+};
+class NORGATE {
+public:
+	CPoint point;
+	NORGATE(CPoint &point);
+	void Paint(CClientDC &dc);
+	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+};
+class NOTGATE {
+public:
+	CPoint point;
+	NOTGATE(CPoint &point);
+	void Paint(CClientDC &dc);
+	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+};
+class TFF {
+public:
+	CPoint point;
+	TFF(CPoint &point);
+	void Paint(CClientDC &dc);
+	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+};
+class BITLAMP {
+public:
+	CPoint point;
+	BITLAMP(CPoint &point);
+	void Paint(CClientDC &dc);
+	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+};

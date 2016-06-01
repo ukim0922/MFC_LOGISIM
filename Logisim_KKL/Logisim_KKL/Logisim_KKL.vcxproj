@@ -222,10 +222,12 @@
     <Image Include="res\bitmap1.bmp" />
     <Image Include="res\bitmap2.bmp" />
     <Image Include="res\bitmap3.bmp" />
+    <Image Include="res\bitmap4.bmp" />
     <Image Include="res\bitmapNAND.bmp" />
     <Image Include="res\bitmapNOR.bmp" />
     <Image Include="res\bitmapNOT.bmp" />
     <Image Include="res\bitmapXOR.bmp" />
+    <Image Include="res\bmp00001.bmp" />
     <Image Include="res\Logisim_KKL.ico" />
     <Image Include="res\Logisim_KKLDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
