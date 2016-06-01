@@ -49,6 +49,14 @@ BOOL CLogisim_KKLApp::InitInstance()
 {
 	CWinApp::InitInstance();
 
+	//gdi플러스 사용을 위한 코드 추가
+	GdiplusStartupInput gdiplusStartupInput;
+	if (::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL) != Ok)
+	{
+		AfxMessageBox(TEXT("ERROR: Failed to initialize GDI+ library!"));
+		return FALSE;
+	}
+
 
 	EnableTaskbarInteraction(FALSE);
 
@@ -149,3 +157,11 @@ void CLogisim_KKLApp::OnAppAbout()
 
 
 
+
+
+int CLogisim_KKLApp::ExitInstance()
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	::GdiplusShutdown(gdiplusToken);
+	return CWinApp::ExitInstance();
+}
