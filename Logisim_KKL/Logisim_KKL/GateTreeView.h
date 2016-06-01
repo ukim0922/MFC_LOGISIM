@@ -24,6 +24,8 @@ protected:
 public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+//	afx_msg void OnTvnSelchanged(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnTvnSelchanging(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 

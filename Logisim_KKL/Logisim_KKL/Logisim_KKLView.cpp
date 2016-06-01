@@ -17,7 +17,23 @@
 #define new DEBUG_NEW
 #endif
 
+struct ANDGATE {
+	CPoint point;
+	ANDGATE(CPoint &point) {
+		this->point = point;
+	}
+	void Paint(CClientDC &dc) {
+		CBitmap bitmap;
+		bitmap.LoadBitmap(IDB_BITMAP2);
+		BITMAP bmpinfo;
+		bitmap.GetBitmap(&bmpinfo);
+		CDC dcmem;
 
+		dcmem.CreateCompatibleDC(&dc);
+		dcmem.SelectObject(&bitmap);
+		dc.BitBlt(point.x, point.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+	}
+};
 // CLogisim_KKLView
 
 IMPLEMENT_DYNCREATE(CLogisim_KKLView, CView)
@@ -25,13 +41,12 @@ IMPLEMENT_DYNCREATE(CLogisim_KKLView, CView)
 BEGIN_MESSAGE_MAP(CLogisim_KKLView, CView)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_LBUTTONUP()
-//	ON_WM_LBUTTONDBLCLK()
-ON_WM_RBUTTONUP()
 END_MESSAGE_MAP()
 
 // CLogisim_KKLView 생성/소멸
 
 CLogisim_KKLView::CLogisim_KKLView()
+	: gatename(_T(""))
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
 
@@ -81,6 +96,10 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 	CString str;
 	str.Format(_T("output : %d"),c.Output);
 	pDC->TextOut(200, 200, str);
+	
+	pDC->TextOutW(200, 250, gatename);
+
+	
 
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
@@ -112,7 +131,7 @@ CLogisim_KKLDoc* CLogisim_KKLView::GetDocument() const // 디버그되지 않은 버전은
 void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	CClientDC dc(this);
+
 	CView::OnLButtonDown(nFlags, point);
 }
 
@@ -126,17 +145,4 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	and.Paint(dc);
 
 	CView::OnLButtonUp(nFlags, point);
-}
-
-
-
-
-void CLogisim_KKLView::OnRButtonUp(UINT nFlags, CPoint point)
-{
-	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	CClientDC dc(this);
-	BITLAMP b(point);
-	b.Rotate(dc, point,360);
-
-	CView::OnRButtonUp(nFlags, point);
 }

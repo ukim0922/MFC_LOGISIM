@@ -4,6 +4,9 @@
 
 #pragma once
 #include "FixedSplitterWnd.h"
+#include "Logisim_KKLDoc.h"
+#include "Logisim_KKLView.h"
+#include "GateTreeView.h"
 
 class CMainFrame : public CFrameWnd
 {
@@ -15,7 +18,10 @@ protected: // serialization에서만 만들어집니다.
 // 특성입니다.
 protected:
 	CFixedSplitterWnd m_wndSplitter;
+
 public:
+	CLogisim_KKLView*  m_pLogisimView;
+	CGateTreeView*	   m_pTreeView;
 
 // 작업입니다.
 public:

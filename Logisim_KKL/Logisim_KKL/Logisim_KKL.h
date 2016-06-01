@@ -22,13 +22,11 @@ public:
 
 // 재정의입니다.
 public:
-	ULONG_PTR gdiplusToken;
 	virtual BOOL InitInstance();
 
 // 구현입니다.
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
-	virtual int ExitInstance();
 };
 
 extern CLogisim_KKLApp theApp;

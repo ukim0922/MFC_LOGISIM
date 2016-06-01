@@ -6,7 +6,7 @@
 #include "Logisim_KKL.h"
 #include "Logisim_KKLDoc.h"
 #include "Logisim_KKLView.h"
-#include "GateTreeView.h"
+#include "TreeFormView.h"
 #include "MainFrm.h"
 
 #ifdef _DEBUG
@@ -81,7 +81,7 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT /*lpcs*/, CCreateContext* pContex
 		return FALSE;
 	}
 	// 사용자가 만든 CFormView1 을 좌측에 배치합니다...
-	if (!m_wndSplitter.CreateView(0, 0, RUNTIME_CLASS(CGateTreeView), CSize(300,0), pContext)) {
+	if (!m_wndSplitter.CreateView(0, 0, RUNTIME_CLASS(CTreeFormView), CSize(300,0), pContext)) {
 		TRACE0("Failed to create CFormView1 pane \n");
 		return FALSE;
 	}
@@ -90,6 +90,10 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT /*lpcs*/, CCreateContext* pContex
 		TRACE0("Failed to create CFormView2 pane \n");
 		return FALSE;
 	}
+
+	m_pLogisimView = (CLogisim_KKLView*)m_wndSplitter.GetPane(0,1);
+	m_pTreeView = (CGateTreeView*)m_wndSplitter.GetPane(0,0);
+
 	SetActiveView((CView *)m_wndSplitter.GetPane(0, 0));
 	return TRUE;
 	
