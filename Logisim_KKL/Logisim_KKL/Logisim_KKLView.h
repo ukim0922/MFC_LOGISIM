@@ -45,7 +45,7 @@ public:
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 };
 
-#ifndef _DEBUG  // Logisim_KKLView.cpp의 디버그 버전
+#ifndef _DEBUG  // Logisim_KKLView.cpp의 디버그 버전//
 inline CLogisim_KKLDoc* CLogisim_KKLView::GetDocument() const
    { return reinterpret_cast<CLogisim_KKLDoc*>(m_pDocument); }
 #endif
