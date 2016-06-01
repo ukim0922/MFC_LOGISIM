@@ -120,6 +120,12 @@ void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
 	CClientDC dc(this);
 	/*if (selected == true) {*/
 		dc.TextOut(200, 250, gatename);
+	
+		if (selected) {
+			dc.TextOutW(200, 300, _T("TRUE"));
+		}
+		else
+			dc.TextOutW(200, 300, _T("FALSE"));
 	/*	selected = false;
 		Invalidate();
 	}*/
@@ -132,14 +138,50 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CClientDC dc(this);
+	{
+		if (gatename == "AND") {
+			ANDGATE and(point,IDB_BITMAP_AND);
+			and.Paint(dc);
+			gatename = "";
+		}
+		else if (gatename == "OR") {
+			ORGATE or(point, IDB_BITMAP_OR);
+			or.Paint(dc);
+			gatename = "";
+		}
+		else if (gatename == "NOT") {
+			NOTGATE not (point, IDB_BITMAP_NOT);
+			not.Paint(dc);
+			gatename = "";
+		}
+		else if (gatename == "NAND") {
+			NANDGATE nand(point, IDB_BITMAP_NAND);
+			nand.Paint(dc);
+			gatename = "";
+		}
+		else if (gatename == "NOR") {
+			NORGATE nor(point, IDB_BITMAP_NOR);
+			nor.Paint(dc);
+			gatename = "";
+		}
+		else if (gatename == "XOR") {
+			XORGATE xor (point, IDB_BITMAP_XOR);
+			xor.Paint(dc);
+			gatename = "";
+		}
+		else if (gatename == "D-FF") {
 
-	ANDGATE and;
-	and.BITMAPID = IDB_BITMAP_AND;
-	and.MPoint = point;
+		}
+		else if (gatename == "JK-FF") {
 
-	and.Paint(dc);
+		}
+		else if (gatename == "T-FF") {
 
-	CView::OnLButtonUp(nFlags, point);
+		}
+
+
+		CView::OnLButtonUp(nFlags, point);
+	}
 }
 
 

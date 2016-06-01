@@ -66,25 +66,27 @@ int CGateTreeView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// 항목 추가
 	/*1레벨 초기화*/
 	HTREEITEM hGATE = tree.InsertItem(_T("GATE"), 0, 0, TVI_ROOT, TVI_LAST);
+	tree.InsertItem(_T("AND"), 1, 1, hGATE, TVI_LAST);
+	tree.InsertItem(_T("OR"), 1, 1, hGATE, TVI_LAST);
+	tree.InsertItem(_T("NOT"), 1, 1, hGATE, TVI_LAST);
+	tree.InsertItem(_T("NAND"), 1, 1, hGATE, TVI_LAST);
+	tree.InsertItem(_T("NOR"), 1, 1, hGATE, TVI_LAST);
+	tree.InsertItem(_T("XOR"), 1, 1, hGATE, TVI_LAST);
+
 	HTREEITEM hFF = tree.InsertItem(_T("Flip-Flop"), 0, 0, TVI_ROOT, TVI_LAST);
+	tree.InsertItem(_T("D-FF"), 1, 1, hFF, TVI_LAST);
+	tree.InsertItem(_T("JK-FF"), 1, 1, hFF, TVI_LAST);
+	tree.InsertItem(_T("T-FF"), 1, 1, hFF, TVI_LAST);
 
-	/*2레벨 초기화*/
-	HTREEITEM hGATES[6];
-	HTREEITEM hFFS[3];
-	CString gates[] = {
-		_T("AND"), _T("OR"),_T("NOT"),_T("NAND"),_T("NOR"),_T("XOR")
-	};
-	CString filpflop[] = {
-		_T("D-FF"),_T("JK-FF"),_T("T-FF")
-	};
-	for (int i = 0; i < 6; i++) {
-		hGATES[i] = tree.InsertItem(gates[i], 1, 1, hGATE, TVI_LAST);
+	HTREEITEM hINPUT = tree.InsertItem(_T("IN-PUT"), 0, 0, TVI_ROOT, TVI_LAST);
+	tree.InsertItem(_T("입력"), 1, 1, hINPUT, TVI_LAST);
+	tree.InsertItem(_T("CLK"), 1, 1, hINPUT, TVI_LAST);
 
-	}
-	for (int i = 0; i < 3; i++) {
-		hFFS[i] = tree.InsertItem(filpflop[i], 1, 1, hFF, TVI_LAST);
 
-	}
+	tree.Expand(hGATE, TVE_EXPAND);
+	tree.Expand(hFF, TVE_EXPAND);		
+	tree.Expand(hINPUT, TVE_EXPAND);
+
 	return 0;
 }
 
@@ -104,7 +106,6 @@ void CGateTreeView::OnTvnSelchanging(NMHDR *pNMHDR, LRESULT *pResult)
 	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 
-
 	*pResult = 0;
 }
 
@@ -120,7 +121,7 @@ void CGateTreeView::OnTvnSelchanged(NMHDR *pNMHDR, LRESULT *pResult)
 	CString str = tree.GetItemText(hItem);
 
 	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
-	pFrame->m_pLogisimView->selected = tree.GetItemData(pNMTreeView->itemNew.hItem);
+	//pFrame->m_pLogisimView->selected = tree.GetItemData(pNMTreeView->itemNew.hItem);
 	pFrame->m_pLogisimView->gatename = str;
 
 	*pResult = 0;
