@@ -92,6 +92,7 @@ public:
 };
 
 
+
 //1비트출력램프
 class BITLAMP {
 public:
@@ -99,4 +100,14 @@ public:
 	BITLAMP(CPoint &point);
 	void Paint(CClientDC &dc);
 	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+};
+
+
+class Seven {
+public:
+	CPoint point;
+	Seven(CPoint &point);
+	void Paint(CClientDC &dc, int num);
+	void Print_7_segment(CClientDC &dc, bool input_a, bool input_b, bool input_c, bool input_d, bool input_e, bool input_f, bool input_g);
+
 };
