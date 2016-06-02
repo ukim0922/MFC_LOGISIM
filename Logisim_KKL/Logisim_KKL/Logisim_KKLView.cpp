@@ -176,9 +176,16 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 
 		}
 		else if (gatename == "T-FF") {
-
+			TFF tff(point, IDB_BITMAP_TFF);
+			tff.Paint(dc);
+			gatename = "";
 		}
-
+		else if (gatename == "LAMP") {
+			BITLAMP lamp(point, IDB_BITMAP_LON);
+			lamp.PrintLabel(dc);
+			lamp.Paint(dc);
+			gatename = "";
+		}
 
 		CView::OnLButtonUp(nFlags, point);
 	}
@@ -191,7 +198,51 @@ void CLogisim_KKLView::OnRButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CClientDC dc(this);
-	TFF t(point);
-	t.Rotate(dc, point,180);
+	if (gatename == "AND") {
+		ANDGATE and (point, IDB_BITMAP_AND);
+		and.Rotate(dc, 90);
+		gatename = "";
+	}
+	else if (gatename == "OR") {
+		ORGATE or (point, IDB_BITMAP_OR);
+		or.Rotate(dc, 90);
+		gatename = "";
+	}
+	else if (gatename == "NOT") {
+		NOTGATE not (point, IDB_BITMAP_NOT);
+		not.Rotate(dc, 90);
+		gatename = "";
+	}
+	else if (gatename == "NAND") {
+		NANDGATE nand(point, IDB_BITMAP_NAND);
+		nand.Rotate(dc, 90);
+		gatename = "";
+	}
+	else if (gatename == "NOR") {
+		NORGATE nor(point, IDB_BITMAP_NOR);
+		nor.Rotate(dc, 90);
+		gatename = "";
+	}
+	else if (gatename == "XOR") {
+		XORGATE xor (point, IDB_BITMAP_XOR);
+		xor.Rotate(dc, 90);
+		gatename = "";
+	}
+	else if (gatename == "D-FF") {
+
+	}
+	else if (gatename == "JK-FF") {
+
+	}
+	else if (gatename == "T-FF") {
+		TFF tff(point, IDB_BITMAP_TFF);
+		tff.Rotate(dc, 90);
+		gatename = "";
+	}
+	else if (gatename == "LAMP") {
+		BITLAMP lamp(point, IDB_BITMAP_LON);
+		lamp.Rotate(dc, 90);
+		gatename = "";
+	}
 	CView::OnRButtonUp(nFlags, point);
 }

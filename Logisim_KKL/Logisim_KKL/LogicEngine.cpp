@@ -23,7 +23,7 @@ void LogicEngine::Paint(CClientDC & dc)
 	dc.BitBlt(MPoint.x, MPoint.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
 }
 
-void LogicEngine::Rotate(CClientDC & dc, CPoint & point, Gdiplus::REAL angle)
+void LogicEngine::Rotate(CClientDC & dc, Gdiplus::REAL angle)
 {
 	Bitmap *pBitmap;
 	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(BITMAPID));
@@ -39,7 +39,7 @@ void LogicEngine::Rotate(CClientDC & dc, CPoint & point, Gdiplus::REAL angle)
 	tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
 	Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
 	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
-	graphics.DrawImage(&tempbmp, point.x, point.y);
+	graphics.DrawImage(&tempbmp, MPoint.x, MPoint.y);
 }
 
 LogicEngine::~LogicEngine()
@@ -190,6 +190,7 @@ void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input_J, bool & input_K
 
 
 //T플립플롭
+/*
 TFF::TFF(CPoint &point) {
 	this->point = point;
 }
@@ -221,12 +222,9 @@ void TFF::Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle) {
 	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
 	graphics.DrawImage(&tempbmp, point.x, point.y);
 
-}
+}*/
 
 //1비트 출력램프
-BITLAMP::BITLAMP(CPoint &point) {
-	this->point = point;
-}
 void BITLAMP::Paint(CClientDC &dc) {
 	CBitmap bitmap;
 	bitmap.LoadBitmap(IDB_BITMAP_LON);
@@ -236,30 +234,33 @@ void BITLAMP::Paint(CClientDC &dc) {
 
 	dcmem.CreateCompatibleDC(&dc);
 	dcmem.SelectObject(&bitmap);
-	dc.BitBlt(point.x, point.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
-}
-void BITLAMP::Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle) {
-	Bitmap *pBitmap;
-	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP_LON));
-	Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
-	int ix, iy;
-	ix = int(pBitmap->GetWidth() / (-2.0));
-	iy = int(pBitmap->GetHeight() / (-2.0));
-
-	Graphics graphics(dc);
-	graphics.SetSmoothingMode(SmoothingModeHighQuality);
-	Graphics tempgx(&tempbmp);
-	tempgx.RotateTransform(angle);
-	tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
-	Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
-	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
-	graphics.DrawImage(&tempbmp, point.x, point.y);
-
+	dc.StretchBlt(MPoint.x, MPoint.y, (bmpinfo.bmWidth) / 2, (bmpinfo.bmHeight) / 2, &dcmem, 0, 0, bmpinfo.bmWidth, bmpinfo.bmHeight, SRCCOPY);
 }
 
-//ANDGATE::~ANDGATE()
-//{
+void BITLAMP::PrintLabel(CClientDC &dc) {
+	SetLabel(_T("LAMP"));
+	dc.TextOutW(MPoint.x-20, MPoint.y-15, GetLabel());
+
+}
+//void BITLAMP::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
+//	Bitmap *pBitmap;
+//	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP_LON));
+//	Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
+//	int ix, iy;
+//	ix = int(pBitmap->GetWidth() / (-2.0));
+//	iy = int(pBitmap->GetHeight() / (-2.0));
+//
+//	Graphics graphics(dc);
+//	graphics.SetSmoothingMode(SmoothingModeHighQuality);
+//	Graphics tempgx(&tempbmp);
+//	tempgx.RotateTransform(angle);
+//	tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
+//	Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
+//	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
+//	graphics.DrawImage(&tempbmp, MPoint.x, MPoint.y, (pBitmap->GetWidth()) / 2, (pBitmap->GetHeight()) / 2);
+//
 //}
+
 
 void NOTGATE::Paint(CClientDC& dc)
 {
@@ -420,5 +421,23 @@ void Seven::Paint(CClientDC &dc, int num) {
 	default:
 
 	}
+
+}
+void NOTGATE::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
+	Bitmap *pBitmap;
+	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP_NOT));
+	Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
+	int ix, iy;
+	ix = int(pBitmap->GetWidth() / (-2.0));
+	iy = int(pBitmap->GetHeight() / (-2.0));
+
+	Graphics graphics(dc);
+	graphics.SetSmoothingMode(SmoothingModeHighQuality);
+	Graphics tempgx(&tempbmp);
+	tempgx.RotateTransform(angle);
+	tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
+	Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
+	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
+	graphics.DrawImage(&tempbmp, MPoint.x, MPoint.y, (pBitmap->GetWidth())/2, (pBitmap->GetHeight())/2);
 
 }

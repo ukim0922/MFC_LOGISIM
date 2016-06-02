@@ -82,6 +82,9 @@ int CGateTreeView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	tree.InsertItem(_T("ют╥б"), 1, 1, hINPUT, TVI_LAST);
 	tree.InsertItem(_T("CLK"), 1, 1, hINPUT, TVI_LAST);
 
+	HTREEITEM hOUTPUT = tree.InsertItem(_T("OUT-PUT"), 0, 0, TVI_ROOT, TVI_LAST);
+	tree.InsertItem(_T("LAMP"), 1, 1, hOUTPUT, TVI_LAST);
+
 
 	tree.Expand(hGATE, TVE_EXPAND);
 	tree.Expand(hFF, TVE_EXPAND);		

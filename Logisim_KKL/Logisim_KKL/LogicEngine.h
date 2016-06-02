@@ -20,7 +20,7 @@ public:
 	bool Output_Q2 = FALSE;
 
 	void Paint(CClientDC &dc);
-	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+	void Rotate(CClientDC &dc, Gdiplus::REAL angle);
 	
 	LogicEngine();
 	LogicEngine(CPoint MPoint,UINT BITMAPID) {
@@ -38,13 +38,15 @@ public:
 	void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1);	//FF기능 구현
 	void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1, bool & input2);
 
+	void SetLabel(CString Label) { this->Label = Label; }
+	CString GetLabel() { return Label; }
 
 private:
 	
 	CString Label;
 };
 
-
+//게이트
 class ANDGATE : public LogicEngine {
 public :
 	ANDGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint,BITMAPID){
@@ -62,6 +64,7 @@ public:
 	NOTGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 	}
 	void Paint(CClientDC& dc);
+	void Rotate(CClientDC &dc, Gdiplus::REAL angle);
 };
 
 class NANDGATE : public LogicEngine {
@@ -83,23 +86,22 @@ public:
 
 
 //플립플롭
-class TFF {
+class TFF : public LogicEngine {
 public:
-	CPoint point;
-	TFF(CPoint &point);
-	void Paint(CClientDC &dc);
-	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+	TFF(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
+	}
 };
 
 
 
 //1비트출력램프
-class BITLAMP {
+class BITLAMP : public LogicEngine {
 public:
-	CPoint point;
-	BITLAMP(CPoint &point);
-	void Paint(CClientDC &dc);
-	void Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle);
+	BITLAMP(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
+	}
+	void Paint(CClientDC& dc);
+	//void Rotate(CClientDC &dc, Gdiplus::REAL angle);
+	void PrintLabel(CClientDC &dc);
 };
 
 
