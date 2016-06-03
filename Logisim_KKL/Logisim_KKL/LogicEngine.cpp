@@ -1,10 +1,8 @@
 #include "stdafx.h"
 #include "LogicEngine.h"
 #include "Logisim_KKL.h"
+#include "MainFrm.h"
 
-bool clock_pre = TRUE; //클럭변수
-bool clock_cur = TRUE;
-bool h_ck = TRUE; //에지트리거방식 (상승이면true, 하강이면false) 클릭으로받아올예정
 
 LogicEngine::LogicEngine()
 {
@@ -42,48 +40,60 @@ void LogicEngine::Rotate(CClientDC & dc, Gdiplus::REAL angle)
 	graphics.DrawImage(&tempbmp, MPoint.x, MPoint.y);
 }
 
+void LogicEngine::PrintLabel(CClientDC &dc,CString Label) {
+	SetLabel(Label);
+	dc.TextOutW(MPoint.x - 20, MPoint.y - 15, GetLabel());
+
+}
+
 LogicEngine::~LogicEngine()
 {
 }
 
-void LogicEngine::Gate(GateSelect Select, bool & Input1, bool & Input2)
+void LogicEngine::Gate(GateSelect Select)
 {
 	switch (Select)
 	{
+	case NOT:
+		if (input[0].boolState)
+			output[0].boolState = FALSE;
+		else
+			output[0].boolState = TRUE;
+		break;
 	case AND:
-		if ((Input1&&Input2) == TRUE) {
-			Output = TRUE;
+		if ((input[0].boolState&&input[1].boolState) == TRUE) {
+			output[0].boolState = TRUE;
 		}
 		else {
-			Output = FALSE;
+			output[0].boolState = FALSE;
 		}
 		break;
 	case OR:
-		if ((Input1 == TRUE) || (Input2 == TRUE)) {
-			Output = TRUE;
+		if ((input[0].boolState == TRUE) || (input[1].boolState == TRUE)) {
+			output[0].boolState = TRUE;
 		}
 		else
 		{
-			Output = FALSE;
+			output[0].boolState = FALSE;
 		}
 		break;
 	case NAND:
-		if (Input1 && Input2)
-			Output = FALSE;
+		if (input[0].boolState && input[1].boolState)
+			output[0].boolState = FALSE;
 		else
-			Output = TRUE;
+			output[0].boolState = TRUE;
 		break;
 	case NOR:
-		if (Input1 || Input2)
-			Output = FALSE;
+		if (input[0].boolState || input[1].boolState)
+			output[0].boolState = FALSE;
 		else
-			Output = TRUE;
+			output[0].boolState = TRUE;
 		break;
 	case XOR:
-		if (Input1 == Input2)
-			Output = FALSE;
+		if (input[0].boolState == input[1].boolState)
+			output[0].boolState = FALSE;
 		else
-			Output = TRUE;
+			output[0].boolState = TRUE;
 		break;
 	default:
 		AfxMessageBox(_T("Overloding ERROR"), MB_OKCANCEL); //NOT gate 인 경우
@@ -92,137 +102,8 @@ void LogicEngine::Gate(GateSelect Select, bool & Input1, bool & Input2)
 
 }
 
-//NOT gate 구현
-void LogicEngine::Gate(GateSelect Select, bool & input1)
-{
-	switch (Select)
-	{
-	case NOT:
-		if (input1)
-			Output = FALSE;
-		else
-			Output = TRUE;
-		break;
-	default:
-		AfxMessageBox(_T("Overloding ERROR"), MB_OKCANCEL); //NOT gate 아닌 경우
-		break;
-		
-	}
-
-}
-
-void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1) {		//d, t플립플롭
-	switch(Select)
-	{
-	case T_FF:
-		if (input1) {
-
-			if (h_ck == TRUE) //상승 에지트리거
-			{
-				if (clock_pre == TRUE && clock_cur == FALSE)
-				{
-					bool temp;
-					temp = Output_Q1;
-					Output_Q1 = Output_Q2;
-					Output_Q2 = temp;
-				}
-			}
-			else //하강 에지트리거
-			{
-				if (clock_pre == FALSE && clock_cur == TRUE)
-				{
-					bool temp;
-					temp = Output_Q1;
-					Output_Q1 = Output_Q2;
-					Output_Q2 = temp;
-				}
-			}
-		}
-		else {
-			//변함이 없음.
-		}
-		break;
-
-	case D_FF: //입력 그대로 출력
-		if (h_ck == TRUE) //상승 에지트리거
-		{
-			if (clock_pre == TRUE && clock_cur == FALSE)
-			{
-				Output_Q1 = input1;
-			}
-		}
-		else //하강 에지트리거
-		{
-			if (clock_pre == FALSE && clock_cur == TRUE)
-			{
-				Output_Q1 = input1;
-			}
-		}
-		break;
-
-	default:
-		AfxMessageBox(_T("Overloding ERROR"), MB_OKCANCEL); 
-		break;
-
-	}
-}
-
-void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input_J, bool & input_K) {		//jk플립플롭
-	switch (Select)
-	{
-	case JK_FF:
-		if (h_ck == TRUE) //상승 에지 트리거
-		{
 
 
-		}
-		else //하강 에지 트리거
-		{
-
-		}
-
-		break;
-	default:
-		AfxMessageBox(_T("Overloding ERROR"), MB_OKCANCEL);
-		break;
-	}
-}
-
-
-//T플립플롭
-/*
-TFF::TFF(CPoint &point) {
-	this->point = point;
-}
-void TFF::Paint(CClientDC &dc) {
-	CBitmap bitmap;
-	bitmap.LoadBitmap(IDB_BITMAP_TFF);
-	BITMAP bmpinfo;
-	bitmap.GetBitmap(&bmpinfo);
-	CDC dcmem;
-
-	dcmem.CreateCompatibleDC(&dc);
-	dcmem.SelectObject(&bitmap);
-	dc.BitBlt(point.x, point.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
-}
-void TFF::Rotate(CClientDC &dc, CPoint &point, Gdiplus::REAL angle) {
-	Bitmap *pBitmap;
-	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP_TFF));
-	Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
-	int ix, iy;
-	ix = int(pBitmap->GetWidth() / (-2.0));
-	iy = int(pBitmap->GetHeight() / (-2.0));
-
-	Graphics graphics(dc);
-	graphics.SetSmoothingMode(SmoothingModeHighQuality);
-	Graphics tempgx(&tempbmp);
-	tempgx.RotateTransform(angle);
-	tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
-	Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
-	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
-	graphics.DrawImage(&tempbmp, point.x, point.y);
-
-}*/
 
 //1비트 출력램프
 void BITLAMP::Paint(CClientDC &dc) {
@@ -237,11 +118,6 @@ void BITLAMP::Paint(CClientDC &dc) {
 	dc.StretchBlt(MPoint.x, MPoint.y, (bmpinfo.bmWidth) / 2, (bmpinfo.bmHeight) / 2, &dcmem, 0, 0, bmpinfo.bmWidth, bmpinfo.bmHeight, SRCCOPY);
 }
 
-void BITLAMP::PrintLabel(CClientDC &dc) {
-	SetLabel(_T("LAMP"));
-	dc.TextOutW(MPoint.x-20, MPoint.y-15, GetLabel());
-
-}
 //void BITLAMP::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
 //	Bitmap *pBitmap;
 //	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP_LON));
@@ -273,7 +149,6 @@ void NOTGATE::Paint(CClientDC& dc)
 	dcmem.CreateCompatibleDC(&dc);
 	dcmem.SelectObject(&bitmap);
 	dc.StretchBlt(MPoint.x, MPoint.y, (bmpinfo.bmWidth) / 2, (bmpinfo.bmHeight) / 2, &dcmem, 0, 0, bmpinfo.bmWidth, bmpinfo.bmHeight, SRCCOPY);
-	//dc.BitBlt(MPoint.x, MPoint.y, (bmpinfo.bmWidth)/2, (bmpinfo.bmHeight)/2, &dcmem, 0, 0, SRCCOPY);
 }
 
 
@@ -438,21 +313,75 @@ void NOTGATE::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
 	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
 	graphics.DrawImage(&tempbmp, MPoint.x, MPoint.y, (pBitmap->GetWidth())/2, (pBitmap->GetHeight())/2);
 }
+//
+//BOOL SetRect(CPoint& point, CPoint& in) {
+//	for (int i = 0; i < RectArr.GetSize(); i++) {
+//		if (PtInRect(RectArr[i].input1, point)) {
+//			in = RectArr[i].input1.CenterPoint();
+//			return TRUE;
+//		}
+//		else if (PtInRect(RectArr[i].input2, point)) {
+//			in = RectArr[i].input2.CenterPoint();
+//			return TRUE;
+//		}
+//		else if (PtInRect(RectArr[i].output, point)) {
+//			in = RectArr[i].output.CenterPoint();
+//			return TRUE;
+//		}
+//	}
+//	return NULL;
+//}
 
-BOOL SetRect(CPoint& point, CPoint& in) {
-	for (int i = 0; i < RectArr.GetSize(); i++) {
-		if (PtInRect(RectArr[i].input1, point)) {
-			in = RectArr[i].input1.CenterPoint();
-			return TRUE;
-		}
-		else if (PtInRect(RectArr[i].input2, point)) {
-			in = RectArr[i].input2.CenterPoint();
-			return TRUE;
-		}
-		else if (PtInRect(RectArr[i].output, point)) {
-			in = RectArr[i].output.CenterPoint();
-			return TRUE;
-		}
+//
+//void LogicEngine::SetOutput(Gdiplus::REAL angle,int i)
+//{
+//	CString name;
+//	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
+//	name = pFrame->m_pLogisimView->gatename;
+//	if (name == "NOT") {
+//		switch ((int)angle/360) {
+//		case 0:
+//			RectArr[i].output = CRect();
+//			RectArr[i].input1 = CRect((rect.left + rect.right) / 2 - 5, rect.bottom + 5, (rect.left + rect.right) / 2 + 5, rect.bottom + 15);
+//			RectArr[i].input2 = CRect();
+//			break;
+//		case 90:
+//			this->out = CRect();
+//			this->in1 = CRect(rect.left - 15, (rect.top + rect.bottom) / 2 - 5, rect.left - 5, (rect.top + rect.bottom) / 2 + 5);
+//			this->in2 = CRect();
+//			break;
+//		case 180:
+//			this->out = CRect();
+//			this->in1 = CRect((rect.left + rect.right) / 2 - 5, rect.top - 15, (rect.left + rect.right) / 2 + 5, rect.top - 5);
+//			this->in2 = CRect();
+//		case 270:
+//			this->out = CRect();
+//			this->in1 = CRect(rect.right + 5, (rect.top + rect.bottom) / 2 - 5, rect.right + 15, (rect.top + rect.bottom) / 2 + 5);
+//			this->in2 = CRect();
+//			break;
+//		}
+//		OutputPoint.x = MPoint.x + 24;
+//		OutputPoint.y = MPoint.y + 12;
+//	}
+//	else {
+//		OutputPoint.x = MPoint.x + 48;
+//		OutputPoint.y = MPoint.y + 24;
+//	}
+//}
+
+void LogicEngine::SetInput()
+{
+	CString name;
+	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
+	name = pFrame->m_pLogisimView->gatename;
+	if (name == "NOT") {
+		input[0].pointState.x = MPoint.x;
+		input[0].pointState.y = MPoint.y + 12;
 	}
-	return NULL;
+	else {
+		input[0].pointState.x = MPoint.x;
+		input[0].pointState.y = MPoint.y + 16;
+		input[1].pointState.x = MPoint.x;
+		input[1].pointState.y = MPoint.y + 16 * 2;
+	}
 }

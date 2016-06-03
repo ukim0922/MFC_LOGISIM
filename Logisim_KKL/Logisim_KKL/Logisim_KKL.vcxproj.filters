@@ -48,6 +48,12 @@
     <ClInclude Include="GateTreeView.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="FilpFlopEngine.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="InOutValues.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logisim_KKL.cpp">
@@ -74,12 +80,16 @@
     <ClCompile Include="GateTreeView.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="FilpFlopEngine.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Logisim_KKL.reg" />
     <None Include="res\Logisim_KKL.rc2">
       <Filter>리소스 파일</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Logisim_KKL.rc">

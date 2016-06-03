@@ -12,6 +12,7 @@
 #include "Logisim_KKLDoc.h"
 #include "Logisim_KKLView.h"
 #include "LogicEngine.h"    //엔진 추가
+#include "FilpFlopEngine.h"    //엔진 추가
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -61,8 +62,8 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 	CRect rect;
 	GetWindowRect(&rect);
 	locPoint.SetSize(0);
-	for (int i = 0; i < rect.Width(); i = i + 15) {
-		for (int j = 0; j < rect.Height(); j = j + 15) {
+	for (int i = 0; i < rect.Width(); i = i + 8) {
+		for (int j = 0; j < rect.Height(); j = j + 8) {
 			pDC->SetPixelV(i, j, RGB(143, 216, 230));
 			locPoint.Add(CPoint(i, j));
 		}
@@ -72,15 +73,10 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 		return;
 	//TEST
 	LogicEngine a, b, c;
-	bool input1 = FALSE;
-	bool input2 = TRUE;
-	//a.Gate(AND, input1);
-	//b.Gate(OR, a.Output, a.Output);
-	c.Gate(NOT, input1);
-
+	c.Gate(NOT);
 
 	CString str;
-	str.Format(_T("output : %d"),c.Output);
+	str.Format(_T("output : %d"),c.output[0].boolState);
 	pDC->TextOut(200, 200, str);
 	
 
@@ -182,7 +178,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		}
 		else if (gatename == "LAMP") {
 			BITLAMP lamp(point, IDB_BITMAP_LON);
-			lamp.PrintLabel(dc);
+			lamp.PrintLabel(dc,gatename);
 			lamp.Paint(dc);
 			gatename = "";
 		}

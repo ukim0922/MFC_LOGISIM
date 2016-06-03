@@ -185,8 +185,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FilpFlopEngine.h" />
     <ClInclude Include="FixedSplitterWnd.h" />
     <ClInclude Include="GateTreeView.h" />
+    <ClInclude Include="InOutValues.h" />
     <ClInclude Include="LogicEngine.h" />
     <ClInclude Include="Logisim_KKL.h" />
     <ClInclude Include="Logisim_KKLDoc.h" />
@@ -197,6 +199,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FilpFlopEngine.cpp" />
     <ClCompile Include="FixedSplitterWnd.cpp" />
     <ClCompile Include="GateTreeView.cpp" />
     <ClCompile Include="LogicEngine.cpp" />
@@ -212,6 +215,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Logisim_KKL.reg" />
     <None Include="res\Logisim_KKL.rc2" />
   </ItemGroup>

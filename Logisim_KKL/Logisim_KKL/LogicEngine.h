@@ -1,4 +1,5 @@
 #pragma once
+#include "InOutValues.h"
 enum Facing {
 	NORTH, SOUTH, WEST, EAST
 };
@@ -13,15 +14,28 @@ enum FlipFlopSelect {
 class LogicEngine
 {
 public:
-	CPoint MPoint;			//클릭 좌표값 받음
+	//클릭 좌표값 받음
+	CPoint MPoint;
+	//비트맵ID 가지고옴
 	UINT BITMAPID;
-	bool Output;
-	bool Output_Q1 = TRUE;	//플립플롭용 output 변수
-	bool Output_Q2 = FALSE;
 
+	//입출력 좌표 지정
+	void SetInput();
+	//void SetOutput(Gdiplus::REAL angle, int i);
+
+	InOutValues input[2];
+	InOutValues output[2];
+
+	//출력
 	void Paint(CClientDC &dc);
+	//회전
 	void Rotate(CClientDC &dc, Gdiplus::REAL angle);
 	
+	//라벨
+	void PrintLabel(CClientDC &dc, CString Label);
+	void SetLabel(CString Label) { this->Label = Label; }
+	CString GetLabel() { return Label; }
+
 	LogicEngine();
 	LogicEngine(CPoint MPoint,UINT BITMAPID) {
 		this->MPoint = MPoint;
@@ -29,29 +43,18 @@ public:
 	}
 	virtual ~LogicEngine();
 
-
-	void Gate(GateSelect Select, bool& input1, bool& input2); // gate 기능 구현
-	void Gate(GateSelect Select, bool& input1);
-	//bool Output;
+	//게이트 기능 구현
+	void Gate(GateSelect Select);
 
 
-	void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1);	//FF기능 구현
-	void LogicEngine::FlipFlop(FlipFlopSelect Select, bool & input1, bool & input2);
-
-	void SetLabel(CString Label) { this->Label = Label; }
-	CString GetLabel() { return Label; }
 
 private:
 	
 	CString Label;
 };
 
-struct RECT_IN_OUTPUT {
-	CRect input1;
-	CRect input2;
-	CRect output;
-};
-static CArray<RECT_IN_OUTPUT, RECT_IN_OUTPUT&> RectArr;
+//static CArray<RECT_IN_OUTPUT, RECT_IN_OUTPUT&> RectArr;
+
 //게이트
 class ANDGATE : public LogicEngine {
 public :
@@ -91,13 +94,6 @@ public:
 };
 
 
-//플립플롭
-class TFF : public LogicEngine {
-public:
-	TFF(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
-	}
-};
-
 
 
 //1비트출력램프
@@ -107,15 +103,13 @@ public:
 	}
 	void Paint(CClientDC& dc);
 	//void Rotate(CClientDC &dc, Gdiplus::REAL angle);
-	void PrintLabel(CClientDC &dc);
 };
 
-
+//7 세그먼트
 class Seven {
 public:
 	CPoint point;
 	Seven(CPoint &point);
 	void Paint(CClientDC &dc, int num);
 	void Print_7_segment(CClientDC &dc, bool input_a, bool input_b, bool input_c, bool input_d, bool input_e, bool input_f, bool input_g);
-
 };
