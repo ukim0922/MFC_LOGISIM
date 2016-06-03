@@ -80,7 +80,7 @@ IDR_Logisim_KKLTYPE     ICON                    "res\\Logisim_KKLDoc.ico"
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
-IDB_BITMAP_OR           BITMAP                  "res\\bitmap1.bmp"
+IDB_BITMAP_OR           BITMAP                  "res\\bitmapOR.bmp"
 
 IDB_BITMAP_AND          BITMAP                  "res\\bitmap2.bmp"
 
@@ -98,7 +98,11 @@ IDB_BITMAP_TFF          BITMAP                  "res\\bitmap4.bmp"
 
 IDB_BITMAP_LOFF         BITMAP                  "res\\bmp00001.bmp"
 
-IDB_BITMAP_JKFF             BITMAP                  "res\\bitmapJKFF.bmp"
+IDB_BITMAP_JKFF         BITMAP                  "res\\bitmapJKFF.bmp"
+
+IDB_BITMAP_W            BITMAP                  "res\\bmpmap_w.bmp"
+
+IDB_BITMAP_H            BITMAP                  "res\\bmpmap_h.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
