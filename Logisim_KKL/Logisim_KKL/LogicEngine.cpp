@@ -261,7 +261,7 @@ void BITLAMP::PrintLabel(CClientDC &dc) {
 //
 //}
 
-
+// NOTGate 출력함수
 void NOTGATE::Paint(CClientDC& dc)
 {
 	CBitmap bitmap;
@@ -276,7 +276,7 @@ void NOTGATE::Paint(CClientDC& dc)
 	//dc.BitBlt(MPoint.x, MPoint.y, (bmpinfo.bmWidth)/2, (bmpinfo.bmHeight)/2, &dcmem, 0, 0, SRCCOPY);
 }
 
-
+//7-segment 출력함수(완료)
 void Seven::Print_7_segment( CClientDC &dc, bool input_a, bool input_b, bool input_c, bool input_d, bool input_e, bool input_f, bool input_g)
 {
 
@@ -326,9 +326,12 @@ void Seven::Print_7_segment( CClientDC &dc, bool input_a, bool input_b, bool inp
 	}
 }
 
+
 Seven::Seven(CPoint &point) {
 	this->point = point;
 }
+
+//7-segment 글자별 출력함수(진행중)
 void Seven::Paint(CClientDC &dc, int num) {
 	CBitmap bitmap_w, bitmap_h;
 	bitmap_w.LoadBitmap(IDB_BITMAP_W);
@@ -350,7 +353,7 @@ void Seven::Paint(CClientDC &dc, int num) {
 	{
 	case 0:
 		dc.BitBlt(point.x, point.y, bmpinfo_w.bmWidth, bmpinfo_w.bmHeight, &dcmem_w, 0, 0, SRCCOPY);
-		dc.BitBlt(point.x- bmpinfo_w.bmWidth , point.y + bmpinfo_h.bmHeight, bmpinfo_w.bmWidth, bmpinfo_w.bmHeight, &dcmem_h, 0, 0, SRCCOPY);
+		dc.BitBlt(point.x - bmpinfo_w.bmWidth, point.y + bmpinfo_h.bmHeight, bmpinfo_w.bmWidth, bmpinfo_w.bmHeight, &dcmem_h, 0, 0, SRCCOPY);
 		dc.BitBlt(point.x + bmpinfo_w.bmWidth, point.y + bmpinfo_h.bmHeight, bmpinfo_w.bmWidth, bmpinfo_w.bmHeight, &dcmem_h, 0, 0, SRCCOPY);
 		dc.BitBlt(point.x, point.y, bmpinfo_w.bmWidth, bmpinfo_w.bmHeight, &dcmem_w, 0, 0, SRCCOPY);
 		dc.BitBlt(point.x, point.y, bmpinfo_w.bmWidth, bmpinfo_w.bmHeight, &dcmem_w, 0, 0, SRCCOPY);
@@ -419,10 +422,12 @@ void Seven::Paint(CClientDC &dc, int num) {
 		dc.BitBlt(point.x, point.y, bmpinfo_w.bmWidth, bmpinfo_w.bmHeight, &dcmem_w, 0, 0, SRCCOPY);
 		break;
 	default:
-
+		break;
 	}
 
-}
+}  
+
+//회전함수
 void NOTGATE::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
 	Bitmap *pBitmap;
 	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP_NOT));
