@@ -3,8 +3,6 @@
 //
 
 #pragma once
-
-
 class CLogisim_KKLView : public CView
 {
 protected: // serialization에서만 만들어집니다.
@@ -16,7 +14,8 @@ public:
 	CLogisim_KKLDoc* GetDocument() const;
 	int x; // 
 	int y; //
-
+	bool mouse_check = false;  //마우스 드래그된 상태 체크
+	CPoint m_prev_pos; //드래그 시작 좌표 저장
 // 작업입니다. 
 public:
 
@@ -45,8 +44,10 @@ public:
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 //	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
+	
 	bool selected;
 	CString gatename;
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // Logisim_KKLView.cpp의 디버그 버전

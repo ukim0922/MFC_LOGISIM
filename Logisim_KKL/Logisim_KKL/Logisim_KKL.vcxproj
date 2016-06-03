@@ -189,6 +189,7 @@
     <ClInclude Include="FixedSplitterWnd.h" />
     <ClInclude Include="GateTreeView.h" />
     <ClInclude Include="InOutValues.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="LogicEngine.h" />
     <ClInclude Include="Logisim_KKL.h" />
     <ClInclude Include="Logisim_KKLDoc.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="FilpFlopEngine.cpp" />
     <ClCompile Include="FixedSplitterWnd.cpp" />
     <ClCompile Include="GateTreeView.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="LogicEngine.cpp" />
     <ClCompile Include="Logisim_KKL.cpp" />
     <ClCompile Include="Logisim_KKLDoc.cpp" />

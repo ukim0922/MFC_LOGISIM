@@ -11,6 +11,8 @@ enum GateSelect {
 enum FlipFlopSelect {
 	D_FF, JK_FF, T_FF
 };
+
+
 class LogicEngine
 {
 public:
@@ -112,4 +114,5 @@ public:
 	Seven(CPoint &point);
 	void Paint(CClientDC &dc, int num);
 	void Print_7_segment(CClientDC &dc, bool input_a, bool input_b, bool input_c, bool input_d, bool input_e, bool input_f, bool input_g);
+
 };
