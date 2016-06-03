@@ -444,5 +444,22 @@ void NOTGATE::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
 	Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
 	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
 	graphics.DrawImage(&tempbmp, MPoint.x, MPoint.y, (pBitmap->GetWidth())/2, (pBitmap->GetHeight())/2);
+}
 
+BOOL SetRect(CPoint& point, CPoint& in) {
+	for (int i = 0; i < RectArr.GetSize(); i++) {
+		if (PtInRect(RectArr[i].first_in, point)) {
+			in = RectArr[i].input1.CenterPoint();
+			return TRUE;
+		}
+		else if (PtInRect(RectArr[i].second_in, point)) {
+			in = gateArr[i].input2.CenterPoint();
+			return TRUE;
+		}
+		else if (PtInRect(RectArr[i].out, point)) {
+			in = gateArr[i].output.CenterPoint();
+			return TRUE;
+		}
+	}
+	return NULL;
 }

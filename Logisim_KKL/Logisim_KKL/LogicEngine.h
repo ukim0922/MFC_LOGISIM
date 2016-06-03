@@ -48,6 +48,12 @@ private:
 	CString Label;
 };
 
+struct RECT_IN_OUTPUT {
+	CRect input1;
+	CRect input2;
+	CRect output;
+};
+static CArray<RECT_IN_OUTPUT, RECT_IN_OUTPUT&> RectArr;
 //∞‘¿Ã∆Æ
 class ANDGATE : public LogicEngine {
 public :
