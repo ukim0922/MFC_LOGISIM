@@ -5,12 +5,10 @@
 class Line
 {
 public:
-	CPoint line[2];
+	CPoint start_pt, desti_pt;
+	CRect rect;
 	bool statu = false;
-	std::vector<Line *> connect_lines;
-	void draw_main(Gdiplus::Graphics* gp);
-	Line(int x, int y);
-	Line(CPoint point);
+	void setLineRect();
 	Line();
 	~Line();
 };

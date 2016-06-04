@@ -1,16 +1,12 @@
 #include "stdafx.h"
 #include "Line.h"
 
-Line::Line(int x, int y)
+void Line::setLineRect()
 {
-	this->line[0] = CPoint(x, y);
-	this->line[1] = CPoint(x, y);
+	rect.SetRect(start_pt.x - 5, start_pt.y - 5, desti_pt.x + 5, desti_pt.y + 5);
 }
-
-Line::Line(CPoint point)
+Line::Line()
 {
-	this->line[0] = point;
-	this->line[1] = point;
 	
 }
 
@@ -19,11 +15,3 @@ Line::~Line()
 {
 }
 
-
-void draw_main(Gdiplus::Graphics* gp)
-{
-	Gdiplus::Pen *p;
-	p = new Gdiplus::Pen(Gdiplus::Color(0, 0, 0), 3);
-	Gdiplus::Point drw_line[2];
-	gp->DrawLines(p, drw_line, 2);
-}
