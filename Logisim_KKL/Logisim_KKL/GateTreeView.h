@@ -26,6 +26,7 @@ public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	afx_msg void OnTvnSelchanging(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnTvnSelchanged(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnNMClick(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 

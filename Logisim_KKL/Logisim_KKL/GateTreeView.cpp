@@ -24,6 +24,7 @@ BEGIN_MESSAGE_MAP(CGateTreeView, CTreeView)
 	ON_WM_CREATE()
 	ON_NOTIFY_REFLECT(TVN_SELCHANGING, &CGateTreeView::OnTvnSelchanging)
 	ON_NOTIFY_REFLECT(TVN_SELCHANGED, &CGateTreeView::OnTvnSelchanged)
+	ON_NOTIFY_REFLECT(NM_CLICK, &CGateTreeView::OnNMClick)
 END_MESSAGE_MAP()
 
 
@@ -124,8 +125,19 @@ void CGateTreeView::OnTvnSelchanged(NMHDR *pNMHDR, LRESULT *pResult)
 	CString str = tree.GetItemText(hItem);
 
 	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
-	//pFrame->m_pLogisimView->selected = tree.GetItemData(pNMTreeView->itemNew.hItem);
+
 	pFrame->m_pLogisimView->gatename = str;
+
+	*pResult = 0;
+}
+
+
+void CGateTreeView::OnNMClick(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CTreeCtrl & tree = GetTreeCtrl();
+	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
+	pFrame->m_pLogisimView->selected = TRUE;
 
 	*pResult = 0;
 }

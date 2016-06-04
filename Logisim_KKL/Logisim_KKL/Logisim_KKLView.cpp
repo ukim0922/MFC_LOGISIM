@@ -89,6 +89,7 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 
 	CString str;
 	str.Format(_T("output : %d"),c.output[0].boolState);
+	//str.Format(_T("Array Size : %d"), gates.GetSize());
 	pDC->TextOut(200, 200, str);
 
 
@@ -135,10 +136,7 @@ void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
 	}
 	else
 		dc.TextOutW(200, 300, _T("FALSE"));
-	/*	selected = false;
-	Invalidate();
-	}*/
-	//Invalidate();
+
 
 	CView::OnLButtonDown(nFlags, point);
 }
@@ -149,64 +147,95 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	//마우스 드래그 flag 변경
 	mouse_check = false;
+	LogicEngine* gate;
 	CClientDC dc(this);
-	{
+
+	if(selected){
 		if (gatename == "AND") {
-			ANDGATE and (point, IDB_BITMAP_AND);
-			and.Paint(dc);
+			gate = new ANDGATE(point,IDB_BITMAP_AND);
+			gates.Add(*gate);
+			gate->Paint(dc);
 			gatename = "";
+			selected = FALSE;
 		}
 		else if (gatename == "OR") {
-			ORGATE or (point, IDB_BITMAP_OR);
-			or .Paint(dc);
+			gate = new ORGATE(point, IDB_BITMAP_OR);
+			gates.Add(*gate);
+			gate->Paint(dc);
 			gatename = "";
+			selected = FALSE;
 		}
 		else if (gatename == "NOT") {
-			NOTGATE not (point, IDB_BITMAP_NOT);
-			not.SmallPaint(dc);
+			gate = new NOTGATE(point, IDB_BITMAP_NOT);
+			gates.Add(*gate);
+			gate->SmallPaint(dc);
 			gatename = "";
+			selected = FALSE;
 		}
 		else if (gatename == "NAND") {
-			NANDGATE nand(point, IDB_BITMAP_NAND);
-			nand.Paint(dc);
+			gate = new NANDGATE(point, IDB_BITMAP_NAND);
+			gates.Add(*gate);
+			gate->Paint(dc);
 			gatename = "";
+			selected = FALSE;
 		}
 		else if (gatename == "NOR") {
-			NORGATE nor(point, IDB_BITMAP_NOR);
-			nor.Paint(dc);
+			gate = new NORGATE(point, IDB_BITMAP_NOR);
+			gates.Add(*gate);
+			gate->Paint(dc);
 			gatename = "";
+			selected = FALSE;
 		}
 		else if (gatename == "XOR") {
-			XORGATE xor (point, IDB_BITMAP_XOR);
-			xor.Paint(dc);
+			gate = new XORGATE(point, IDB_BITMAP_XOR);
+			gates.Add(*gate);
+			gate->Paint(dc);
 			gatename = "";
+			selected = FALSE;
 		}
 		else if (gatename == "D-FF") {
-			DFF dff (point, IDB_BITMAP_DFF);
-			dff.Paint(dc);
+			gate = new DFF(point, IDB_BITMAP_DFF);
+			gates.Add(*gate);
+			gate->Paint(dc);
 			gatename = "";
+			selected = FALSE;
 
 		}
 		else if (gatename == "JK-FF") {
-			JKFF jkff(point, IDB_BITMAP_JKFF);
-			jkff.Paint(dc);
+			gate = new JKFF(point, IDB_BITMAP_JKFF);
+			gates.Add(*gate);
+			gate->Paint(dc);
 			gatename = "";
+			selected = FALSE;
 		}
 		else if (gatename == "T-FF") {
-			TFF tff(point, IDB_BITMAP_TFF);
-			tff.Paint(dc);
+			gate = new TFF(point, IDB_BITMAP_TFF);
+			gates.Add(*gate);
+			gate->Paint(dc);
 			gatename = "";
+			selected = FALSE;
 		}
 		else if (gatename == "LAMP") {
-			BITLAMP lamp(point, IDB_BITMAP_LON);
-			lamp.PrintLabel(dc,gatename);
-			lamp.SmallPaint(dc);
+			gate = new BITLAMP(point, IDB_BITMAP_LON);
+			gates.Add(*gate);
+			gate->SmallPaint(dc);
+			gate->PrintLabel(dc,gatename);
 			gatename = "";
+			selected = FALSE;
 		}
 		else if (gatename == "입력") {
-			BITINPUT bitin(point, IDB_BITMAP_BITINPUT_0);
-			bitin.SmallPaint(dc);
+			gate = new BITINPUT(point, IDB_BITMAP_BITINPUT_0);
+			gates.Add(*gate);
+			gate->SmallPaint(dc);
 			gatename = "";
+			selected = FALSE;
+		}
+		else if (gatename == "CLK") {
+			gate = new CLOCK_SIGNAL(point, IDB_BITMAP_CLK0);
+			gates.Add(*gate);
+			gate->SmallPaint(dc);
+			gatename = "";
+			selected = FALSE;
 		}
 		CView::OnLButtonUp(nFlags, point);
 	}

@@ -1,6 +1,7 @@
 
 // Logisim_KKLView.h : CLogisim_KKLView 클래스의 인터페이스
 //
+#include "LogicEngine.h"
 
 #pragma once
 class CLogisim_KKLView : public CView
@@ -12,8 +13,7 @@ protected: // serialization에서만 만들어집니다.
 // 특성입니다.
 public:
 	CLogisim_KKLDoc* GetDocument() const;
-	int x; // 
-	int y; //
+	CArray<LogicEngine, LogicEngine&> gates;
 	bool mouse_check = false;  //마우스 드래그된 상태 체크
 	CPoint m_prev_pos; //드래그 시작 좌표 저장
 // 작업입니다. 
