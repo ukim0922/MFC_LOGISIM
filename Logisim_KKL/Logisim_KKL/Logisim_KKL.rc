@@ -122,6 +122,7 @@ BEGIN
     SEPARATOR
     BUTTON      ID_FILE_PRINT
     BUTTON      ID_APP_ABOUT
+    BUTTON      ID_HIGH
 END
 
 
@@ -160,6 +161,11 @@ BEGIN
     POPUP "도움말(&H)"
     BEGIN
         MENUITEM "Logisim_KKL 정보(&A)...",       ID_APP_ABOUT
+    END
+    POPUP "트리거방식"
+    BEGIN
+        MENUITEM "상승에지트리거",                     ID_HIGH
+        MENUITEM "하강에지트리거",                     ID_LOW
     END
 END
 

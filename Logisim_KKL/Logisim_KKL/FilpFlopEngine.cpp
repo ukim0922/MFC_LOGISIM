@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "FilpFlopEngine.h"
+#include "MainFrm.h"
 
+void FilpFlopEngine::FlipFlopLogic()
+{
+}
 
 FilpFlopEngine::FilpFlopEngine()
 {
@@ -10,6 +14,7 @@ FilpFlopEngine::FilpFlopEngine()
 FilpFlopEngine::~FilpFlopEngine()
 {
 }
+
 
 void  FilpFlopEngine::Paint(CClientDC &dc) {
 	CBitmap bitmap;
@@ -40,11 +45,27 @@ void  FilpFlopEngine::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
 	graphics.DrawImage(&tempbmp, MPoint.x, MPoint.y);
 }
 
-void FilpFlopEngine::FilpFlop(FlipFlopSelect Select)
+
+void DFF::FlipFlopLogic()
 {
-	switch (Select)
+	if (h_ck == TRUE) //상승 에지트리거
 	{
-	case T_FF:
+		if (clock_pre == TRUE && clock_cur == FALSE)
+		{
+			output[0].boolState = input[0].boolState;
+		}
+	}
+	else //하강 에지트리거
+	{
+		if (clock_pre == FALSE && clock_cur == TRUE)
+		{
+			output[0].boolState = input[0].boolState;
+		}
+	}
+}
+
+void TFF::FlipFlopLogic()
+{
 		if (input[0].boolState) {
 
 			if (h_ck == TRUE) //상승 에지트리거
@@ -71,39 +92,75 @@ void FilpFlopEngine::FilpFlop(FlipFlopSelect Select)
 		else {
 			//변함이 없음.
 		}
-		break;
-
-	case D_FF: //입력 그대로 출력
-		if (h_ck == TRUE) //상승 에지트리거
-		{
-			if (clock_pre == TRUE && clock_cur == FALSE)
-			{
-				output[0].boolState = input[0].boolState;
-			}
-		}
-		else //하강 에지트리거
-		{
-			if (clock_pre == FALSE && clock_cur == TRUE)
-			{
-				output[0].boolState = input[0].boolState;
-			}
-		}
-		break;
-	case JK_FF:
-		if (h_ck == TRUE) //상승 에지 트리거
-		{
-
-
-		}
-		else //하강 에지 트리거
-		{
-
-		}
-		break;
-	default:
-		AfxMessageBox(_T("Overloding ERROR"), MB_OKCANCEL); //NOT gate 인 경우
-		break;
-	}
-
 }
 
+void JKFF::FlipFlopLogic()
+		{
+	if (h_ck == TRUE) //상승 에지 트리거
+	{
+			if (clock_pre == TRUE && clock_cur == FALSE)
+			{
+			if ((input[0].boolState == FALSE) && (input[1].boolState == FALSE)) {
+				// 변화 없음
+			}
+			else if ((input[0].boolState == FALSE) && (input[1].boolState == TRUE))
+			{	// 0으로 리셋
+				output[0].boolState = FALSE;
+		}
+			else if ((input[0].boolState == TRUE) && (input[1].boolState == FALSE))
+			{	// 1로 세트
+				output[0].boolState = TRUE;
+			}
+			else if ((input[0].boolState == TRUE) && (input[1].boolState == TRUE))
+			{	// 토글
+				if (output[0].boolState)
+					output[0].boolState = FALSE;
+				else
+					output[0].boolState = TRUE;
+		}
+			else
+		{
+				AfxMessageBox(_T("JK FilpFilop 논리 에러"), MB_OKCANCEL);
+			}
+
+			if (output[0].boolState) //Q가 T이면
+				output[1].boolState = FALSE; //Q'는 F
+			else // Q가 F면
+				output[1].boolState = TRUE; // Q'는 T
+
+		}
+	}
+		else //하강 에지 트리거
+		{
+		if (clock_pre == FALSE && clock_cur == TRUE)
+		{
+			if ((input[0].boolState == FALSE) && (input[1].boolState == FALSE)) {
+				// 변화 없음
+			}
+			else if ((input[0].boolState == FALSE) && (input[1].boolState == TRUE))
+			{	// 0으로 리셋
+				output[0].boolState = FALSE;
+			}
+			else if ((input[0].boolState == TRUE) && (input[1].boolState == FALSE))
+			{	// 1로 세트
+				output[0].boolState = TRUE;
+			}
+			else if ((input[0].boolState == TRUE) && (input[1].boolState == TRUE))
+			{	// 토글
+				if (output[0].boolState)
+					output[0].boolState = FALSE;
+				else
+					output[0].boolState = TRUE;
+			}
+			else
+			{
+				AfxMessageBox(_T("JK FilpFilop 논리 에러"), MB_OKCANCEL);
+			}
+
+			if (output[0].boolState) //Q가 T이면
+				output[1].boolState = FALSE; //Q'는 F
+			else // Q가 F면
+				output[1].boolState = TRUE; // Q'는 T
+		}
+	}
+}
