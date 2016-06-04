@@ -15,6 +15,10 @@
 #include "FilpFlopEngine.h"    //엔진 추가
 #include "Line.h" //라인 추가
 
+CArray < Line, Line& > LineArray;
+Line temp;
+ANDGATE andTemp((0,0),IDB_BITMAP_AND);
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -117,15 +121,36 @@ CLogisim_KKLDoc* CLogisim_KKLView::GetDocument() const // 디버그되지 않은 버전은
 }
 #endif //_DEBUG
 
-
+int check_line(CPoint point)
+{
+	int array_size = LineArray.GetSize();
+	for (int i = 0; i < array_size; i++)
+	{
+		if (PtInRect(LineArray.GetAt(i).rect, point))
+			return i;
+	}
+	return -1;
+}
 
 void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	// 눌렀을 때의 flag 및 좌표 저장
-	mouse_check = true;
+	temp.start_pt = point;
 	m_prev_pos.x = point.x;
 	m_prev_pos.y = point.y;
+
+	//ANDGATE and (point, IDB_BITMAP_AND);
+	if (PtInRect(andTemp.output[0].rectState, point))
+	{
+		temp.statu = andTemp.output[0].boolState;
+		mouse_check = true;
+	}
+	else if (int index = check_line(point) >= 0)
+	{
+		temp.statu = LineArray.GetAt(index).statu;
+		mouse_check = true;
+	}
 
 	CClientDC dc(this);
 	/*if (selected == true) {*/
@@ -146,8 +171,26 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	//마우스 드래그 flag 변경
+	
+	if (mouse_check)
+	{
 	mouse_check = false;
-	LogicEngine* gate;
+		temp.desti_pt = point;
+
+		if (PtInRect(andTemp.input[0].rectState, point))
+		{
+			andTemp.input[0].boolState = temp.statu;
+		}
+		else if (PtInRect(andTemp.input[1].rectState, point))
+		{
+			andTemp.input[1].boolState = temp.statu;
+		}
+
+		temp.setLineRect();
+		LineArray.Add(temp);
+	}
+	
+
 	CClientDC dc(this);
 
 	if(selected){
@@ -301,41 +344,14 @@ void CLogisim_KKLView::OnMouseMove(UINT nFlags, CPoint point)
 {
 
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-
 	CClientDC dc(this);
-	
-	CRect* rect;
-	rect = new CRect;
-	// 사각형 (m_prev_pos.x-5, m_prev_pos.y-5)(point.x+5, point.y+5) 선 인식, ptinrect 함수 사용
-	CPen pen;
-	pen.CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
-	CPen* oldPen = dc.SelectObject(&pen);
-
-	
-	if (mouse_check) {
-		/*if(연결된단자가 input단자 or output단자) 영역으로 인식
-		dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
-		dc.LineTo(point.x, point.y);
-		m_prev_pos = point;
-		구조체 생성 : 사각형 (m_prev_pos.x-5, m_prev_pos.y-5)(point.x+5, point.y+5)
-		structure->statu = 단자의 상태;
-
-		else if( struct.rect,ptInRect(point) )  선이 있는 영역-> 사각형. 비교를 모든 사각형으로 해야함..? => 함수를 만들어야함
-		
-		dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
-		dc.LineTo(point.x, point.y);
-		m_prev_pos = point;
-		구조체 생성 : 사각형 (m_prev_pos.x-5, m_prev_pos.y-5)(point.x+5, point.y+5)
-		새로만든 struct.statu = 연결되는 struct.statu;
-
-		*/
-
+	if (mouse_check)
+	{
 		dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
 		dc.LineTo(point.x, point.y);
 		m_prev_pos = point;
 	}
 
-	
 	CView::OnMouseMove(nFlags, point);
 }
 
