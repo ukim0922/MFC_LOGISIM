@@ -21,6 +21,10 @@ public:
 	CArray<NORGATE, NORGATE&> norgates;
 	CArray<XORGATE, XORGATE&> xorgates;
 	CArray<NANDGATE, NANDGATE&> nandgates;
+	
+	CArray<CLOCK_SIGNAL, CLOCK_SIGNAL&> clocks;
+	CArray<BITINPUT, BITINPUT&> bitinputs;
+	CArray<BITLAMP, BITLAMP&> lamps;
 
 
 	bool mouse_check = false;  //마우스 드래그된 상태 체크
@@ -56,8 +60,8 @@ public:
 	
 	bool selected;
 	CString gatename;
-	bool clock_pre; //클럭변수
-	bool clock_cur;
+	//bool clock_pre; //클럭변수
+	//bool clock_cur;
 	bool h_ck; //에지트리거방식 (상승이면true, 하강이면false) 클릭으로받아올예정
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnHighTRG();

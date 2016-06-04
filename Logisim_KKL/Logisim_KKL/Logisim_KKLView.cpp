@@ -200,6 +200,9 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	NORGATE* nor;
 	XORGATE* xor;
 
+	CLOCK_SIGNAL* clock;
+	BITINPUT* bitinput;
+	BITLAMP* lamp;
 
 
 	if(selected){
@@ -268,24 +271,24 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			selected = FALSE;
 		}
 		else if (gatename == "LAMP") {
-			gate = new BITLAMP(point, IDB_BITMAP_LON);
-			gates.Add(*gate);
-			gate->SmallPaint(dc);
-			gate->PrintLabel(dc,gatename);
+			lamp = new BITLAMP(point, IDB_BITMAP_LON);
+			lamps.Add(*lamp);
+			lamp->SmallPaint(dc);
+			lamp->PrintLabel(dc,gatename);
 			gatename = "";
 			selected = FALSE;
 		}
 		else if (gatename == "ют╥б") {
-			gate = new BITINPUT(point, IDB_BITMAP_BITINPUT_0);
-			gates.Add(*gate);
-			gate->SmallPaint(dc);
+			bitinput = new BITINPUT(point, IDB_BITMAP_BITINPUT_0);
+			bitinputs.Add(*bitinput);
+			bitinput->SmallPaint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
 		else if (gatename == "CLK") {
-			gate = new CLOCK_SIGNAL(point, IDB_BITMAP_CLK0);
-			gates.Add(*gate);
-			gate->SmallPaint(dc);
+			clock = new CLOCK_SIGNAL(point, IDB_BITMAP_CLK0);
+			clocks.Add(*clock);
+			clock->SmallPaint(dc);
 			gatename = "";
 			selected = FALSE;
 		}

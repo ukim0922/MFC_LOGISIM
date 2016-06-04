@@ -145,6 +145,7 @@ public:
 	CLOCK_SIGNAL(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {};
 	~CLOCK_SIGNAL() {};
 
+
 private:
 
 };
