@@ -22,6 +22,9 @@ public:
 	UINT BITMAPID;
 	//방향 설정
 	Gdiplus::REAL angle;
+	//전체 영역 지정
+	CRect MRect;
+	void SetRect();
 	//입출력 좌표 지정
 	void SetInOutValues(Gdiplus::REAL angle);
 
