@@ -82,8 +82,14 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 	//TEST
-	LogicEngine a, b, c;
-	c.Gate(NOT);
+	BITINPUT a, b;
+	a.output[0].boolState = TRUE;
+	b.output[0].boolState = FALSE;
+
+	ORGATE c;
+	c.input[0].boolState = a.output[0].boolState;
+	c.input[1].boolState = b.output[0].boolState;
+	c.GateLogic();
 
 	CString str;
 	str.Format(_T("output : %d"),c.output[0].boolState);
@@ -201,7 +207,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		}
 		else if (gatename == "NOT") {
 			NOTGATE not (point, IDB_BITMAP_NOT);
-			not.Paint(dc);
+			not.SmallPaint(dc);
 			gatename = "";
 		}
 		else if (gatename == "NAND") {
@@ -226,7 +232,9 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 
 		}
 		else if (gatename == "JK-FF") {
-
+			JKFF jkff(point, IDB_BITMAP_JKFF);
+			jkff.Paint(dc);
+			gatename = "";
 		}
 		else if (gatename == "T-FF") {
 			TFF tff(point, IDB_BITMAP_TFF);
@@ -236,7 +244,12 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "LAMP") {
 			BITLAMP lamp(point, IDB_BITMAP_LON);
 			lamp.PrintLabel(dc,gatename);
-			lamp.Paint(dc);
+			lamp.SmallPaint(dc);
+			gatename = "";
+		}
+		else if (gatename == "ют╥б") {
+			BITINPUT bitin(point, IDB_BITMAP_BITINPUT_0);
+			bitin.SmallPaint(dc);
 			gatename = "";
 		}
 		CView::OnLButtonUp(nFlags, point);

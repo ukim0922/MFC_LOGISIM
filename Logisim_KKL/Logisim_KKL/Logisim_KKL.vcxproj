@@ -225,6 +225,10 @@
     <ResourceCompile Include="Logisim_KKL.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\bitmapBITINPUT_0.bmp" />
+    <Image Include="res\bitmapBITINPUT_1.bmp" />
+    <Image Include="res\bitmapCLK0.bmp" />
+    <Image Include="res\bitmapCLK1.bmp" />
     <Image Include="res\bitmapOR.bmp" />
     <Image Include="res\bitmap2.bmp" />
     <Image Include="res\bitmap3.bmp" />
