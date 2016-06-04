@@ -53,6 +53,8 @@ public:
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnHighTRG();
 	afx_msg void OnLowTRG();
+	afx_msg void OnUpdateHigh(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateLow(CCmdUI *pCmdUI);
 };
 
 #ifndef _DEBUG  // Logisim_KKLView.cpp의 디버그 버전

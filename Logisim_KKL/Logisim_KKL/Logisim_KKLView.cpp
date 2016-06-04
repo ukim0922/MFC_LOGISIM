@@ -32,6 +32,8 @@ BEGIN_MESSAGE_MAP(CLogisim_KKLView, CView)
 	ON_WM_MOUSEMOVE()
 	ON_COMMAND(ID_HIGH, &CLogisim_KKLView::OnHighTRG)
 	ON_COMMAND(ID_LOW, &CLogisim_KKLView::OnLowTRG)
+	ON_UPDATE_COMMAND_UI(ID_HIGH, &CLogisim_KKLView::OnUpdateHigh)
+	ON_UPDATE_COMMAND_UI(ID_LOW, &CLogisim_KKLView::OnUpdateLow)
 END_MESSAGE_MAP()
 
 // CLogisim_KKLView 생성/소멸
@@ -177,9 +179,6 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 
 		}
 		else if (gatename == "JK-FF") {
-			JKFF jkff(point, IDB_BITMAP_JKFF);
-			jkff.Paint(dc);
-			gatename = "";
 
 		}
 		else if (gatename == "T-FF") {
@@ -307,4 +306,18 @@ void CLogisim_KKLView::OnLowTRG()
 {
 	h_ck = false;
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CLogisim_KKLView::OnUpdateHigh(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck(h_ck == true);
+	// TODO: 여기에 명령 업데이트 UI 처리기 코드를 추가합니다.
+}
+
+
+void CLogisim_KKLView::OnUpdateLow(CCmdUI *pCmdUI)
+{
+	pCmdUI->SetCheck(h_ck == false);
+	// TODO: 여기에 명령 업데이트 UI 처리기 코드를 추가합니다.
 }
