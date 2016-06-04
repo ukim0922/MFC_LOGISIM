@@ -280,6 +280,14 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			gatename = "";
 			selected = FALSE;
 		}
+		/*else if (gatename == "7-segment") {
+			gate = new Seven(point, );
+			gates.Add(*gate);
+			gate->SmallPaint(dc);
+			gatename = "";
+			selected = FALSE;
+		}
+		*/
 		CView::OnLButtonUp(nFlags, point);
 	}
 }
@@ -337,6 +345,7 @@ void CLogisim_KKLView::OnRButtonUp(UINT nFlags, CPoint point)
 		lamp.Rotate(dc, 90);
 		gatename = "";
 	}
+	
 	CView::OnRButtonUp(nFlags, point);
 }
 
