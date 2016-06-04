@@ -35,8 +35,10 @@ public:
 
 	//출력
 	void Paint(CClientDC &dc);
+	void SmallPaint(CClientDC &dc); //not, input, clock signal, ouputlamp
 	//회전
 	void Rotate(CClientDC &dc, Gdiplus::REAL angle);
+	void SmallRotate(CClientDC &dc, Gdiplus::REAL angle); //not
 	
 	//라벨
 	void PrintLabel(CClientDC &dc, CString Label);
@@ -51,8 +53,7 @@ public:
 	virtual ~LogicEngine();
 
 	//게이트 기능 구현
-	void Gate(GateSelect Select);
-
+	void GateLogic() {};
 
 
 private:
@@ -63,39 +64,55 @@ private:
 //게이트
 class ANDGATE : public LogicEngine {
 public :
+	ANDGATE() {};
+	~ANDGATE() {};
 	ANDGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint,BITMAPID){
 	}
+	void GateLogic();
 };
 
 class ORGATE : public LogicEngine {
 public:
+	ORGATE() {};
+	~ORGATE() {};
 	ORGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 	}
+	void GateLogic();
 };
 
 class NOTGATE : public LogicEngine {
 public:
+	NOTGATE() {};
+	~NOTGATE() {};
 	NOTGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 	}
-	void Paint(CClientDC& dc);
-	void Rotate(CClientDC &dc, Gdiplus::REAL angle);
+	void GateLogic();
 };
 
 class NANDGATE : public LogicEngine {
 public:
+	NANDGATE() {};
+	~NANDGATE() {};
 	NANDGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 	}
+	void GateLogic();
 };
 
 class NORGATE : public LogicEngine {
 public:
+	NORGATE() {};
+	~NORGATE() {};
 	NORGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 	}
+	void GateLogic();
 };
 class XORGATE : public LogicEngine {
 public:
+	XORGATE() {};
+	~XORGATE() {};
 	XORGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 	}
+	void GateLogic();
 };
 
 
@@ -104,11 +121,35 @@ public:
 //1비트출력램프
 class BITLAMP : public LogicEngine {
 public:
+	BITLAMP() {};
+	~BITLAMP() {};
 	BITLAMP(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 	}
-	void Paint(CClientDC& dc);
-	//void Rotate(CClientDC &dc, Gdiplus::REAL angle);
 };
+
+class BITINPUT : public LogicEngine
+{
+public:
+	BITINPUT() {};
+	BITINPUT(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {};
+	~BITINPUT() {};
+
+private:
+
+};
+
+class CLOCK_SIGNAL :public LogicEngine
+{
+public:
+	CLOCK_SIGNAL() {};
+	CLOCK_SIGNAL(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {};
+	~CLOCK_SIGNAL() {};
+
+private:
+
+};
+
+
 
 //7 세그먼트
 class Seven {
@@ -117,5 +158,4 @@ public:
 	Seven(CPoint &point);
 	void Paint(CClientDC &dc, int num);
 	void Print_7_segment(CClientDC &dc, bool input_a, bool input_b, bool input_c, bool input_d, bool input_e, bool input_f, bool input_g);
-
 };

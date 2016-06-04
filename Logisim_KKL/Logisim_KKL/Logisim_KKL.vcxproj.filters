@@ -148,5 +148,17 @@
     <Image Include="res\bmpmap_w.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="res\bitmapBITINPUT_1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmapBITINPUT_0.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmapCLK0.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmapCLK1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>
