@@ -18,6 +18,7 @@
 #define IDB_BITMAP_JKFF                 324
 #define IDB_BITMAP_W                    330
 #define IDB_BITMAP_H                    331
+#define IDB_BITMAP_DFF                  332
 #define ID_32773                        32773
 #define ID_32774                        32774
 #define ID_HIGH                         32775
@@ -27,7 +28,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        332
+#define _APS_NEXT_RESOURCE_VALUE        333
 #define _APS_NEXT_COMMAND_VALUE         32777
 #define _APS_NEXT_CONTROL_VALUE         1004
 #define _APS_NEXT_SYMED_VALUE           318
