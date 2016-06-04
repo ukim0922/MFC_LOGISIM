@@ -225,6 +225,7 @@
     <ResourceCompile Include="Logisim_KKL.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\bitmap1.bmp" />
     <Image Include="res\bitmapOR.bmp" />
     <Image Include="res\bitmap2.bmp" />
     <Image Include="res\bitmap3.bmp" />
@@ -237,6 +238,7 @@
     <Image Include="res\bitmapJKFF.bmp" />
     <Image Include="res\bmpmap_h.bmp" />
     <Image Include="res\bmpmap_w.bmp" />
+    <Image Include="res\DFF.bmp" />
     <Image Include="res\Logisim_KKL.ico" />
     <Image Include="res\Logisim_KKLDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
