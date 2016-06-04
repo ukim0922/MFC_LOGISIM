@@ -104,6 +104,8 @@ IDB_BITMAP_W            BITMAP                  "res\\bmpmap_w.bmp"
 
 IDB_BITMAP_H            BITMAP                  "res\\bmpmap_h.bmp"
 
+IDB_BITMAP_DFF          BITMAP                  "res\\bitmap_DFF.bmp"
+
 IDB_BITMAP_BITINPUT_1   BITMAP                  "res\\bitmapBITINPUT_1.bmp"
 
 IDB_BITMAP_BITINPUT_0   BITMAP                  "res\\bitmapBITINPUT_0.bmp"

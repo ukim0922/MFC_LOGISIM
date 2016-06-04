@@ -237,6 +237,7 @@
     <Image Include="res\bitmapNOR.bmp" />
     <Image Include="res\bitmapNOT.bmp" />
     <Image Include="res\bitmapXOR.bmp" />
+    <Image Include="res\bitmap_DFF.bmp" />
     <Image Include="res\bmp00001.bmp" />
     <Image Include="res\bitmapJKFF.bmp" />
     <Image Include="res\bmpmap_h.bmp" />
