@@ -192,47 +192,59 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	
 
 	CClientDC dc(this);
+	LogicEngine* gate;
+	ANDGATE* and;
+	ORGATE* or ;
+	NOTGATE* not;
+	NANDGATE* nand;
+	NORGATE* nor;
+	XORGATE* xor;
+
+	CLOCK_SIGNAL* clock;
+	BITINPUT* bitinput;
+	BITLAMP* lamp;
+
 
 	if(selected){
 		if (gatename == "AND") {
-			gate = new ANDGATE(point,IDB_BITMAP_AND);
-			gates.Add(*gate);
-			gate->Paint(dc);
+			and = new ANDGATE(point,IDB_BITMAP_AND);
+			andgates.Add(*and);
+			and->Paint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
 		else if (gatename == "OR") {
-			gate = new ORGATE(point, IDB_BITMAP_OR);
-			gates.Add(*gate);
-			gate->Paint(dc);
+			or = new ORGATE(point, IDB_BITMAP_OR);
+			orgates.Add(*or );
+			or ->Paint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
 		else if (gatename == "NOT") {
-			gate = new NOTGATE(point, IDB_BITMAP_NOT);
-			gates.Add(*gate);
-			gate->SmallPaint(dc);
+			not = new NOTGATE(point, IDB_BITMAP_NOT);
+			notgates.Add(*not);
+			not->SmallPaint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
 		else if (gatename == "NAND") {
-			gate = new NANDGATE(point, IDB_BITMAP_NAND);
-			gates.Add(*gate);
-			gate->Paint(dc);
+			nand = new NANDGATE(point, IDB_BITMAP_NAND);
+			nandgates.Add(*nand);
+			nand->Paint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
 		else if (gatename == "NOR") {
-			gate = new NORGATE(point, IDB_BITMAP_NOR);
-			gates.Add(*gate);
-			gate->Paint(dc);
+			nor = new NORGATE(point, IDB_BITMAP_NOR);
+			norgates.Add(*nor);
+			nor->Paint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
 		else if (gatename == "XOR") {
-			gate = new XORGATE(point, IDB_BITMAP_XOR);
-			gates.Add(*gate);
-			gate->Paint(dc);
+			xor = new XORGATE(point, IDB_BITMAP_XOR);
+			xorgates.Add(*xor);
+			xor->Paint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -259,24 +271,24 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			selected = FALSE;
 		}
 		else if (gatename == "LAMP") {
-			gate = new BITLAMP(point, IDB_BITMAP_LON);
-			gates.Add(*gate);
-			gate->SmallPaint(dc);
-			gate->PrintLabel(dc,gatename);
+			lamp = new BITLAMP(point, IDB_BITMAP_LON);
+			lamps.Add(*lamp);
+			lamp->SmallPaint(dc);
+			lamp->PrintLabel(dc,gatename);
 			gatename = "";
 			selected = FALSE;
 		}
 		else if (gatename == "ют╥б") {
-			gate = new BITINPUT(point, IDB_BITMAP_BITINPUT_0);
-			gates.Add(*gate);
-			gate->SmallPaint(dc);
+			bitinput = new BITINPUT(point, IDB_BITMAP_BITINPUT_0);
+			bitinputs.Add(*bitinput);
+			bitinput->SmallPaint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
 		else if (gatename == "CLK") {
-			gate = new CLOCK_SIGNAL(point, IDB_BITMAP_CLK0);
-			gates.Add(*gate);
-			gate->SmallPaint(dc);
+			clock = new CLOCK_SIGNAL(point, IDB_BITMAP_CLK0);
+			clocks.Add(*clock);
+			clock->SmallPaint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
