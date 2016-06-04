@@ -2,9 +2,9 @@
 // Logisim_KKLView.h : CLogisim_KKLView 클래스의 인터페이스
 //
 #include "LogicEngine.h"
+//#include "FilpFlopEngine.h"
 
 #pragma once
-
 class CLogisim_KKLView : public CView
 {
 protected: // serialization에서만 만들어집니다.
@@ -15,9 +15,20 @@ protected: // serialization에서만 만들어집니다.
 public:
 	CLogisim_KKLDoc* GetDocument() const;
 	CArray<LogicEngine, LogicEngine&> gates;
+	CArray<ANDGATE, ANDGATE&> andgates;
+	CArray<ORGATE, ORGATE&> orgates;
+	CArray<NOTGATE, NOTGATE&> notgates;
+	CArray<NORGATE, NORGATE&> norgates;
+	CArray<XORGATE, XORGATE&> xorgates;
+	CArray<NANDGATE, NANDGATE&> nandgates;
+	
+	CArray<CLOCK_SIGNAL, CLOCK_SIGNAL&> clocks;
+	CArray<BITINPUT, BITINPUT&> bitinputs;
+	CArray<BITLAMP, BITLAMP&> lamps;
+
+
 	bool mouse_check = false;  //마우스 드래그된 상태 체크
 	CPoint m_prev_pos; //드래그 시작 좌표 저장
-	CPoint m_last_pos;
 // 작업입니다. 
 public:
 
@@ -49,8 +60,8 @@ public:
 	
 	bool selected;
 	CString gatename;
-	bool clock_pre; //클럭변수
-	bool clock_cur;
+	//bool clock_pre; //클럭변수
+	//bool clock_cur;
 	bool h_ck; //에지트리거방식 (상승이면true, 하강이면false) 클릭으로받아올예정
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnHighTRG();

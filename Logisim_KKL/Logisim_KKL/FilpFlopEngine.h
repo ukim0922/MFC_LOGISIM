@@ -5,14 +5,16 @@
 class FilpFlopEngine : public LogicEngine
 {
 public:
-	CMainFrame *pFrame_clock_pre = (CMainFrame *)AfxGetMainWnd();
-	CMainFrame *pFrame_clock_cur = (CMainFrame *)AfxGetMainWnd();
-	CMainFrame *pFrame_h_ck = (CMainFrame *)AfxGetMainWnd();
+	InOutValues clk;
+
+	//CMainFrame *pFrame_clock_pre = (CMainFrame *)AfxGetMainWnd();
+	//CMainFrame *pFrame_clock_cur = (CMainFrame *)AfxGetMainWnd();
+	//CMainFrame *pFrame_h_ck = (CMainFrame *)AfxGetMainWnd();
 	
 
-	bool clock_pre = pFrame_clock_pre->m_pLogisimView->clock_pre;
-	bool clock_cur = pFrame_clock_cur->m_pLogisimView->clock_cur;
-	bool h_ck = pFrame_h_ck->m_pLogisimView->h_ck;
+	bool clock_pre /*= pFrame_clock_pre->m_pLogisimView->clock_pre;*/;
+	bool clock_cur /*= pFrame_clock_cur->m_pLogisimView->clock_cur;*/;
+	bool h_ck /*= pFrame_h_ck->m_pLogisimView->h_ck;*/;
 
 	CLogisim_KKLView*  m_pLogisimView;
 	CGateTreeView*	   m_pTreeView;
