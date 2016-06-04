@@ -164,3 +164,230 @@ void JKFF::FlipFlopLogic()
 		}
 	}
 }
+
+
+void FilpFlopEngine::SetInOutValues(Gdiplus::REAL angle)
+{
+	CString name;
+	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
+	name = pFrame->m_pLogisimView->gatename;
+	//NOT게이트일 때
+	if (name == "D-FF") {
+		switch ((int)angle / 360) {
+		case 0:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x - 4, MPoint.y + 12, MPoint.x + 4, MPoint.y + 20);
+			clk.rectState = CRect(MPoint.x - 4, MPoint.y + 32, MPoint.x + 4, MPoint.y + 40);
+			output[0].rectState = CRect(MPoint.x + 44, MPoint.y + 4, MPoint.x + 52, MPoint.y + 12);
+			output[1].rectState = CRect(MPoint.x + 44, MPoint.y + 32, MPoint.x + 52, MPoint.y + 40);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x;
+			input[0].pointState.y = MPoint.y + 16;
+			clk.pointState.x = MPoint.x;
+			clk.pointState.y = MPoint.y + 36;
+			output[0].pointState.x = MPoint.x + 48;
+			output[0].pointState.y = MPoint.y + 8;
+			output[1].pointState.x = MPoint.x + 48;
+			output[1].pointState.y = MPoint.y + 36;
+			break;
+		case 90:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 28, MPoint.y - 4, MPoint.x + 36, MPoint.y + 4);
+			clk.rectState = CRect(MPoint.x + 8, MPoint.y - 4, MPoint.x + 16, MPoint.y + 4);
+			output[0].rectState = CRect(MPoint.x + 36, MPoint.y + 44, MPoint.x + 44, MPoint.y + 52);
+			output[1].rectState = CRect(MPoint.x + 8, MPoint.y + 44, MPoint.x + 16, MPoint.y + 52);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 32;
+			input[0].pointState.y = MPoint.y;
+			clk.pointState.x = MPoint.x + 12;
+			clk.pointState.y = MPoint.y;
+			output[0].pointState.x = MPoint.x + 40;
+			output[0].pointState.y = MPoint.y + 48;
+			output[1].pointState.x = MPoint.x + 12;
+			output[1].pointState.y = MPoint.y + 48;
+			break;
+		case 180:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 44, MPoint.y + 28, MPoint.x + 52, MPoint.y + 36);
+			clk.rectState = CRect(MPoint.x + 44, MPoint.y + 8, MPoint.x + 52, MPoint.y + 16);
+			output[0].rectState = CRect(MPoint.x - 4, MPoint.y + 8, MPoint.x + 4, MPoint.y + 16);
+			output[1].rectState = CRect(MPoint.x - 4, MPoint.y + 36, MPoint.x + 4, MPoint.y + 44);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 48;
+			input[0].pointState.y = MPoint.y + 32;
+			clk.pointState.x = MPoint.x + 48;
+			clk.pointState.y = MPoint.y + 12;
+			output[0].pointState.x = MPoint.x;
+			output[0].pointState.y = MPoint.y + 12;
+			output[1].pointState.x = MPoint.x;
+			output[1].pointState.y = MPoint.y + 40;
+			break;
+		case 270:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 4, MPoint.y - 4, MPoint.x + 12, MPoint.y + 4);
+			clk.rectState = CRect(MPoint.x + 32, MPoint.y - 4, MPoint.x + 40, MPoint.y + 4);
+			output[0].rectState = CRect(MPoint.x + 12, MPoint.y + 44, MPoint.x + 20, MPoint.y + 52);
+			output[1].rectState = CRect(MPoint.x + 44, MPoint.y + 44, MPoint.x + 52, MPoint.y + 52);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 8;
+			input[0].pointState.y = MPoint.y;
+			clk.pointState.x = MPoint.x + 36;
+			clk.pointState.y = MPoint.y;
+			output[0].pointState.x = MPoint.x + 16;
+			output[0].pointState.y = MPoint.y + 48;
+			output[1].pointState.x = MPoint.x + 36;
+			output[1].pointState.y = MPoint.y + 48;
+			break;
+		}
+	}
+	//출력 램프일 때
+	else if (name == "T-FF") {
+		switch ((int)angle / 360) {
+		case 0:
+			//사각형 영역 지정
+			input[1].rectState = CRect(MPoint.x - 4, MPoint.y + 12, MPoint.x + 4, MPoint.y + 20);
+			clk.rectState = CRect(MPoint.x - 4, MPoint.y + 32, MPoint.x + 4, MPoint.y + 40);
+			output[0].rectState = CRect(MPoint.x + 44, MPoint.y + 4, MPoint.x + 52, MPoint.y + 12);
+			output[1].rectState = CRect(MPoint.x + 44, MPoint.y + 32, MPoint.x + 52, MPoint.y + 40);
+			//좌표 영역 지정
+			input[1].pointState.x = MPoint.x;
+			input[1].pointState.y = MPoint.y + 16;
+			clk.pointState.x = MPoint.x;
+			clk.pointState.y = MPoint.y + 36;
+			output[0].pointState.x = MPoint.x + 48;
+			output[0].pointState.y = MPoint.y + 8;
+			output[1].pointState.x = MPoint.x + 48;
+			output[1].pointState.y = MPoint.y + 36;
+			break;
+		case 90:
+			//사각형 영역 지정
+			input[1].rectState = CRect(MPoint.x + 28, MPoint.y - 4, MPoint.x + 36, MPoint.y + 4);
+			clk.rectState = CRect(MPoint.x + 8, MPoint.y - 4, MPoint.x + 16, MPoint.y + 4);
+			output[0].rectState = CRect(MPoint.x + 36, MPoint.y + 44, MPoint.x + 44, MPoint.y + 52);
+			output[1].rectState = CRect(MPoint.x + 8, MPoint.y + 44, MPoint.x + 16, MPoint.y + 52);
+			//좌표 영역 지정
+			input[1].pointState.x = MPoint.x + 32;
+			input[1].pointState.y = MPoint.y;
+			clk.pointState.x = MPoint.x + 12;
+			clk.pointState.y = MPoint.y;
+			output[0].pointState.x = MPoint.x + 40;
+			output[0].pointState.y = MPoint.y + 48;
+			output[1].pointState.x = MPoint.x + 12;
+			output[1].pointState.y = MPoint.y + 48;
+			break;
+		case 180:
+			//사각형 영역 지정
+			input[1].rectState = CRect(MPoint.x + 44, MPoint.y + 28, MPoint.x + 52, MPoint.y + 36);
+			clk.rectState = CRect(MPoint.x + 44, MPoint.y + 8, MPoint.x + 52, MPoint.y + 16);
+			output[0].rectState = CRect(MPoint.x - 4, MPoint.y + 8, MPoint.x + 4, MPoint.y + 16);
+			output[1].rectState = CRect(MPoint.x - 4, MPoint.y + 36, MPoint.x + 4, MPoint.y + 44);
+			//좌표 영역 지정
+			input[1].pointState.x = MPoint.x + 48;
+			input[1].pointState.y = MPoint.y + 32;
+			clk.pointState.x = MPoint.x + 48;
+			clk.pointState.y = MPoint.y + 12;
+			output[0].pointState.x = MPoint.x;
+			output[0].pointState.y = MPoint.y + 12;
+			output[1].pointState.x = MPoint.x;
+			output[1].pointState.y = MPoint.y + 40;
+			break;
+		case 270:
+			//사각형 영역 지정
+			input[1].rectState = CRect(MPoint.x + 4, MPoint.y - 4, MPoint.x + 12, MPoint.y + 4);
+			clk.rectState = CRect(MPoint.x + 32, MPoint.y - 4, MPoint.x + 40, MPoint.y + 4);
+			output[0].rectState = CRect(MPoint.x + 12, MPoint.y + 44, MPoint.x + 20, MPoint.y + 52);
+			output[1].rectState = CRect(MPoint.x + 44, MPoint.y + 44, MPoint.x + 52, MPoint.y + 52);
+			//좌표 영역 지정
+			input[1].pointState.x = MPoint.x + 8;
+			input[1].pointState.y = MPoint.y;
+			clk.pointState.x = MPoint.x + 36;
+			clk.pointState.y = MPoint.y;
+			output[0].pointState.x = MPoint.x + 16;
+			output[0].pointState.y = MPoint.y + 48;
+			output[1].pointState.x = MPoint.x + 36;
+			output[1].pointState.y = MPoint.y + 48;
+			break;
+		}
+	}
+	//나머지 게이트들
+	else if(name == "JK-FF"){
+		switch ((int)angle / 360) {
+		case 0:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x - 4, MPoint.y + 4, MPoint.x + 4, MPoint.y + 12);
+			input[1].rectState = CRect(MPoint.x - 4, MPoint.y + 20, MPoint.x + 4, MPoint.y + 28);
+			clk.rectState = CRect(MPoint.x - 4, MPoint.y + 32, MPoint.x + 4, MPoint.y + 40);
+			output[0].rectState = CRect(MPoint.x + 44, MPoint.y + 4, MPoint.x + 52, MPoint.y + 12);
+			output[1].rectState = CRect(MPoint.x + 44, MPoint.y + 32, MPoint.x + 52, MPoint.y + 40);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x;
+			input[0].pointState.y = MPoint.y + 8;
+			input[1].pointState.x = MPoint.x;
+			input[1].pointState.y = MPoint.y + 24;
+			clk.pointState.x = MPoint.x;
+			clk.pointState.y = MPoint.y + 36;
+			output[0].pointState.x = MPoint.x + 48;
+			output[0].pointState.y = MPoint.y + 8;
+			output[1].pointState.x = MPoint.x + 48;
+			output[1].pointState.y = MPoint.y + 36;
+			break;
+		case 90:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 36, MPoint.y - 4, MPoint.x + 44, MPoint.y + 4);
+			input[1].rectState = CRect(MPoint.x + 8, MPoint.y - 4, MPoint.x + 16, MPoint.y + 4);
+			clk.rectState = CRect(MPoint.x + 20, MPoint.y - 4, MPoint.x + 28, MPoint.y + 4);
+			output[0].rectState = CRect(MPoint.x + 36, MPoint.y + 44, MPoint.x + 44, MPoint.y + 52);
+			output[1].rectState = CRect(MPoint.x + 8, MPoint.y + 44, MPoint.x + 16, MPoint.y + 52);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 40;
+			input[0].pointState.y = MPoint.y;
+			input[1].pointState.x = MPoint.x + 12;
+			input[1].pointState.y = MPoint.y;
+			clk.pointState.x = MPoint.x + 24;
+			clk.pointState.y = MPoint.y;
+			output[0].pointState.x = MPoint.x + 40;
+			output[0].pointState.y = MPoint.y + 48;
+			output[1].pointState.x = MPoint.x + 12;
+			output[1].pointState.y = MPoint.y + 48;
+			break;
+		case 180:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 44, MPoint.y + 36, MPoint.x + 52, MPoint.y + 44);
+			input[1].rectState = CRect(MPoint.x + 44, MPoint.y + 8, MPoint.x + 52, MPoint.y + 16);
+			clk.rectState = CRect(MPoint.x + 44, MPoint.y + 20, MPoint.x + 52, MPoint.y + 28);
+			output[0].rectState = CRect(MPoint.x - 4, MPoint.y + 8, MPoint.x + 4, MPoint.y + 16);
+			output[1].rectState = CRect(MPoint.x - 4, MPoint.y + 36, MPoint.x + 4, MPoint.y + 44);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 48;
+			input[0].pointState.y = MPoint.y + 40;
+			input[1].pointState.x = MPoint.x + 48;
+			input[1].pointState.y = MPoint.y + 12;
+			clk.pointState.x = MPoint.x + 48;
+			clk.pointState.y = MPoint.y + 24;
+			output[0].pointState.x = MPoint.x;
+			output[0].pointState.y = MPoint.y + 12;
+			output[1].pointState.x = MPoint.x;
+			output[1].pointState.y = MPoint.y + 40;
+			break;
+		case 270:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 4, MPoint.y + 44, MPoint.x + 12, MPoint.y + 52);
+			input[1].rectState = CRect(MPoint.x + 32, MPoint.y + 44, MPoint.x + 40, MPoint.y + 52);
+			clk.rectState = CRect(MPoint.x + 20, MPoint.y + 44, MPoint.x + 28, MPoint.y + 52);
+			output[0].rectState = CRect(MPoint.x + 4, MPoint.y - 4, MPoint.x + 12, MPoint.y + 4);
+			output[1].rectState = CRect(MPoint.x + 32, MPoint.y - 4, MPoint.x + 40, MPoint.y + 4);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 8;
+			input[0].pointState.y = MPoint.y + 48;
+			input[1].pointState.x = MPoint.x + 36;
+			input[1].pointState.y = MPoint.y + 48;
+			clk.pointState.x = MPoint.x + 24;
+			clk.pointState.y = MPoint.y + 48;
+			output[0].pointState.x = MPoint.x + 8;
+			output[0].pointState.y = MPoint.y;
+			output[1].pointState.x = MPoint.x + 36;
+			output[1].pointState.y = MPoint.y;
+			break;
+		}
+	}
+}
