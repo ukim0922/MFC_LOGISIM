@@ -47,7 +47,12 @@ public:
 	
 	bool selected;
 	CString gatename;
+	bool clock_pre; //클럭변수
+	bool clock_cur;
+	bool h_ck; //에지트리거방식 (상승이면true, 하강이면false) 클릭으로받아올예정
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnHighTRG();
+	afx_msg void OnLowTRG();
 };
 
 #ifndef _DEBUG  // Logisim_KKLView.cpp의 디버그 버전

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "FilpFlopEngine.h"
-
+#include "MainFrm.h"
 
 FilpFlopEngine::FilpFlopEngine()
 {
@@ -10,6 +10,7 @@ FilpFlopEngine::FilpFlopEngine()
 FilpFlopEngine::~FilpFlopEngine()
 {
 }
+
 
 void  FilpFlopEngine::Paint(CClientDC &dc) {
 	CBitmap bitmap;
@@ -46,7 +47,7 @@ void FilpFlopEngine::FilpFlop(FlipFlopSelect Select)
 	{
 	case T_FF:
 		if (input[0].boolState) {
-
+			
 			if (h_ck == TRUE) //상승 에지트리거
 			{
 				if (clock_pre == TRUE && clock_cur == FALSE)

@@ -8,6 +8,7 @@
 #include "Logisim_KKLView.h"
 #include "GateTreeView.h"
 
+
 class CMainFrame : public CFrameWnd
 {
 	
@@ -22,6 +23,7 @@ protected:
 public:
 	CLogisim_KKLView*  m_pLogisimView;
 	CGateTreeView*	   m_pTreeView;
+	
 
 // 작업입니다.
 public:
