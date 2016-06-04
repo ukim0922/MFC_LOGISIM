@@ -384,6 +384,36 @@ void LogicEngine::SetInOutValues(Gdiplus::REAL angle)
 			break;
 		}
 	}
+	//출력 램프일 때
+	else if(name == "BITLAMP"){
+		switch ((int)angle / 360) {
+		case 0:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x - 4, MPoint.y + 8, MPoint.x + 4, MPoint.y + 16);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x;
+			input[0].pointState.y = MPoint.y + 12;
+		case 90:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 8, MPoint.y + 20, MPoint.x + 16, MPoint.y + 28);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 12;
+			input[0].pointState.y = MPoint.y + 24;
+		case 180:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x - 4, MPoint.y + 8, MPoint.x + 4, MPoint.y + 16);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x;
+			input[0].pointState.y = MPoint.y + 12;
+		case 270:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 8, MPoint.y - 4, MPoint.x + 16, MPoint.y + 4);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 12;
+			input[0].pointState.y = MPoint.y;
+			break;
+		}
+	}
 	//나머지 게이트들
 	else {
 		switch ((int)angle / 360) {
