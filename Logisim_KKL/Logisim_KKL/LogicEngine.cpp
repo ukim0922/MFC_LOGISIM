@@ -190,7 +190,6 @@ Seven::Seven(CPoint &point) {
 
 //7-segment 글자별 출력함수(진행중)
 void Seven::Paint(CClientDC &dc, int num) {
-	CPoint point;
 	CBitmap bitmap_w, bitmap_h;
 	bitmap_w.LoadBitmap(IDB_BITMAP_W);
 	bitmap_h.LoadBitmap(IDB_BITMAP_H);
@@ -281,8 +280,6 @@ void Seven::Paint(CClientDC &dc, int num) {
 			break;
 	}
 }
-
-
 void NOTGATE::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
 	Bitmap *pBitmap;
 	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP_NOT));
@@ -301,44 +298,6 @@ void NOTGATE::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
 	graphics.DrawImage(&tempbmp, MPoint.x, MPoint.y, (pBitmap->GetWidth())/2, (pBitmap->GetHeight())/2);
 }
 
-//
-//void LogicEngine::SetOutput(Gdiplus::REAL angle,int i)
-//{
-//	CString name;
-//	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
-//	name = pFrame->m_pLogisimView->gatename;
-//	if (name == "NOT") {
-//		switch ((int)angle/360) {
-//		case 0:
-//			RectArr[i].output = CRect();
-//			RectArr[i].input1 = CRect((rect.left + rect.right) / 2 - 5, rect.bottom + 5, (rect.left + rect.right) / 2 + 5, rect.bottom + 15);
-//			RectArr[i].input2 = CRect();
-//			break;
-//		case 90:
-//			this->out = CRect();
-//			this->in1 = CRect(rect.left - 15, (rect.top + rect.bottom) / 2 - 5, rect.left - 5, (rect.top + rect.bottom) / 2 + 5);
-//			this->in2 = CRect();
-//			break;
-//		case 180:
-//			this->out = CRect();
-//			this->in1 = CRect((rect.left + rect.right) / 2 - 5, rect.top - 15, (rect.left + rect.right) / 2 + 5, rect.top - 5);
-//			this->in2 = CRect();
-//		case 270:
-//			this->out = CRect();
-//			this->in1 = CRect(rect.right + 5, (rect.top + rect.bottom) / 2 - 5, rect.right + 15, (rect.top + rect.bottom) / 2 + 5);
-//			this->in2 = CRect();
-//			break;
-//		}
-//		OutputPoint.x = MPoint.x + 24;
-//		OutputPoint.y = MPoint.y + 12;
-//	}
-//	else {
-//		OutputPoint.x = MPoint.x + 48;
-//		OutputPoint.y = MPoint.y + 24;
-//	}
-//}
-
-void LogicEngine::SetInput()
 void LogicEngine::SetRect()
 {
 	CString name;
@@ -358,9 +317,48 @@ void LogicEngine::SetInOutValues(Gdiplus::REAL angle)
 	CString name;
 	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
 	name = pFrame->m_pLogisimView->gatename;
+	//NOT게이트일 때
 	if (name == "NOT") {
+		switch ((int)angle/360) {
+		case 0:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x - 4, MPoint.y +8, MPoint.x + 4, MPoint.y + 16);
+			output[0].rectState = CRect(MPoint.x + 20, MPoint.y + 8, MPoint.x + 28, MPoint.y + 16);
+			//좌표 영역 지정
 			input[0].pointState.x = MPoint.x;
 			input[0].pointState.y = MPoint.y + 12;
+			output[0].pointState.x = MPoint.x + 24;
+			output[0].pointState.y = MPoint.y + 12;
+			break;
+		case 90:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 8, MPoint.y - 4, MPoint.x + 16, MPoint.y + 4);
+			output[0].rectState = CRect(MPoint.x +8, MPoint.y + 20, MPoint.x + 16, MPoint.y + 28);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 12;
+			input[0].pointState.y = MPoint.y;
+			output[0].pointState.x = MPoint.x + 12;
+			output[0].pointState.y = MPoint.y + 24;
+			break;
+		case 180:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 20, MPoint.y + 8, MPoint.x + 28, MPoint.y + 16);
+			output[0].rectState = CRect(MPoint.x - 4, MPoint.y + 8, MPoint.x + 4, MPoint.y + 16);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 24;
+			input[0].pointState.y = MPoint.y + 12;
+			output[0].pointState.x = MPoint.x;
+			output[0].pointState.y = MPoint.y + 12;
+		case 270:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 8, MPoint.y + 20, MPoint.x + 16, MPoint.y + 28);
+			output[0].rectState = CRect(MPoint.x + 8, MPoint.y - 4, MPoint.x + 16, MPoint.y + 4);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 12;
+			input[0].pointState.y = MPoint.y + 24;
+			output[0].pointState.x = MPoint.x + 12;
+			output[0].pointState.y = MPoint.y;
+			break;
 		}
 	}
 	//출력 램프일 때
@@ -395,9 +393,58 @@ void LogicEngine::SetInOutValues(Gdiplus::REAL angle)
 	}
 	//나머지 게이트들
 	else {
+		switch ((int)angle / 360) {
+		case 0:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x - 4, MPoint.y + 12, MPoint.x + 4, MPoint.y + 20);
+			input[1].rectState = CRect(MPoint.x - 4, MPoint.y + 28, MPoint.x + 4, MPoint.y + 36);
+			output[0].rectState = CRect(MPoint.x + 44, MPoint.y + 20, MPoint.x + 52, MPoint.y + 28);
+			//좌표 영역 지정
 			input[0].pointState.x = MPoint.x;
 			input[0].pointState.y = MPoint.y + 16;
 			input[1].pointState.x = MPoint.x;
-		input[1].pointState.y = MPoint.y + 16 * 2;
+			input[1].pointState.y = MPoint.y + 32;
+			output[0].pointState.x = MPoint.x + 48;
+			output[0].pointState.y = MPoint.y + 24;
+			break;
+		case 90:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 12, MPoint.y - 4, MPoint.x + 20, MPoint.y + 4);
+			input[1].rectState = CRect(MPoint.x + 28, MPoint.y - 4, MPoint.x + 36, MPoint.y + 4);
+			output[0].rectState = CRect(MPoint.x + 20, MPoint.y + 44, MPoint.x + 28, MPoint.y + 52);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 16;
+			input[0].pointState.y = MPoint.y;
+			input[1].pointState.x = MPoint.x + 32;
+			input[1].pointState.y = MPoint.y;
+			output[0].pointState.x = MPoint.x + 24;
+			output[0].pointState.y = MPoint.y + 48;
+			break;
+		case 180:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 44, MPoint.y + 12, MPoint.x + 52, MPoint.y + 20);
+			input[1].rectState = CRect(MPoint.x + 44, MPoint.y + 28, MPoint.x + 52, MPoint.y + 36);
+			output[0].rectState = CRect(MPoint.x - 4, MPoint.y + 20, MPoint.x + 4, MPoint.y + 28);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 48;
+			input[0].pointState.y = MPoint.y + 16;
+			input[1].pointState.x = MPoint.x + 48;
+			input[1].pointState.y = MPoint.y + 32;
+			output[0].pointState.x = MPoint.x;
+			output[0].pointState.y = MPoint.y + 24;
+		case 270:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 12, MPoint.y + 44, MPoint.x + 20, MPoint.y + 52);
+			input[1].rectState = CRect(MPoint.x + 28, MPoint.y + 44, MPoint.x + 36, MPoint.y + 52);
+			output[0].rectState = CRect(MPoint.x + 20, MPoint.y - 4, MPoint.x + 28, MPoint.y + 4);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 16;
+			input[0].pointState.y = MPoint.y + 48;
+			input[1].pointState.x = MPoint.x + 32;
+			input[1].pointState.y = MPoint.y + 48;
+			output[0].pointState.x = MPoint.x + 24;
+			output[0].pointState.y = MPoint.y;
+			break;
+		}
 	}
 }

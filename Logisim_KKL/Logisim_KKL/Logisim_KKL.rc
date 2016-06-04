@@ -104,8 +104,6 @@ IDB_BITMAP_W            BITMAP                  "res\\bmpmap_w.bmp"
 
 IDB_BITMAP_H            BITMAP                  "res\\bmpmap_h.bmp"
 
-IDB_DFF                 BITMAP                  "res\\DFF.bmp"
-
 
 /////////////////////////////////////////////////////////////////////////////
 //

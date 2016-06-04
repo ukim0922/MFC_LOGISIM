@@ -258,14 +258,15 @@ void CLogisim_KKLView::OnMouseMove(UINT nFlags, CPoint point)
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
 	CClientDC dc(this);
-	Graphics graphics(dc);
+	
 	CRect* rect;
 	rect = new CRect;
 	// 사각형 (m_prev_pos.x-5, m_prev_pos.y-5)(point.x+5, point.y+5) 선 인식, ptinrect 함수 사용
-	//CPen pen;
-	//pen.CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
-	//CPen* oldPen = dc.SelectObject(&pen);
-		
+	CPen pen;
+	pen.CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
+	CPen* oldPen = dc.SelectObject(&pen);
+
+	
 	if (mouse_check) {
 		/*if(연결된단자가 input단자 or output단자) 영역으로 인식
 		dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
@@ -281,14 +282,11 @@ void CLogisim_KKLView::OnMouseMove(UINT nFlags, CPoint point)
 		m_prev_pos = point;
 		구조체 생성 : 사각형 (m_prev_pos.x-5, m_prev_pos.y-5)(point.x+5, point.y+5)
 		새로만든 struct.statu = 연결되는 struct.statu;
+
 		*/
 
-		Pen pen(Color(255, 0, 0, 0),5); // 불투명 (255), 검정색(0,0,0)
-		graphics.DrawLine(&pen, (long)m_prev_pos.x, (long)m_prev_pos.y, (long)point.x, point.y);
-		
-		
-		//dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
-		//dc.LineTo(point.x, point.y);
+		dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
+		dc.LineTo(point.x, point.y);
 		m_prev_pos = point;
 	}
 
