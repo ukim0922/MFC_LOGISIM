@@ -20,13 +20,15 @@ public:
 	CPoint MPoint;
 	//비트맵ID 가지고옴
 	UINT BITMAPID;
-
+	//방향 설정
+	Gdiplus::REAL angle;
 	//입출력 좌표 지정
-	void SetInput();
-	//void SetOutput(Gdiplus::REAL angle, int i);
+	void SetInOutValues(Gdiplus::REAL angle);
 
 	InOutValues input[2];
 	InOutValues output[2];
+
+
 
 	//출력
 	void Paint(CClientDC &dc);
@@ -54,8 +56,6 @@ private:
 	
 	CString Label;
 };
-
-//static CArray<RECT_IN_OUTPUT, RECT_IN_OUTPUT&> RectArr;
 
 //게이트
 class ANDGATE : public LogicEngine {
