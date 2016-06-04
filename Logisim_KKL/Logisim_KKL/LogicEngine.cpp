@@ -118,24 +118,6 @@ void BITLAMP::Paint(CClientDC &dc) {
 	dc.StretchBlt(MPoint.x, MPoint.y, (bmpinfo.bmWidth) / 2, (bmpinfo.bmHeight) / 2, &dcmem, 0, 0, bmpinfo.bmWidth, bmpinfo.bmHeight, SRCCOPY);
 }
 
-//void BITLAMP::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
-//	Bitmap *pBitmap;
-//	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP_LON));
-//	Bitmap tempbmp(pBitmap->GetWidth(), pBitmap->GetHeight(), PixelFormat24bppRGB);
-//	int ix, iy;
-//	ix = int(pBitmap->GetWidth() / (-2.0));
-//	iy = int(pBitmap->GetHeight() / (-2.0));
-//
-//	Graphics graphics(dc);
-//	graphics.SetSmoothingMode(SmoothingModeHighQuality);
-//	Graphics tempgx(&tempbmp);
-//	tempgx.RotateTransform(angle);
-//	tempgx.TranslateTransform(REAL(-ix), REAL(-iy), MatrixOrderAppend);
-//	Point dest[3] = { Point(ix, iy), Point(ix + pBitmap->GetWidth() + 1, iy), Point(ix, iy + pBitmap->GetHeight() + 1) };
-//	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
-//	graphics.DrawImage(&tempbmp, MPoint.x, MPoint.y, (pBitmap->GetWidth()) / 2, (pBitmap->GetHeight()) / 2);
-//
-//}
 
 // NOTGate 출력함수
 void NOTGATE::Paint(CClientDC& dc)
@@ -318,24 +300,6 @@ void NOTGATE::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
 	tempgx.DrawImage(pBitmap, dest, 3, 0, 0, pBitmap->GetWidth(), pBitmap->GetHeight(), UnitPixel);
 	graphics.DrawImage(&tempbmp, MPoint.x, MPoint.y, (pBitmap->GetWidth())/2, (pBitmap->GetHeight())/2);
 }
-//
-//BOOL SetRect(CPoint& point, CPoint& in) {
-//	for (int i = 0; i < RectArr.GetSize(); i++) {
-//		if (PtInRect(RectArr[i].input1, point)) {
-//			in = RectArr[i].input1.CenterPoint();
-//			return TRUE;
-//		}
-//		else if (PtInRect(RectArr[i].input2, point)) {
-//			in = RectArr[i].input2.CenterPoint();
-//			return TRUE;
-//		}
-//		else if (PtInRect(RectArr[i].output, point)) {
-//			in = RectArr[i].output.CenterPoint();
-//			return TRUE;
-//		}
-//	}
-//	return NULL;
-//}
 
 //
 //void LogicEngine::SetOutput(Gdiplus::REAL angle,int i)
@@ -375,18 +339,65 @@ void NOTGATE::Rotate(CClientDC &dc, Gdiplus::REAL angle) {
 //}
 
 void LogicEngine::SetInput()
+void LogicEngine::SetRect()
+{
+	CString name;
+	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
+	name = pFrame->m_pLogisimView->gatename;
+	//NOT게이트, 출력 램프일 때
+	if (name == "NOT" || name == "BITLAMP") {
+		MRect = CRect(MPoint.x, MPoint.y, MPoint.x + 24, MPoint.y + 24);
+	}
+	//나머지 게이트들
+	else {
+		MRect = CRect(MPoint.x, MPoint.y, MPoint.x + 48, MPoint.y + 48);
+	}
+}
+void LogicEngine::SetInOutValues(Gdiplus::REAL angle)
 {
 	CString name;
 	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
 	name = pFrame->m_pLogisimView->gatename;
 	if (name == "NOT") {
-		input[0].pointState.x = MPoint.x;
-		input[0].pointState.y = MPoint.y + 12;
+			input[0].pointState.x = MPoint.x;
+			input[0].pointState.y = MPoint.y + 12;
+		}
 	}
+	//출력 램프일 때
+	else if(name == "BITLAMP"){
+		switch ((int)angle / 360) {
+		case 0:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x - 4, MPoint.y + 8, MPoint.x + 4, MPoint.y + 16);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x;
+			input[0].pointState.y = MPoint.y + 12;
+		case 90:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 8, MPoint.y + 20, MPoint.x + 16, MPoint.y + 28);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 12;
+			input[0].pointState.y = MPoint.y + 24;
+		case 180:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x - 4, MPoint.y + 8, MPoint.x + 4, MPoint.y + 16);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x;
+			input[0].pointState.y = MPoint.y + 12;
+		case 270:
+			//사각형 영역 지정
+			input[0].rectState = CRect(MPoint.x + 8, MPoint.y - 4, MPoint.x + 16, MPoint.y + 4);
+			//좌표 영역 지정
+			input[0].pointState.x = MPoint.x + 12;
+			input[0].pointState.y = MPoint.y;
+			break;
+		}
+	}
+	//나머지 게이트들
 	else {
-		input[0].pointState.x = MPoint.x;
-		input[0].pointState.y = MPoint.y + 16;
-		input[1].pointState.x = MPoint.x;
+			input[0].pointState.x = MPoint.x;
+			input[0].pointState.y = MPoint.y + 16;
+			input[1].pointState.x = MPoint.x;
 		input[1].pointState.y = MPoint.y + 16 * 2;
 	}
 }
