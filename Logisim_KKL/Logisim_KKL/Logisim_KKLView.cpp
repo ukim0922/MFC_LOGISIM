@@ -175,6 +175,9 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 
 		}
 		else if (gatename == "JK-FF") {
+			JKFF jkff(point, IDB_BITMAP_JKFF);
+			jkff.Paint(dc);
+			gatename = "";
 
 		}
 		else if (gatename == "T-FF") {

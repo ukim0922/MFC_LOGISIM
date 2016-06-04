@@ -10,7 +10,7 @@ public:
 	bool h_ck = TRUE; //에지트리거방식 (상승이면true, 하강이면false) 클릭으로받아올예정
 
 	//플립플롭 기능 구현
-	void FilpFlop(FlipFlopSelect Select);
+	void FlipFlopLogic();
 
 	FilpFlopEngine();
 	FilpFlopEngine(CPoint MPoint, UINT BITMAPID) {
@@ -28,16 +28,20 @@ class DFF : public FilpFlopEngine {
 public:
 	DFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
 	}
+	void FlipFlopLogic();
+
 };
 
 class TFF : public FilpFlopEngine {
 public:
 	TFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
 	}
+	void FlipFlopLogic();
 };
 
 class JKFF : public FilpFlopEngine {
 public:
 	JKFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
 	}
+	void FlipFlopLogic();
 };
