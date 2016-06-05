@@ -158,7 +158,7 @@ void LogicEngine::SetInOutValues(Gdiplus::REAL angle)
 		}
 	}
 	//클럭, 입력일 때
-	if (name == "NOT") {
+	if (name == "CLK" || name == "입력") {
 		switch ((int)angle % 360) {
 		case 0:
 			//사각형 영역 지정

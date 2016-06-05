@@ -30,6 +30,7 @@ int check_line(CPoint point)
 
 bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 {
+	//게이트
 	for (int i = 0; i < andgates.GetSize(); i++)
 	{
 		if (PtInRect(andgates.GetAt(i).output[0].rectState, point))
@@ -79,6 +80,77 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(xorgates.GetAt(i).output[0].rectState, point))
 		{
 			xorgates.GetAt(i).input[0].boolState = temp.statu;
+			return true;
+		}
+
+	}
+	//플립플롭
+	for (int i = 0; i <dffs.GetSize(); i++)
+	{
+		if (PtInRect(dffs.GetAt(i).output[0].rectState, point))
+		{
+			dffs.GetAt(i).input[0].boolState = temp.statu;
+			return true;
+		}
+		else if (PtInRect(dffs.GetAt(i).output[1].rectState, point))
+		{
+			dffs.GetAt(i).input[1].boolState = temp.statu;
+			return true;
+		}
+
+	}
+	for (int i = 0; i <tffs.GetSize(); i++)
+	{
+		if (PtInRect(tffs.GetAt(i).output[0].rectState, point))
+		{
+			tffs.GetAt(i).input[0].boolState = temp.statu;
+			return true;
+		}
+		else if (PtInRect(tffs.GetAt(i).output[1].rectState, point))
+		{
+			tffs.GetAt(i).input[1].boolState = temp.statu;
+			return true;
+		}
+
+	}
+	for (int i = 0; i <jkffs.GetSize(); i++)
+	{
+		if (PtInRect(jkffs.GetAt(i).output[0].rectState, point))
+		{
+			jkffs.GetAt(i).input[0].boolState = temp.statu;
+			return true;
+		}
+		else if (PtInRect(jkffs.GetAt(i).output[1].rectState, point))
+		{
+			jkffs.GetAt(i).input[1].boolState = temp.statu;
+			return true;
+		}
+
+	}
+	//입출력, 클럭
+	for (int i = 0; i <clocks.GetSize(); i++)
+	{
+		if (PtInRect(clocks.GetAt(i).output[0].rectState, point))
+		{
+			clocks.GetAt(i).input[0].boolState = temp.statu;
+			return true;
+		}
+
+	}
+	for (int i = 0; i <bitinputs.GetSize(); i++)
+	{
+		if (PtInRect(bitinputs.GetAt(i).output[0].rectState, point))
+		{
+			bitinputs.GetAt(i).input[0].boolState = temp.statu;
+			return true;
+		}
+
+	}
+	for (int i = 0; i <lamps.GetSize(); i++)
+	{
+		if (PtInRect(lamps.GetAt(i).output[0].rectState, point))
+		{
+			lamps.GetAt(i).input[0].boolState = temp.statu;
 			return true;
 		}
 
