@@ -89,12 +89,12 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(dffs.GetAt(i).output[0].rectState, point))
 		{
-			dffs.GetAt(i).input[0].boolState = temp.statu;
+			temp.statu = dffs.GetAt(i).output[0].boolState;
 			return true;
 		}
 		else if (PtInRect(dffs.GetAt(i).output[1].rectState, point))
 		{
-			dffs.GetAt(i).input[1].boolState = temp.statu;
+			temp.statu = dffs.GetAt(i).output[1].boolState;
 			return true;
 		}
 
@@ -103,12 +103,12 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(tffs.GetAt(i).output[0].rectState, point))
 		{
-			tffs.GetAt(i).input[0].boolState = temp.statu;
+			temp.statu = tffs.GetAt(i).output[0].boolState;
 			return true;
 		}
 		else if (PtInRect(tffs.GetAt(i).output[1].rectState, point))
 		{
-			tffs.GetAt(i).input[1].boolState = temp.statu;
+			temp.statu = tffs.GetAt(i).output[1].boolState;
 			return true;
 		}
 
@@ -117,22 +117,22 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(jkffs.GetAt(i).output[0].rectState, point))
 		{
-			jkffs.GetAt(i).input[0].boolState = temp.statu;
+			temp.statu = jkffs.GetAt(i).output[0].boolState;
 			return true;
 		}
 		else if (PtInRect(jkffs.GetAt(i).output[1].rectState, point))
 		{
-			jkffs.GetAt(i).input[1].boolState = temp.statu;
+			temp.statu = jkffs.GetAt(i).output[1].boolState;
 			return true;
 		}
 
 	}
-	//입출력, 클럭
+	//입력, 클럭
 	for (int i = 0; i <clocks.GetSize(); i++)
 	{
 		if (PtInRect(clocks.GetAt(i).output[0].rectState, point))
 		{
-			clocks.GetAt(i).input[0].boolState = temp.statu;
+			temp.statu = clocks.GetAt(i).output[0].boolState;
 			return true;
 		}
 
@@ -141,16 +141,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(bitinputs.GetAt(i).output[0].rectState, point))
 		{
-			bitinputs.GetAt(i).input[0].boolState = temp.statu;
-			return true;
-		}
-
-	}
-	for (int i = 0; i <lamps.GetSize(); i++)
-	{
-		if (PtInRect(lamps.GetAt(i).output[0].rectState, point))
-		{
-			lamps.GetAt(i).input[0].boolState = temp.statu;
+			temp.statu = bitinputs.GetAt(i).output[0].boolState;
 			return true;
 		}
 
@@ -160,6 +151,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 
 bool CLogisim_KKLView:: check_InputArray(CPoint point, Line& temp)
 {
+	//게이트
 	for (int i = 0; i < andgates.GetSize(); i++)
 	{
 		if (PtInRect(andgates.GetAt(i).input[0].rectState, point))
@@ -237,6 +229,64 @@ bool CLogisim_KKLView:: check_InputArray(CPoint point, Line& temp)
 		else if (PtInRect(xorgates.GetAt(i).input[1].rectState, point))
 		{
 			xorgates.GetAt(i).input[1].boolState = temp.statu;
+			return true;
+		}
+
+	}
+	//플립플롭
+	for (int i = 0; i <dffs.GetSize(); i++)
+	{
+		if (PtInRect(dffs.GetAt(i).input[0].rectState, point))
+		{
+			dffs.GetAt(i).input[0].boolState = temp.statu;
+			return true;
+		}
+		else if (PtInRect(dffs.GetAt(i).input[1].rectState, point))		//clk
+		{
+			dffs.GetAt(i).input[1].boolState = temp.statu;
+			return true;
+		}
+
+	}
+	for (int i = 0; i <tffs.GetSize(); i++)
+	{
+		if (PtInRect(tffs.GetAt(i).input[0].rectState, point))			//clk
+		{
+			tffs.GetAt(i).input[0].boolState = temp.statu;
+			return true;
+		}
+		else if (PtInRect(tffs.GetAt(i).input[1].rectState, point))
+		{
+			tffs.GetAt(i).input[1].boolState = temp.statu;
+			return true;
+		}
+
+	}
+	for (int i = 0; i <jkffs.GetSize(); i++)
+	{
+		if (PtInRect(jkffs.GetAt(i).input[0].rectState, point))
+		{
+			jkffs.GetAt(i).input[0].boolState = temp.statu;
+			return true;
+		}
+		else if (PtInRect(jkffs.GetAt(i).input[1].rectState, point))
+		{
+			jkffs.GetAt(i).input[1].boolState = temp.statu;
+			return true;
+		}
+		else if (PtInRect(jkffs.GetAt(i).input[1].rectState, point))	//clk
+		{
+			jkffs.GetAt(i).input[1].boolState = temp.statu;
+			return true;
+		}
+
+	}
+	//출력
+	for (int i = 0; i <lamps.GetSize(); i++)
+	{
+		if (PtInRect(lamps.GetAt(i).input[0].rectState, point))
+		{
+			lamps.GetAt(i).input[0].boolState = temp.statu;
 			return true;
 		}
 
@@ -322,7 +372,7 @@ void CLogisim_KKLView::rotate(CClientDC & dc, CPoint point) {
 	//입출력램프일 때
 	for (int i = 0; i <bitinputs.GetSize(); i++)
 	{
-		if (PtInRect(bitinputs.GetAt(i).output[0].rectState, point)) {
+		if (PtInRect(bitinputs.GetAt(i).MRect, point)) {
 			bitinputs.GetAt(i).angle += 90;
 			bitinputs.GetAt(i).SmallRotate(dc, bitinputs.GetAt(i).angle);
 			bitinputs.GetAt(i).SetInOutValues(bitinputs.GetAt(i).angle);
@@ -330,7 +380,7 @@ void CLogisim_KKLView::rotate(CClientDC & dc, CPoint point) {
 	}
 	for (int i = 0; i <lamps.GetSize(); i++)
 	{
-		if (PtInRect(lamps.GetAt(i).output[0].rectState, point)) {
+		if (PtInRect(lamps.GetAt(i).MRect, point)) {
 			lamps.GetAt(i).angle += 90;
 			lamps.GetAt(i).SmallRotate(dc, lamps.GetAt(i).angle);
 			lamps.GetAt(i).SetInOutValues(lamps.GetAt(i).angle);
@@ -338,7 +388,7 @@ void CLogisim_KKLView::rotate(CClientDC & dc, CPoint point) {
 	}
 	for (int i = 0; i <clocks.GetSize(); i++)
 	{
-		if (PtInRect(clocks.GetAt(i).output[0].rectState, point)) {
+		if (PtInRect(clocks.GetAt(i).MRect, point)) {
 			clocks.GetAt(i).angle += 90;
 			clocks.GetAt(i).SmallRotate(dc, clocks.GetAt(i).angle);
 			clocks.GetAt(i).SetInOutValues(clocks.GetAt(i).angle);

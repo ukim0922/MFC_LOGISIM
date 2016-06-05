@@ -171,9 +171,8 @@ void FilpFlopEngine::SetInOutValues(Gdiplus::REAL angle)
 	CString name;
 	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
 	name = pFrame->m_pLogisimView->gatename;
-	//NOT게이트일 때
 	if (name == "D-FF") {
-		switch ((int)angle / 360) {
+		switch ((int)angle % 360) {
 		case 0:
 			//사각형 영역 지정
 			input[0].rectState = CRect(MPoint.x - 4, MPoint.y + 12, MPoint.x + 4, MPoint.y + 20);
@@ -240,9 +239,8 @@ void FilpFlopEngine::SetInOutValues(Gdiplus::REAL angle)
 			break;
 		}
 	}
-	//출력 램프일 때
 	else if (name == "T-FF") {
-		switch ((int)angle / 360) {
+		switch ((int)angle % 360) {
 		case 0:
 			//사각형 영역 지정
 			input[1].rectState = CRect(MPoint.x - 4, MPoint.y + 12, MPoint.x + 4, MPoint.y + 20);
@@ -309,9 +307,8 @@ void FilpFlopEngine::SetInOutValues(Gdiplus::REAL angle)
 			break;
 		}
 	}
-	//나머지 게이트들
 	else if(name == "JK-FF"){
-		switch ((int)angle / 360) {
+		switch ((int)angle % 360) {
 		case 0:
 			//사각형 영역 지정
 			input[0].rectState = CRect(MPoint.x - 4, MPoint.y + 4, MPoint.x + 4, MPoint.y + 12);
