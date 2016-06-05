@@ -19,8 +19,6 @@ public:
 	CLogisim_KKLView*  m_pLogisimView;
 	CGateTreeView*	   m_pTreeView;
 	
-
-	InOutValues clk;
 	void SetInOutValues(Gdiplus::REAL angle);
 	//플립플롭 기능 구현
 	void FlipFlopLogic();
@@ -40,6 +38,7 @@ public:
 class DFF : public FilpFlopEngine {
 public:
 	DFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
+		this->gatenumber = D_FF;
 	}
 	void FlipFlopLogic();
 
@@ -48,6 +47,7 @@ public:
 class TFF : public FilpFlopEngine {
 public:
 	TFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
+		this->gatenumber = T_FF;
 	}
 	void FlipFlopLogic();
 };
@@ -55,6 +55,7 @@ public:
 class JKFF : public FilpFlopEngine {
 public:
 	JKFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
+		this->gatenumber = JK_FF;
 	}
 	void FlipFlopLogic();
 };

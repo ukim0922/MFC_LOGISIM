@@ -1,16 +1,16 @@
 #pragma once
 #include "InOutValues.h"
 enum Facing {
-	NORTH, SOUTH, WEST, EAST
+	NORTH=270, SOUTH=90, WEST=180, EAST=0
 };
 
 enum GateSelect {
-	AND, OR , NOT, NAND, NOR, XOR
+	AND, OR , NOT, NAND, NOR, XOR, D_FF, JK_FF, T_FF, CLK, BITIN, LAMP
 };
 
-enum FlipFlopSelect {
-	D_FF, JK_FF, T_FF
-};
+//enum FlipFlopSelect {
+//	D_FF, JK_FF, T_FF
+//};
 
 
 class LogicEngine
@@ -24,6 +24,10 @@ public:
 	Gdiplus::REAL angle;
 	//전체 영역 지정
 	CRect MRect;
+	//게이트별 정보
+	int gatenumber;
+
+
 	void SetRect();
 	//입출력 좌표 지정
 	void SetInOutValues(Gdiplus::REAL angle);
@@ -67,6 +71,7 @@ public :
 	ANDGATE() {};
 	~ANDGATE() {};
 	ANDGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint,BITMAPID){
+		this->gatenumber = AND;
 	}
 	void GateLogic();
 };
@@ -76,6 +81,7 @@ public:
 	ORGATE() {};
 	~ORGATE() {};
 	ORGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
+		this->gatenumber = OR;
 	}
 	void GateLogic();
 };
@@ -85,6 +91,7 @@ public:
 	NOTGATE() {};
 	~NOTGATE() {};
 	NOTGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
+		this->gatenumber = NOT;
 	}
 	void GateLogic();
 };
@@ -94,6 +101,7 @@ public:
 	NANDGATE() {};
 	~NANDGATE() {};
 	NANDGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
+		this->gatenumber = NAND;
 	}
 	void GateLogic();
 };
@@ -103,6 +111,7 @@ public:
 	NORGATE() {};
 	~NORGATE() {};
 	NORGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
+		this->gatenumber = NOR;
 	}
 	void GateLogic();
 };
@@ -111,6 +120,7 @@ public:
 	XORGATE() {};
 	~XORGATE() {};
 	XORGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
+		this->gatenumber = XOR;
 	}
 	void GateLogic();
 };
@@ -124,6 +134,7 @@ public:
 	BITLAMP() {};
 	~BITLAMP() {};
 	BITLAMP(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
+		this->gatenumber = LAMP;
 	}
 };
 
@@ -131,7 +142,9 @@ class BITINPUT : public LogicEngine
 {
 public:
 	BITINPUT() {};
-	BITINPUT(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {};
+	BITINPUT(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
+		this->gatenumber = BITIN;
+	};
 	~BITINPUT() {};
 
 private:
@@ -142,7 +155,9 @@ class CLOCK_SIGNAL :public LogicEngine
 {
 public:
 	CLOCK_SIGNAL() {};
-	CLOCK_SIGNAL(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {};
+	CLOCK_SIGNAL(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
+		this->gatenumber = CLK;
+	};
 	~CLOCK_SIGNAL() {};
 
 
