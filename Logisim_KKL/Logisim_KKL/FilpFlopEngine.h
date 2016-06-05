@@ -20,6 +20,8 @@ public:
 	CGateTreeView*	   m_pTreeView;
 	
 
+	InOutValues clk;
+	void SetInOutValues(Gdiplus::REAL angle);
 	//플립플롭 기능 구현
 	void FlipFlopLogic();
 
