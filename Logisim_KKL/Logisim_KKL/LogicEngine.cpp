@@ -157,6 +157,38 @@ void LogicEngine::SetInOutValues(Gdiplus::REAL angle)
 			break;
 		}
 	}
+	//클럭, 입력일 때
+	if (name == "NOT") {
+		switch ((int)angle / 360) {
+		case 0:
+			//사각형 영역 지정
+			output[0].rectState = CRect(MPoint.x + 20, MPoint.y + 8, MPoint.x + 28, MPoint.y + 16);
+			//좌표 영역 지정
+			output[0].pointState.x = MPoint.x + 24;
+			output[0].pointState.y = MPoint.y + 12;
+			break;
+		case 90:
+			//사각형 영역 지정
+			output[0].rectState = CRect(MPoint.x + 8, MPoint.y + 20, MPoint.x + 16, MPoint.y + 28);
+			//좌표 영역 지정
+			output[0].pointState.x = MPoint.x + 12;
+			output[0].pointState.y = MPoint.y + 24;
+			break;
+		case 180:
+			//사각형 영역 지정
+			output[0].rectState = CRect(MPoint.x - 4, MPoint.y + 8, MPoint.x + 4, MPoint.y + 16);
+			//좌표 영역 지정
+			output[0].pointState.x = MPoint.x;
+			output[0].pointState.y = MPoint.y + 12;
+		case 270:
+			//사각형 영역 지정
+			output[0].rectState = CRect(MPoint.x + 8, MPoint.y - 4, MPoint.x + 16, MPoint.y + 4);
+			//좌표 영역 지정
+			output[0].pointState.x = MPoint.x + 12;
+			output[0].pointState.y = MPoint.y;
+			break;
+		}
+	}
 	//나머지 게이트들
 	else {
 		switch ((int)angle / 360) {
