@@ -67,7 +67,10 @@ public :
 	ANDGATE() {};
 	~ANDGATE() {};
 	ANDGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint,BITMAPID){
+		SetRect();
+		SetInOutValues(0);
 	}
+	
 	void GateLogic();
 };
 
