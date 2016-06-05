@@ -103,6 +103,7 @@ BEGIN_MESSAGE_MAP(CLogisim_KKLView, CView)
 	ON_COMMAND(ID_LOW, &CLogisim_KKLView::OnLowTRG)
 	ON_UPDATE_COMMAND_UI(ID_HIGH, &CLogisim_KKLView::OnUpdateHigh)
 	ON_UPDATE_COMMAND_UI(ID_LOW, &CLogisim_KKLView::OnUpdateLow)
+	ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 // CLogisim_KKLView 생성/소멸
@@ -471,4 +472,38 @@ void CLogisim_KKLView::OnUpdateLow(CCmdUI *pCmdUI)
 {
 	pCmdUI->SetCheck(h_ck == false);
 	// TODO: 여기에 명령 업데이트 UI 처리기 코드를 추가합니다.
+}
+
+bool CLogisim_KKLView::CheckInput(CPoint point ,int& i)
+{
+	for (i = 0; i < bitinputs.GetSize(); i++) {
+		if (PtInRect(bitinputs.GetAt(i).MRect, point)) {
+			return true;
+			break;
+		}
+	}
+	return false;
+}
+
+void CLogisim_KKLView::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	CClientDC dc(this);
+	int i=0;
+	if (CheckInput(point, i)) {
+		if (bitinputs.GetAt(i).output[0].boolState)
+		{	
+			bitinputs.GetAt(i).output[0].boolState = false;
+			bitinputs.GetAt(i).BITMAPID = IDB_BITMAP_BITINPUT_0;
+			bitinputs.GetAt(i).SmallPaint(dc);
+		}
+		else
+		{
+			bitinputs.GetAt(i).output[0].boolState = true;
+			bitinputs.GetAt(i).BITMAPID = IDB_BITMAP_BITINPUT_1;
+			bitinputs.GetAt(i).SmallPaint(dc);
+		}
+	}
+
+	CView::OnLButtonDblClk(nFlags, point);
 }

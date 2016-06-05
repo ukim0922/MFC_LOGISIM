@@ -70,6 +70,8 @@ public:
 	afx_msg void OnLowTRG();
 	afx_msg void OnUpdateHigh(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateLow(CCmdUI *pCmdUI);
+	bool CheckInput(CPoint point, int& i);
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // Logisim_KKLView.cpp의 디버그 버전
