@@ -34,7 +34,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(andgates.GetAt(i).output[0].rectState, point))
 		{
-			andgates.GetAt(i).input[0].boolState = temp.statu;
+			temp.statu = andgates.GetAt(i).output[0].boolState;
 			return true;
 		}
 		
@@ -43,7 +43,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(orgates.GetAt(i).output[0].rectState, point))
 		{
-			orgates.GetAt(i).input[0].boolState = temp.statu;
+			temp.statu = orgates.GetAt(i).output[0].boolState;
 			return true;
 		}
 	}
@@ -51,7 +51,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(notgates.GetAt(i).output[0].rectState, point))
 		{
-			notgates.GetAt(i).input[0].boolState = temp.statu;
+			temp.statu = notgates.GetAt(i).output[0].boolState;
 			return true;
 		}
 
@@ -60,7 +60,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(norgates.GetAt(i).output[0].rectState, point))
 		{
-			norgates.GetAt(i).input[0].boolState = temp.statu;
+			temp.statu = norgates.GetAt(i).output[0].boolState;
 			return true;
 		}
 
@@ -69,7 +69,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(nandgates.GetAt(i).output[0].rectState, point))
 		{
-			nandgates.GetAt(i).input[0].boolState = temp.statu;
+			temp.statu = nandgates.GetAt(i).output[0].boolState;
 			return true;
 		}
 
@@ -78,7 +78,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(xorgates.GetAt(i).output[0].rectState, point))
 		{
-			xorgates.GetAt(i).input[0].boolState = temp.statu;
+			temp.statu = xorgates.GetAt(i).output[0].boolState;
 			return true;
 		}
 
@@ -92,12 +92,12 @@ bool CLogisim_KKLView:: check_InputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(andgates.GetAt(i).input[0].rectState, point))
 		{
-			temp.statu = andgates.GetAt(i).input[0].boolState;
+			andgates.GetAt(i).input[0].boolState = temp.statu;
 			return true;
 		}
 		else if (PtInRect(andgates.GetAt(i).input[1].rectState, point))
 		{
-			temp.statu = andgates.GetAt(i).input[1].boolState;
+			andgates.GetAt(i).input[1].boolState = temp.statu;
 			return true;
 		}
 	}
@@ -105,12 +105,12 @@ bool CLogisim_KKLView:: check_InputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(orgates.GetAt(i).output[0].rectState, point))
 		{
-			temp.statu = orgates.GetAt(i).output[0].boolState;
+			orgates.GetAt(i).input[0].boolState = temp.statu;
 			return true;
 		}
 		else if (PtInRect(orgates.GetAt(i).input[1].rectState, point))
 		{
-			temp.statu = orgates.GetAt(i).input[1].boolState;
+			orgates.GetAt(i).input[1].boolState = temp.statu;
 			return true;
 		}
 	}
@@ -118,12 +118,12 @@ bool CLogisim_KKLView:: check_InputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(notgates.GetAt(i).output[0].rectState, point))
 		{
-			temp.statu = notgates.GetAt(i).input[0].boolState;
+			notgates.GetAt(i).input[0].boolState = temp.statu;
 			return true;
 		}
 		else if (PtInRect(notgates.GetAt(i).input[1].rectState, point))
 		{
-			temp.statu = notgates.GetAt(i).input[1].boolState;
+			notgates.GetAt(i).input[1].boolState = temp.statu;
 			return true;
 		}
 	}
@@ -131,12 +131,12 @@ bool CLogisim_KKLView:: check_InputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(norgates.GetAt(i).input[0].rectState, point))
 		{
-			temp.statu = norgates.GetAt(i).input[0].boolState;
+			norgates.GetAt(i).input[0].boolState = temp.statu;
 			return true;
 		}
 		else if (PtInRect(norgates.GetAt(i).input[1].rectState, point))
 		{
-			temp.statu = norgates.GetAt(i).input[1].boolState;
+			norgates.GetAt(i).input[1].boolState = temp.statu;
 			return true;
 		}
 
@@ -145,12 +145,12 @@ bool CLogisim_KKLView:: check_InputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(nandgates.GetAt(i).input[0].rectState, point))
 		{
-			temp.statu = nandgates.GetAt(i).input[0].boolState;
+			nandgates.GetAt(i).input[0].boolState = temp.statu;
 			return true;
 		}
 		else if (PtInRect(nandgates.GetAt(i).input[1].rectState, point))
 		{
-			temp.statu = nandgates.GetAt(i).input[1].boolState;
+			nandgates.GetAt(i).input[1].boolState = temp.statu;
 			return true;
 		}
 
@@ -159,12 +159,12 @@ bool CLogisim_KKLView:: check_InputArray(CPoint point, Line& temp)
 	{
 		if (PtInRect(xorgates.GetAt(i).input[0].rectState, point))
 		{
-			temp.statu = xorgates.GetAt(i).input[0].boolState;
+			xorgates.GetAt(i).input[0].boolState = temp.statu;
 			return true;
 		}
 		else if (PtInRect(xorgates.GetAt(i).input[1].rectState, point))
 		{
-			temp.statu = xorgates.GetAt(i).input[1].boolState;
+			xorgates.GetAt(i).input[1].boolState = temp.statu;
 			return true;
 		}
 
