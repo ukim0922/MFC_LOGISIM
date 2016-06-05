@@ -31,6 +31,7 @@ public:
 
 	bool mouse_check = false;  //마우스 드래그된 상태 체크
 	CPoint m_prev_pos; //드래그 시작 좌표 저장
+	CPoint m_start_pos;
 // 작업입니다. 
 public:
 
