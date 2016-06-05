@@ -53,6 +53,7 @@ public:
 	LogicEngine(CPoint MPoint,UINT BITMAPID) {
 		this->MPoint = MPoint;
 		this->BITMAPID = BITMAPID;
+		this->angle = 0;
 	}
 	virtual ~LogicEngine();
 

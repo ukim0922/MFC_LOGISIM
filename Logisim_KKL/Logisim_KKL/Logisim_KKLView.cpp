@@ -172,6 +172,108 @@ bool CLogisim_KKLView:: check_InputArray(CPoint point, Line& temp)
 	return false;
 }
 
+void CLogisim_KKLView::rotate(CClientDC & dc, CPoint point) {
+	//게이트일 때
+	for (int i = 0; i < andgates.GetSize(); i++)
+	{
+		if (PtInRect(andgates.GetAt(i).MRect, point)) {
+			andgates.GetAt(i).angle += 90;
+			andgates.GetAt(i).Rotate(dc, andgates.GetAt(i).angle);
+			andgates.GetAt(i).SetInOutValues(andgates.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i < orgates.GetSize(); i++)
+	{
+		if (PtInRect(orgates.GetAt(i).MRect, point)) {
+			orgates.GetAt(i).angle += 90;
+			orgates.GetAt(i).Rotate(dc, orgates.GetAt(i).angle);
+			orgates.GetAt(i).SetInOutValues(orgates.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i < notgates.GetSize(); i++)
+	{
+		if (PtInRect(notgates.GetAt(i).MRect, point)) {
+			notgates.GetAt(i).angle += 90;
+			notgates.GetAt(i).SmallRotate(dc, notgates.GetAt(i).angle);
+			notgates.GetAt(i).SetInOutValues(notgates.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i < norgates.GetSize(); i++)
+	{
+		if (PtInRect(norgates.GetAt(i).MRect, point)) {
+			norgates.GetAt(i).angle += 90;
+			norgates.GetAt(i).Rotate(dc, norgates.GetAt(i).angle);
+			norgates.GetAt(i).SetInOutValues(norgates.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i < nandgates.GetSize(); i++)
+	{
+		if (PtInRect(nandgates.GetAt(i).MRect, point)) {
+			nandgates.GetAt(i).angle += 90;
+			nandgates.GetAt(i).Rotate(dc, nandgates.GetAt(i).angle);
+			nandgates.GetAt(i).SetInOutValues(nandgates.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i <xorgates.GetSize(); i++)
+	{
+		if (PtInRect(xorgates.GetAt(i).MRect, point)) {
+			xorgates.GetAt(i).angle += 90;
+			xorgates.GetAt(i).Rotate(dc, xorgates.GetAt(i).angle);
+			xorgates.GetAt(i).SetInOutValues(xorgates.GetAt(i).angle);
+		}
+	}
+	//플립플롭일 때
+	for (int i = 0; i <tffs.GetSize(); i++)
+	{
+		if (PtInRect(tffs.GetAt(i).MRect, point)) {
+			tffs.GetAt(i).angle += 90;
+			tffs.GetAt(i).Rotate(dc, tffs.GetAt(i).angle);
+			tffs.GetAt(i).SetInOutValues(tffs.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i <dffs.GetSize(); i++)
+	{
+		if (PtInRect(dffs.GetAt(i).MRect, point)) {
+			dffs.GetAt(i).angle += 90;
+			dffs.GetAt(i).Rotate(dc, dffs.GetAt(i).angle);
+			dffs.GetAt(i).SetInOutValues(dffs.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i <jkffs.GetSize(); i++)
+	{
+		if (PtInRect(jkffs.GetAt(i).MRect, point)) {
+			jkffs.GetAt(i).angle += 90;
+			jkffs.GetAt(i).Rotate(dc, jkffs.GetAt(i).angle);
+			jkffs.GetAt(i).SetInOutValues(jkffs.GetAt(i).angle);
+		}
+	}
+	//입출력램프일 때
+	for (int i = 0; i <bitinputs.GetSize(); i++)
+	{
+		if (PtInRect(bitinputs.GetAt(i).output[0].rectState, point)) {
+			bitinputs.GetAt(i).angle += 90;
+			bitinputs.GetAt(i).SmallRotate(dc, bitinputs.GetAt(i).angle);
+			bitinputs.GetAt(i).SetInOutValues(bitinputs.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i <lamps.GetSize(); i++)
+	{
+		if (PtInRect(lamps.GetAt(i).output[0].rectState, point)) {
+			lamps.GetAt(i).angle += 90;
+			lamps.GetAt(i).SmallRotate(dc, lamps.GetAt(i).angle);
+			lamps.GetAt(i).SetInOutValues(lamps.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i <clocks.GetSize(); i++)
+	{
+		if (PtInRect(clocks.GetAt(i).output[0].rectState, point)) {
+			clocks.GetAt(i).angle += 90;
+			clocks.GetAt(i).SmallRotate(dc, clocks.GetAt(i).angle);
+			clocks.GetAt(i).SetInOutValues(clocks.GetAt(i).angle);
+		}
+	}
+}
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -190,6 +292,7 @@ BEGIN_MESSAGE_MAP(CLogisim_KKLView, CView)
 	ON_COMMAND(ID_LOW, &CLogisim_KKLView::OnLowTRG)
 	ON_UPDATE_COMMAND_UI(ID_HIGH, &CLogisim_KKLView::OnUpdateHigh)
 	ON_UPDATE_COMMAND_UI(ID_LOW, &CLogisim_KKLView::OnUpdateLow)
+	ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 // CLogisim_KKLView 생성/소멸
@@ -354,6 +457,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			and = new ANDGATE(point,IDB_BITMAP_AND);
 			andgates.Add(*and);
 			and->Paint(dc);
+			and->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -361,6 +465,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			or = new ORGATE(point, IDB_BITMAP_OR);
 			orgates.Add(*or );
 			or ->Paint(dc);
+			or->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -455,53 +560,9 @@ void CLogisim_KKLView::OnRButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CClientDC dc(this);
-	if (gatename == "AND") {
-		ANDGATE and (point, IDB_BITMAP_AND);
-		and.Rotate(dc, 90);
-		gatename = "";
+	if (gatename == "") {
+		rotate(dc, point);
 	}
-	else if (gatename == "OR") {
-		ORGATE or (point, IDB_BITMAP_OR);
-		or .Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "NOT") {
-		NOTGATE not (point, IDB_BITMAP_NOT);
-		not.Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "NAND") {
-		NANDGATE nand(point, IDB_BITMAP_NAND);
-		nand.Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "NOR") {
-		NORGATE nor(point, IDB_BITMAP_NOR);
-		nor.Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "XOR") {
-		XORGATE xor (point, IDB_BITMAP_XOR);
-		xor.Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "D-FF") {
-
-	}
-	else if (gatename == "JK-FF") {
-
-	}
-	else if (gatename == "T-FF") {
-		TFF tff(point, IDB_BITMAP_TFF);
-		tff.Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "LAMP") {
-		BITLAMP lamp(point, IDB_BITMAP_LON);
-		lamp.Rotate(dc, 90);
-		gatename = "";
-	}
-	
 	CView::OnRButtonUp(nFlags, point);
 }
 
@@ -550,4 +611,38 @@ void CLogisim_KKLView::OnUpdateLow(CCmdUI *pCmdUI)
 {
 	pCmdUI->SetCheck(h_ck == false);
 	// TODO: 여기에 명령 업데이트 UI 처리기 코드를 추가합니다.
+}
+
+bool CLogisim_KKLView::CheckInput(CPoint point ,int& i)
+{
+	for (i = 0; i < bitinputs.GetSize(); i++) {
+		if (PtInRect(bitinputs.GetAt(i).MRect, point)) {
+			return true;
+			break;
+		}
+	}
+	return false;
+}
+
+void CLogisim_KKLView::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	CClientDC dc(this);
+	int i=0;
+	if (CheckInput(point, i)) {
+		if (bitinputs.GetAt(i).output[0].boolState)
+		{	
+			bitinputs.GetAt(i).output[0].boolState = false;
+			bitinputs.GetAt(i).BITMAPID = IDB_BITMAP_BITINPUT_0;
+			bitinputs.GetAt(i).SmallPaint(dc);
+		}
+		else
+		{
+			bitinputs.GetAt(i).output[0].boolState = true;
+			bitinputs.GetAt(i).BITMAPID = IDB_BITMAP_BITINPUT_1;
+			bitinputs.GetAt(i).SmallPaint(dc);
+		}
+	}
+
+	CView::OnLButtonDblClk(nFlags, point);
 }

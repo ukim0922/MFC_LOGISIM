@@ -15,6 +15,7 @@ protected: // serialization에서만 만들어집니다.
 public:
 	bool check_OutputArray(CPoint point, Line& temp);
 	bool check_InputArray(CPoint point, Line& temp);
+	void rotate(CClientDC & dc, CPoint point);
 	CLogisim_KKLDoc* GetDocument() const;
 	CArray<LogicEngine, LogicEngine&> gates;
 	CArray<ANDGATE, ANDGATE&> andgates;
@@ -23,7 +24,11 @@ public:
 	CArray<NORGATE, NORGATE&> norgates;
 	CArray<XORGATE, XORGATE&> xorgates;
 	CArray<NANDGATE, NANDGATE&> nandgates;
-	
+
+	CArray<LogicEngine, LogicEngine&> dffs;
+	CArray<LogicEngine, LogicEngine&> tffs;
+	CArray<LogicEngine, LogicEngine&> jkffs;
+
 	CArray<CLOCK_SIGNAL, CLOCK_SIGNAL&> clocks;
 	CArray<BITINPUT, BITINPUT&> bitinputs;
 	CArray<BITLAMP, BITLAMP&> lamps;
@@ -71,6 +76,8 @@ public:
 	afx_msg void OnLowTRG();
 	afx_msg void OnUpdateHigh(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateLow(CCmdUI *pCmdUI);
+	bool CheckInput(CPoint point, int& i);
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // Logisim_KKLView.cpp의 디버그 버전
