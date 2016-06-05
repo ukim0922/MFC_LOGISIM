@@ -33,57 +33,246 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 	for (int i = 0; i < andgates.GetSize(); i++)
 	{
 		if (PtInRect(andgates.GetAt(i).output[0].rectState, point))
-			temp.statu = andgates.GetAt(i).output[0].boolState;
+		{
+			andgates.GetAt(i).input[0].boolState = temp.statu;
 			return true;
+		}
 		
 	}
 	for (int i = 0; i < orgates.GetSize(); i++)
 	{
 		if (PtInRect(orgates.GetAt(i).output[0].rectState, point))
-			temp.statu = orgates.GetAt(i).output[0].boolState;
+		{
+			orgates.GetAt(i).input[0].boolState = temp.statu;
 			return true;
-
+		}
 	}
 	for (int i = 0; i < notgates.GetSize(); i++)
 	{
 		if (PtInRect(notgates.GetAt(i).output[0].rectState, point))
-			temp.statu = notgates.GetAt(i).output[0].boolState;
+		{
+			notgates.GetAt(i).input[0].boolState = temp.statu;
 			return true;
+		}
 
 	}
 	for (int i = 0; i < norgates.GetSize(); i++)
 	{
 		if (PtInRect(norgates.GetAt(i).output[0].rectState, point))
-			temp.statu = norgates.GetAt(i).output[0].boolState;
+		{
+			norgates.GetAt(i).input[0].boolState = temp.statu;
 			return true;
+		}
 
 	}
 	for (int i = 0; i < nandgates.GetSize(); i++)
 	{
 		if (PtInRect(nandgates.GetAt(i).output[0].rectState, point))
-			temp.statu = nandgates.GetAt(i).output[0].boolState;
+		{
+			nandgates.GetAt(i).input[0].boolState = temp.statu;
 			return true;
+		}
 
 	}
 	for (int i = 0; i <xorgates.GetSize(); i++)
 	{
 		if (PtInRect(xorgates.GetAt(i).output[0].rectState, point))
-			temp.statu = xorgates.GetAt(i).output[0].boolState;
-		return true;
+		{
+			xorgates.GetAt(i).input[0].boolState = temp.statu;
+			return true;
+		}
 
 	}
 	return false;
 }
+
 bool CLogisim_KKLView:: check_InputArray(CPoint point, Line& temp)
 {
+	for (int i = 0; i < andgates.GetSize(); i++)
+	{
+		if (PtInRect(andgates.GetAt(i).input[0].rectState, point))
+		{
+			temp.statu = andgates.GetAt(i).input[0].boolState;
+			return true;
+		}
+		else if (PtInRect(andgates.GetAt(i).input[1].rectState, point))
+		{
+			temp.statu = andgates.GetAt(i).input[1].boolState;
+			return true;
+		}
+	}
+	for (int i = 0; i < orgates.GetSize(); i++)
+	{
+		if (PtInRect(orgates.GetAt(i).output[0].rectState, point))
+		{
+			temp.statu = orgates.GetAt(i).output[0].boolState;
+			return true;
+		}
+		else if (PtInRect(orgates.GetAt(i).input[1].rectState, point))
+		{
+			temp.statu = orgates.GetAt(i).input[1].boolState;
+			return true;
+		}
+	}
+	for (int i = 0; i < notgates.GetSize(); i++)
+	{
+		if (PtInRect(notgates.GetAt(i).output[0].rectState, point))
+		{
+			temp.statu = notgates.GetAt(i).input[0].boolState;
+			return true;
+		}
+		else if (PtInRect(notgates.GetAt(i).input[1].rectState, point))
+		{
+			temp.statu = notgates.GetAt(i).input[1].boolState;
+			return true;
+		}
+	}
+	for (int i = 0; i < norgates.GetSize(); i++)
+	{
+		if (PtInRect(norgates.GetAt(i).input[0].rectState, point))
+		{
+			temp.statu = norgates.GetAt(i).input[0].boolState;
+			return true;
+		}
+		else if (PtInRect(norgates.GetAt(i).input[1].rectState, point))
+		{
+			temp.statu = norgates.GetAt(i).input[1].boolState;
+			return true;
+		}
+
+	}
+	for (int i = 0; i < nandgates.GetSize(); i++)
+	{
+		if (PtInRect(nandgates.GetAt(i).input[0].rectState, point))
+		{
+			temp.statu = nandgates.GetAt(i).input[0].boolState;
+			return true;
+		}
+		else if (PtInRect(nandgates.GetAt(i).input[1].rectState, point))
+		{
+			temp.statu = nandgates.GetAt(i).input[1].boolState;
+			return true;
+		}
+
+	}
+	for (int i = 0; i <xorgates.GetSize(); i++)
+	{
+		if (PtInRect(xorgates.GetAt(i).input[0].rectState, point))
+		{
+			temp.statu = xorgates.GetAt(i).input[0].boolState;
+			return true;
+		}
+		else if (PtInRect(xorgates.GetAt(i).input[1].rectState, point))
+		{
+			temp.statu = xorgates.GetAt(i).input[1].boolState;
+			return true;
+		}
+
+	}
 	return false;
 }
 
-//int check_InputArray()
-//{
-//
-//}
-
+void CLogisim_KKLView::rotate(CClientDC & dc, CPoint point) {
+	//게이트일 때
+	for (int i = 0; i < andgates.GetSize(); i++)
+	{
+		if (PtInRect(andgates.GetAt(i).MRect, point)) {
+			andgates.GetAt(i).angle += 90;
+			andgates.GetAt(i).Rotate(dc, andgates.GetAt(i).angle);
+			andgates.GetAt(i).SetInOutValues(andgates.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i < orgates.GetSize(); i++)
+	{
+		if (PtInRect(orgates.GetAt(i).MRect, point)) {
+			orgates.GetAt(i).angle += 90;
+			orgates.GetAt(i).Rotate(dc, orgates.GetAt(i).angle);
+			orgates.GetAt(i).SetInOutValues(orgates.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i < notgates.GetSize(); i++)
+	{
+		if (PtInRect(notgates.GetAt(i).MRect, point)) {
+			notgates.GetAt(i).angle += 90;
+			notgates.GetAt(i).SmallRotate(dc, notgates.GetAt(i).angle);
+			notgates.GetAt(i).SetInOutValues(notgates.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i < norgates.GetSize(); i++)
+	{
+		if (PtInRect(norgates.GetAt(i).MRect, point)) {
+			norgates.GetAt(i).angle += 90;
+			norgates.GetAt(i).Rotate(dc, norgates.GetAt(i).angle);
+			norgates.GetAt(i).SetInOutValues(norgates.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i < nandgates.GetSize(); i++)
+	{
+		if (PtInRect(nandgates.GetAt(i).MRect, point)) {
+			nandgates.GetAt(i).angle += 90;
+			nandgates.GetAt(i).Rotate(dc, nandgates.GetAt(i).angle);
+			nandgates.GetAt(i).SetInOutValues(nandgates.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i <xorgates.GetSize(); i++)
+	{
+		if (PtInRect(xorgates.GetAt(i).MRect, point)) {
+			xorgates.GetAt(i).angle += 90;
+			xorgates.GetAt(i).Rotate(dc, xorgates.GetAt(i).angle);
+			xorgates.GetAt(i).SetInOutValues(xorgates.GetAt(i).angle);
+		}
+	}
+	//플립플롭일 때
+	for (int i = 0; i <tffs.GetSize(); i++)
+	{
+		if (PtInRect(tffs.GetAt(i).MRect, point)) {
+			tffs.GetAt(i).angle += 90;
+			tffs.GetAt(i).Rotate(dc, tffs.GetAt(i).angle);
+			tffs.GetAt(i).SetInOutValues(tffs.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i <dffs.GetSize(); i++)
+	{
+		if (PtInRect(dffs.GetAt(i).MRect, point)) {
+			dffs.GetAt(i).angle += 90;
+			dffs.GetAt(i).Rotate(dc, dffs.GetAt(i).angle);
+			dffs.GetAt(i).SetInOutValues(dffs.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i <jkffs.GetSize(); i++)
+	{
+		if (PtInRect(jkffs.GetAt(i).MRect, point)) {
+			jkffs.GetAt(i).angle += 90;
+			jkffs.GetAt(i).Rotate(dc, jkffs.GetAt(i).angle);
+			jkffs.GetAt(i).SetInOutValues(jkffs.GetAt(i).angle);
+		}
+	}
+	//입출력램프일 때
+	for (int i = 0; i <bitinputs.GetSize(); i++)
+	{
+		if (PtInRect(bitinputs.GetAt(i).output[0].rectState, point)) {
+			bitinputs.GetAt(i).angle += 90;
+			bitinputs.GetAt(i).SmallRotate(dc, bitinputs.GetAt(i).angle);
+			bitinputs.GetAt(i).SetInOutValues(bitinputs.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i <lamps.GetSize(); i++)
+	{
+		if (PtInRect(lamps.GetAt(i).output[0].rectState, point)) {
+			lamps.GetAt(i).angle += 90;
+			lamps.GetAt(i).SmallRotate(dc, lamps.GetAt(i).angle);
+			lamps.GetAt(i).SetInOutValues(lamps.GetAt(i).angle);
+		}
+	}
+	for (int i = 0; i <clocks.GetSize(); i++)
+	{
+		if (PtInRect(clocks.GetAt(i).output[0].rectState, point)) {
+			clocks.GetAt(i).angle += 90;
+			clocks.GetAt(i).SmallRotate(dc, clocks.GetAt(i).angle);
+			clocks.GetAt(i).SetInOutValues(clocks.GetAt(i).angle);
+		}
+	}
+}
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -196,23 +385,23 @@ void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
 	if(gatename == "")
 	{
 		temp = new Line;
-		//LineArray.Add(*temp);
 		temp->start_pt = point;
-
-		
-		m_prev_pos.x = point.x;
-		m_prev_pos.y = point.y;
-		//int index = check_line(point);
-
+		m_start_pos = point;
+		m_prev_pos = point;
 
 		if (check_OutputArray(point, *temp)) //게이트들만 , 플립플롭 영역 따로 해야함
 		{                                    //플립플롭 output영역.  input영역, 클럭 영역
 			mouse_check = true;
 		}
-		else if (check_line(point) >= 0)
+		
+	    else if (check_line(point) >= 0)
 		{
 			(*temp).statu = LineArray.GetAt(check_line(point)).statu;
 			mouse_check = true;
+		}
+		else
+		{
+			mouse_check = false;
 		}
 		
 	}
@@ -240,18 +429,10 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	
 	if (mouse_check)
 	{
-	mouse_check = false;
-	(*temp).desti_pt = point;
+		mouse_check = false;
+		(*temp).desti_pt = point;
 
-		if (PtInRect(andgates.GetAt(0).input[0].rectState, point))
-		{
-			andgates.GetAt(0).input[0].boolState = (*temp).statu;
-		}
-		else if (PtInRect(andgates.GetAt(0).input[1].rectState, point))
-		{
-			andgates.GetAt(0).input[1].boolState = (*temp).statu;
-		}
-
+		check_InputArray(point, *temp);
 		(*temp).setLineRect();
 		LineArray.Add(*temp);
 	}
@@ -276,6 +457,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			and = new ANDGATE(point,IDB_BITMAP_AND);
 			andgates.Add(*and);
 			and->Paint(dc);
+			and->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -283,6 +465,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			or = new ORGATE(point, IDB_BITMAP_OR);
 			orgates.Add(*or );
 			or ->Paint(dc);
+			or->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -377,53 +560,9 @@ void CLogisim_KKLView::OnRButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CClientDC dc(this);
-	if (gatename == "AND") {
-		ANDGATE and (point, IDB_BITMAP_AND);
-		and.Rotate(dc, 90);
-		gatename = "";
+	if (gatename == "") {
+		rotate(dc, point);
 	}
-	else if (gatename == "OR") {
-		ORGATE or (point, IDB_BITMAP_OR);
-		or .Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "NOT") {
-		NOTGATE not (point, IDB_BITMAP_NOT);
-		not.Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "NAND") {
-		NANDGATE nand(point, IDB_BITMAP_NAND);
-		nand.Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "NOR") {
-		NORGATE nor(point, IDB_BITMAP_NOR);
-		nor.Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "XOR") {
-		XORGATE xor (point, IDB_BITMAP_XOR);
-		xor.Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "D-FF") {
-
-	}
-	else if (gatename == "JK-FF") {
-
-	}
-	else if (gatename == "T-FF") {
-		TFF tff(point, IDB_BITMAP_TFF);
-		tff.Rotate(dc, 90);
-		gatename = "";
-	}
-	else if (gatename == "LAMP") {
-		BITLAMP lamp(point, IDB_BITMAP_LON);
-		lamp.Rotate(dc, 90);
-		gatename = "";
-	}
-	
 	CView::OnRButtonUp(nFlags, point);
 }
 
@@ -434,7 +573,7 @@ void CLogisim_KKLView::OnMouseMove(UINT nFlags, CPoint point)
 	CClientDC dc(this);
 	if (mouse_check)
 	{
-		if (point.x == m_prev_pos.x || point.y == m_prev_pos.y)
+		if (point.x == m_start_pos.x || point.y == m_start_pos.y)
 		{
 			dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
 			dc.LineTo(point.x, point.y);

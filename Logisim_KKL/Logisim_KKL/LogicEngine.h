@@ -53,6 +53,7 @@ public:
 	LogicEngine(CPoint MPoint,UINT BITMAPID) {
 		this->MPoint = MPoint;
 		this->BITMAPID = BITMAPID;
+		this->angle = 0;
 	}
 	virtual ~LogicEngine();
 
@@ -85,6 +86,8 @@ public:
 	~ORGATE() {};
 	ORGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 		this->gatenumber = OR;
+		SetRect();
+		SetInOutValues(0);
 	}
 	void GateLogic();
 };
@@ -95,6 +98,8 @@ public:
 	~NOTGATE() {};
 	NOTGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 		this->gatenumber = NOT;
+		SetRect();
+		SetInOutValues(0);
 	}
 	void GateLogic();
 };
@@ -105,6 +110,8 @@ public:
 	~NANDGATE() {};
 	NANDGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 		this->gatenumber = NAND;
+		SetRect();
+		SetInOutValues(0);
 	}
 	void GateLogic();
 };
@@ -115,6 +122,8 @@ public:
 	~NORGATE() {};
 	NORGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 		this->gatenumber = NOR;
+		SetRect();
+		SetInOutValues(0);
 	}
 	void GateLogic();
 };
@@ -124,6 +133,8 @@ public:
 	~XORGATE() {};
 	XORGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 		this->gatenumber = XOR;
+		SetRect();
+		SetInOutValues(0);
 	}
 	void GateLogic();
 };
@@ -138,6 +149,8 @@ public:
 	~BITLAMP() {};
 	BITLAMP(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 		this->gatenumber = LAMP;
+		SetRect();
+		SetInOutValues(0);
 	}
 };
 
@@ -147,6 +160,8 @@ public:
 	BITINPUT() {};
 	BITINPUT(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 		this->gatenumber = BITIN;
+		SetRect();
+		SetInOutValues(0);
 	};
 	~BITINPUT() {};
 
@@ -160,6 +175,8 @@ public:
 	CLOCK_SIGNAL() {};
 	CLOCK_SIGNAL(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 		this->gatenumber = CLK;
+		SetRect();
+		SetInOutValues(0);
 	};
 	~CLOCK_SIGNAL() {};
 
