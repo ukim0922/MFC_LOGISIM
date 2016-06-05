@@ -456,6 +456,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			and = new ANDGATE(point,IDB_BITMAP_AND);
 			andgates.Add(*and);
 			and->Paint(dc);
+			and->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -463,6 +464,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			or = new ORGATE(point, IDB_BITMAP_OR);
 			orgates.Add(*or );
 			or ->Paint(dc);
+			or->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
