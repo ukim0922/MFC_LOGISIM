@@ -3,7 +3,7 @@
 //
 #include "LogicEngine.h"
 //#include "FilpFlopEngine.h"
-
+#include "Line.h"
 #pragma once
 class CLogisim_KKLView : public CView
 {
@@ -13,6 +13,8 @@ protected: // serialization에서만 만들어집니다.
 
 // 특성입니다.
 public:
+	bool check_OutputArray(CPoint point, Line& temp);
+	bool check_InputArray(CPoint point, Line& temp);
 	CLogisim_KKLDoc* GetDocument() const;
 	CArray<LogicEngine, LogicEngine&> gates;
 	CArray<ANDGATE, ANDGATE&> andgates;

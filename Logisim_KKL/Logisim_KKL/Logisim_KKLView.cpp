@@ -16,8 +16,73 @@
 #include "Line.h" //라인 추가
 
 CArray < Line, Line& > LineArray;
-Line temp;
-ANDGATE andTemp((0,0),IDB_BITMAP_AND);
+Line* temp;
+int check_line(CPoint point)
+{
+	int array_size = LineArray.GetSize();
+	for (int i = 0; i < array_size; i++)
+	{
+		if (PtInRect(LineArray.GetAt(i).rect, point))
+			return i;
+	}
+	return -1;
+}
+
+bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
+{
+	for (int i = 0; i < andgates.GetSize(); i++)
+	{
+		if (PtInRect(andgates.GetAt(i).output[0].rectState, point))
+			temp.statu = andgates.GetAt(i).output[0].boolState;
+			return true;
+		
+	}
+	for (int i = 0; i < orgates.GetSize(); i++)
+	{
+		if (PtInRect(orgates.GetAt(i).output[0].rectState, point))
+			temp.statu = orgates.GetAt(i).output[0].boolState;
+			return true;
+
+	}
+	for (int i = 0; i < notgates.GetSize(); i++)
+	{
+		if (PtInRect(notgates.GetAt(i).output[0].rectState, point))
+			temp.statu = notgates.GetAt(i).output[0].boolState;
+			return true;
+
+	}
+	for (int i = 0; i < norgates.GetSize(); i++)
+	{
+		if (PtInRect(norgates.GetAt(i).output[0].rectState, point))
+			temp.statu = norgates.GetAt(i).output[0].boolState;
+			return true;
+
+	}
+	for (int i = 0; i < nandgates.GetSize(); i++)
+	{
+		if (PtInRect(nandgates.GetAt(i).output[0].rectState, point))
+			temp.statu = nandgates.GetAt(i).output[0].boolState;
+			return true;
+
+	}
+	for (int i = 0; i <xorgates.GetSize(); i++)
+	{
+		if (PtInRect(xorgates.GetAt(i).output[0].rectState, point))
+			temp.statu = xorgates.GetAt(i).output[0].boolState;
+		return true;
+
+	}
+	return false;
+}
+bool CLogisim_KKLView:: check_InputArray(CPoint point, Line& temp)
+{
+	return false;
+}
+
+//int check_InputArray()
+//{
+//
+//}
 
 
 #ifdef _DEBUG
@@ -48,6 +113,7 @@ CLogisim_KKLView::CLogisim_KKLView()
 	// TODO: 여기에 생성 코드를 추가합니다.
 
 }
+
 
 CLogisim_KKLView::~CLogisim_KKLView()
 {
@@ -121,36 +187,35 @@ CLogisim_KKLDoc* CLogisim_KKLView::GetDocument() const // 디버그되지 않은 버전은
 }
 #endif //_DEBUG
 
-int check_line(CPoint point)
-{
-	int array_size = LineArray.GetSize();
-	for (int i = 0; i < array_size; i++)
-	{
-		if (PtInRect(LineArray.GetAt(i).rect, point))
-			return i;
-	}
-	return -1;
-}
 
 void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	// 눌렀을 때의 flag 및 좌표 저장
-	temp.start_pt = point;
-	m_prev_pos.x = point.x;
-	m_prev_pos.y = point.y;
+	if(gatename == "")
+	{
+		temp = new Line;
+		//LineArray.Add(*temp);
+		temp->start_pt = point;
 
-	//ANDGATE and (point, IDB_BITMAP_AND);
-	if (PtInRect(andTemp.output[0].rectState, point))
-	{
-		temp.statu = andTemp.output[0].boolState;
-		mouse_check = true;
+		
+		m_prev_pos.x = point.x;
+		m_prev_pos.y = point.y;
+		//int index = check_line(point);
+
+
+		if (check_OutputArray(point, *temp)) //게이트들만 , 플립플롭 영역 따로 해야함
+		{                                    //플립플롭 output영역.  input영역, 클럭 영역
+			mouse_check = true;
+		}
+		else if (check_line(point) >= 0)
+		{
+			(*temp).statu = LineArray.GetAt(check_line(point)).statu;
+			mouse_check = true;
+		}
+		
 	}
-	else if (int index = check_line(point) >= 0)
-	{
-		temp.statu = LineArray.GetAt(index).statu;
-		mouse_check = true;
-	}
+	
 
 	CClientDC dc(this);
 	/*if (selected == true) {*/
@@ -175,19 +240,19 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	if (mouse_check)
 	{
 	mouse_check = false;
-		temp.desti_pt = point;
+	(*temp).desti_pt = point;
 
-		if (PtInRect(andTemp.input[0].rectState, point))
+		if (PtInRect(andgates.GetAt(0).input[0].rectState, point))
 		{
-			andTemp.input[0].boolState = temp.statu;
+			andgates.GetAt(0).input[0].boolState = (*temp).statu;
 		}
-		else if (PtInRect(andTemp.input[1].rectState, point))
+		else if (PtInRect(andgates.GetAt(0).input[1].rectState, point))
 		{
-			andTemp.input[1].boolState = temp.statu;
+			andgates.GetAt(0).input[1].boolState = (*temp).statu;
 		}
 
-		temp.setLineRect();
-		LineArray.Add(temp);
+		(*temp).setLineRect();
+		LineArray.Add(*temp);
 	}
 	
 
@@ -221,7 +286,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			selected = FALSE;
 		}
 		else if (gatename == "NOT") {
-			not = new NOTGATE(point, IDB_BITMAP_NOT);
+			not = new NOTGATE(point,IDB_BITMAP_NOT);
 			notgates.Add(*not);
 			not->SmallPaint(dc);
 			gatename = "";
@@ -368,9 +433,13 @@ void CLogisim_KKLView::OnMouseMove(UINT nFlags, CPoint point)
 	CClientDC dc(this);
 	if (mouse_check)
 	{
-		dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
-		dc.LineTo(point.x, point.y);
-		m_prev_pos = point;
+		if (point.x == m_prev_pos.x || point.y == m_prev_pos.y)
+		{
+			dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
+			dc.LineTo(point.x, point.y);
+			m_prev_pos = point;
+		}
+		
 	}
 
 	CView::OnMouseMove(nFlags, point);

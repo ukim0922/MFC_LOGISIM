@@ -72,7 +72,10 @@ public :
 	~ANDGATE() {};
 	ANDGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint,BITMAPID){
 		this->gatenumber = AND;
+		SetRect();
+		SetInOutValues(0);
 	}
+	
 	void GateLogic();
 };
 
