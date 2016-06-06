@@ -711,18 +711,10 @@ void CLogisim_KKLView::OnMouseMove(UINT nFlags, CPoint point)
 	CPen* oldPen = dc.SelectObject(&pen);
 	if (mouse_check)
 	{
-		if (point.x == m_start_pos.x)
+		if (point.x == m_start_pos.x || point.y == m_start_pos.y)
 		{
-			//dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
-			dc.MoveTo(point.x, selected_point.y);
+			dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
 			dc.LineTo(point.x, point.y);
-			m_prev_pos = point;
-		}else if (point.y == m_start_pos.y)
-		{
-			//dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
-			dc.MoveTo(selected_point.x, point.y);
-			dc.LineTo(point.x, point.y);
-			m_prev_pos = point;
 		}
 		
 	}
