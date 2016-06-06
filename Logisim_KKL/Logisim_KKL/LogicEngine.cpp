@@ -253,7 +253,7 @@ LogicEngine::~LogicEngine()
 
 
 //7-segment 출력함수(완료)
-void Seven::Print_7_segment( CClientDC &dc, bool input_a, bool input_b, bool input_c, bool input_d, bool input_e, bool input_f, bool input_g)
+void Seven::Print_7_segment( CClientDC &dc)
 {
 
 	if ((input_a && input_b && input_c && input_d && input_e && input_f == true) && (input_g == false) )
@@ -302,6 +302,18 @@ void Seven::Print_7_segment( CClientDC &dc, bool input_a, bool input_b, bool inp
 	}
 }
 
+
+void Seven::Set_7Rect()
+{
+	rect[0].SetRect(point.x-20, point.y, point.x+10, point.y+10);
+	rect[1].SetRect(point.x-20, point.y+10, point.x+10, point.y+20);
+	rect[2].SetRect(point.x-20, point.y+20, point.x+10, point.y+30);
+	rect[3].SetRect(point.x-20, point.y+30, point.x+10, point.y+40);
+	rect[4].SetRect(point.x-20, point.y+40, point.x + 10, point.y+50);
+	rect[5].SetRect(point.x-20, point.y+50, point.x + 10, point.y+60);
+	rect[6].SetRect(point.x-20, point.y+60, point.x + 10, point.y+70);
+
+}
 
 Seven::Seven(CPoint &point) {
 	this->point = point;
