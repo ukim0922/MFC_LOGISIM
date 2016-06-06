@@ -561,13 +561,17 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	
 
 	CClientDC dc(this);
-	LogicEngine* gate;
+
 	ANDGATE* and;
 	ORGATE* or ;
 	NOTGATE* not;
 	NANDGATE* nand;
 	NORGATE* nor;
 	XORGATE* xor;
+
+	DFF* dff;
+	TFF* tff;
+	JKFF* jkff;
 
 	CLOCK_SIGNAL* clock;
 	BITINPUT* bitinput;
@@ -620,24 +624,24 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			selected = FALSE;
 		}
 		else if (gatename == "D-FF") {
-			gate = new DFF(point, IDB_BITMAP_DFF);
-			gates.Add(*gate);
-			gate->Paint(dc);
+			dff = new DFF(point, IDB_BITMAP_DFF);
+			dffs.Add(*dff);
+			dff->Paint(dc);
 			gatename = "";
 			selected = FALSE;
 
 		}
 		else if (gatename == "JK-FF") {
-			gate = new JKFF(point, IDB_BITMAP_JKFF);
-			gates.Add(*gate);
-			gate->Paint(dc);
+			jkff = new JKFF(point, IDB_BITMAP_JKFF);
+			jkffs.Add(*jkff);
+			jkff->Paint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
 		else if (gatename == "T-FF") {
-			gate = new TFF(point, IDB_BITMAP_TFF);
-			gates.Add(*gate);
-			gate->Paint(dc);
+			tff = new TFF(point, IDB_BITMAP_TFF);
+			tffs.Add(*tff);
+			tff->Paint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -746,6 +750,17 @@ bool CLogisim_KKLView::CheckInput(CPoint point ,int& i)
 	return false;
 }
 
+bool CLogisim_KKLView::CheckCLK(CPoint point, int& i)
+{
+	for (i = 0; i < clocks.GetSize(); i++) {
+		if (PtInRect(clocks.GetAt(i).MRect, point)) {
+			return true;
+			break;
+		}
+	}
+	return false;
+}
+
 void CLogisim_KKLView::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
@@ -763,6 +778,24 @@ void CLogisim_KKLView::OnLButtonDblClk(UINT nFlags, CPoint point)
 			bitinputs.GetAt(i).output[0].boolState = true;
 			bitinputs.GetAt(i).BITMAPID = IDB_BITMAP_BITINPUT_1;
 			bitinputs.GetAt(i).SmallPaint(dc);
+		}
+	}
+
+	
+	else if (CheckCLK(point, i)) {
+		if (clocks.GetAt(i).output[0].boolState)
+		{	
+			clocks.GetAt(i).pre_clk = true;
+			clocks.GetAt(i).output[0].boolState = false;
+			clocks.GetAt(i).BITMAPID = IDB_BITMAP_CLK0;
+			clocks.GetAt(i).SmallPaint(dc);
+		}
+		else
+		{	
+			clocks.GetAt(i).pre_clk = false;
+			clocks.GetAt(i).output[0].boolState = true;
+			clocks.GetAt(i).BITMAPID = IDB_BITMAP_CKL1;
+			clocks.GetAt(i).SmallPaint(dc);
 		}
 	}
 

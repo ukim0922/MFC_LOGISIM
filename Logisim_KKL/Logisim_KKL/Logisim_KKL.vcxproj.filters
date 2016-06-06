@@ -48,9 +48,6 @@
     <ClInclude Include="GateTreeView.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="FilpFlopEngine.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="InOutValues.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -81,9 +78,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GateTreeView.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="FilpFlopEngine.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Line.cpp">

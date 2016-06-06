@@ -2,7 +2,6 @@
 // Logisim_KKLView.h : CLogisim_KKLView 클래스의 인터페이스
 //
 #include "LogicEngine.h"
-//#include "FilpFlopEngine.h"
 #include "Line.h"
 #pragma once
 class CLogisim_KKLView : public CView
@@ -25,9 +24,9 @@ public:
 	CArray<XORGATE, XORGATE&> xorgates;
 	CArray<NANDGATE, NANDGATE&> nandgates;
 
-	CArray<LogicEngine, LogicEngine&> dffs;
-	CArray<LogicEngine, LogicEngine&> tffs;
-	CArray<LogicEngine, LogicEngine&> jkffs;
+	CArray<DFF,DFF&> dffs;
+	CArray<TFF, TFF&> tffs;
+	CArray<JKFF, JKFF&> jkffs;
 
 	CArray<CLOCK_SIGNAL, CLOCK_SIGNAL&> clocks;
 	CArray<BITINPUT, BITINPUT&> bitinputs;
@@ -68,15 +67,16 @@ public:
 	
 	bool selected;
 	CString gatename;
-	//bool clock_pre; //클럭변수
-	//bool clock_cur;
+
 	bool h_ck; //에지트리거방식 (상승이면true, 하강이면false) 클릭으로받아올예정
+
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnHighTRG();
 	afx_msg void OnLowTRG();
 	afx_msg void OnUpdateHigh(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateLow(CCmdUI *pCmdUI);
 	bool CheckInput(CPoint point, int& i);
+	bool CheckCLK(CPoint point, int & i);
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 };
 
