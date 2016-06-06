@@ -253,7 +253,7 @@ LogicEngine::~LogicEngine()
 
 
 //7-segment 출력함수(완료)
-void Seven::Print_7_segment( CClientDC &dc)
+void Seven::Print_7_segment(CClientDC &dc)
 {
 
 	if ((input_a && input_b && input_c && input_d && input_e && input_f == true) && (input_g == false) )
@@ -295,10 +295,6 @@ void Seven::Print_7_segment( CClientDC &dc)
 	else if ((input_a && input_b && input_c && input_d && input_f && input_g == true)&& (input_e == false))
 	{
 		Paint(dc, 9);
-	}
-	else
-	{
-		Paint(dc, 10);
 	}
 }
 

@@ -207,3 +207,4 @@ public:
 	void Paint(CClientDC &dc, int num);
 	void Print_7_segment(CClientDC &dc);
 };
+

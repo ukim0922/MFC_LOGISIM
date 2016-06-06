@@ -9,7 +9,6 @@ Line::Line()
 {
 	
 }
-
 Line::~Line()
 {
 }

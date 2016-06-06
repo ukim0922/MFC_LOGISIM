@@ -17,6 +17,7 @@
 
 CArray < Line, Line& > LineArray;
 Line* temp;
+
 int CLogisim_KKLView::check_line(CPoint point)
 {
 	int array_size = LineArray.GetSize();
@@ -28,7 +29,6 @@ int CLogisim_KKLView::check_line(CPoint point)
 	}
 	return -1;
 }
-
 bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 {
 	//게이트
@@ -584,7 +584,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	NORGATE* nor;
 	XORGATE* xor;
 	
-	Seven* seven;
+	//Seven* seven;
 	CLOCK_SIGNAL* clock;
 	BITINPUT* bitinput;
 	BITLAMP* lamp;
@@ -594,6 +594,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		if (gatename == "AND") {
 			and = new ANDGATE(point,IDB_BITMAP_AND);
 			andgates.Add(*and);
+			ALL.Add(*and);
 			and->Paint(dc);
 			and->PrintLabel(dc, gatename);
 			gatename = "";
@@ -602,6 +603,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "OR") {
 			or = new ORGATE(point, IDB_BITMAP_OR);
 			orgates.Add(*or );
+			ALL.Add(*or);
 			or ->Paint(dc);
 			or->PrintLabel(dc, gatename);
 			gatename = "";
@@ -610,6 +612,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "NOT") {
 			not = new NOTGATE(point,IDB_BITMAP_NOT);
 			notgates.Add(*not);
+			ALL.Add(*not);
 			not->SmallPaint(dc);
 			not->PrintLabel(dc, gatename);
 			gatename = "";
@@ -618,6 +621,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "NAND") {
 			nand = new NANDGATE(point, IDB_BITMAP_NAND);
 			nandgates.Add(*nand);
+			ALL.Add(*nand);
 			nand->Paint(dc);
 			nand->PrintLabel(dc, gatename);
 			gatename = "";
@@ -626,6 +630,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "NOR") {
 			nor = new NORGATE(point, IDB_BITMAP_NOR);
 			norgates.Add(*nor);
+			ALL.Add(*nor);
 			nor->Paint(dc);
 			nor->PrintLabel(dc, gatename);
 			gatename = "";
@@ -634,6 +639,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "XOR") {
 			xor = new XORGATE(point, IDB_BITMAP_XOR);
 			xorgates.Add(*xor);
+			ALL.Add(*xor);
 			xor->Paint(dc);
 			xor->PrintLabel(dc, gatename);
 			gatename = "";
@@ -642,6 +648,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "D-FF") {
 			gate = new DFF(point, IDB_BITMAP_DFF);
 			gates.Add(*gate);
+			ALL.Add(*gate);
 			gate->Paint(dc);
 			gatename = "";
 			selected = FALSE;
@@ -650,6 +657,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "JK-FF") {
 			gate = new JKFF(point, IDB_BITMAP_JKFF);
 			gates.Add(*gate);
+			ALL.Add(*gate);
 			gate->Paint(dc);
 			gatename = "";
 			selected = FALSE;
@@ -657,6 +665,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "T-FF") {
 			gate = new TFF(point, IDB_BITMAP_TFF);
 			gates.Add(*gate);
+			ALL.Add(*gate);
 			gate->Paint(dc);
 			gatename = "";
 			selected = FALSE;
@@ -664,6 +673,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "LAMP") {
 			lamp = new BITLAMP(point, IDB_BITMAP_LON);
 			lamps.Add(*lamp);
+			ALL.Add(*lamp);
 			lamp->SmallPaint(dc);
 			lamp->PrintLabel(dc,gatename);
 			gatename = "";
@@ -672,6 +682,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "입력") {
 			bitinput = new BITINPUT(point, IDB_BITMAP_BITINPUT_0);
 			bitinputs.Add(*bitinput);
+			ALL.Add(*bitinput);
 			bitinput->SmallPaint(dc);
 			gatename = "";
 			selected = FALSE;
@@ -679,16 +690,18 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 		else if (gatename == "CLK") {
 			clock = new CLOCK_SIGNAL(point, IDB_BITMAP_CLK0);
 			clocks.Add(*clock);
+			ALL.Add(*clock);
 			clock->SmallPaint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
+		/*
 		else if (gatename == "7-segment") {
 			seven = new Seven(point);
 			seven->Print_7_segment(dc);
 			selected = FALSE;
 		}
-		
+		*/
 		CView::OnLButtonUp(nFlags, point);
 	}
 }
@@ -773,6 +786,33 @@ bool CLogisim_KKLView::CheckInput(CPoint point ,int& i)
 	}
 	return false;
 }
+
+/*
+CRectTracker함수
+
+void CLogisim_KKLView::Cut(CPoint point)
+{
+	CPtrArray cut_Array;
+	CRect cutRect;
+	cutRect.SetRect(m_start_pos, point);
+	for (int i = 0; i < LineArray.GetSize();; i++)
+	{
+		if (PtInRect(cutRect, LineArray.GetAt(i).start_pt))
+		{
+			cut_Array.Add(&LineArray.GetAt(i));
+		}
+	}
+	for (int i = 0; i < ALL.GetSize(); i++)
+	{
+		if (PtInRect(cutRect, ALL.GetAt(i).MPoint))
+		{
+			cut_Array.Add(&ALL.GetAt(i));
+		}
+	}
+
+
+}
+*/
 
 void CLogisim_KKLView::OnLButtonDblClk(UINT nFlags, CPoint point)
 {

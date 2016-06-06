@@ -18,6 +18,7 @@ public:
 	int check_line(CPoint point);
 	void rotate(CClientDC & dc, CPoint point);
 	CLogisim_KKLDoc* GetDocument() const;
+	CArray<LogicEngine, LogicEngine&> ALL;
 	CArray<LogicEngine, LogicEngine&> gates;
 	CArray<ANDGATE, ANDGATE&> andgates;
 	CArray<ORGATE, ORGATE&> orgates;
@@ -79,6 +80,7 @@ public:
 	afx_msg void OnUpdateHigh(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateLow(CCmdUI *pCmdUI);
 	bool CheckInput(CPoint point, int& i);
+	void Cut(CPoint point);
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 };
 
