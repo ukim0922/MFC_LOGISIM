@@ -655,27 +655,24 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			dffs.Add(*dff);
 			dff->Paint(dc);
 			dff->PrintLabel(dc, gatename);
-			gate = new DFF(point, IDB_BITMAP_DFF);
-			gates.Add(*gate);
-			ALL.Add(*gate);
-			gate->Paint(dc);
+			ALL.Add(*dff);
 			gatename = "";
 			selected = FALSE;
 
 		}
 		else if (gatename == "JK-FF") {
-			gate = new JKFF(point, IDB_BITMAP_JKFF);
-			gates.Add(*gate);
-			ALL.Add(*gate);
-			gate->Paint(dc);
+			jkff = new JKFF(point, IDB_BITMAP_JKFF);
+			jkffs.Add(*jkff);
+			ALL.Add(*jkff);
+			jkff->Paint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
 		else if (gatename == "T-FF") {
-			gate = new TFF(point, IDB_BITMAP_TFF);
-			gates.Add(*gate);
-			ALL.Add(*gate);
-			gate->Paint(dc);
+			tff = new TFF(point, IDB_BITMAP_TFF);
+			tffs.Add(*tff);
+			ALL.Add(*tff);
+			tff->Paint(dc);
 			gatename = "";
 			selected = FALSE;
 		}
