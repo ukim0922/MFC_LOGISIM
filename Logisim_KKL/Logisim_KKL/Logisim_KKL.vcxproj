@@ -185,7 +185,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FilpFlopEngine.h" />
     <ClInclude Include="FixedSplitterWnd.h" />
     <ClInclude Include="GateTreeView.h" />
     <ClInclude Include="InOutValues.h" />
@@ -200,7 +199,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FilpFlopEngine.cpp" />
     <ClCompile Include="FixedSplitterWnd.cpp" />
     <ClCompile Include="GateTreeView.cpp" />
     <ClCompile Include="Line.cpp" />
