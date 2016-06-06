@@ -74,7 +74,7 @@ void LogicEngine::SmallRotate(CClientDC & dc, Gdiplus::REAL angle)
 
 void LogicEngine::PrintLabel(CClientDC &dc,CString Label) {
 	SetLabel(Label);
-	dc.TextOutW(MRect.BottomRight().x, MRect.BottomRight().y - 20, GetLabel());
+	dc.TextOutW(MRect.TopLeft().x +MRect.Width(), MRect.TopLeft().y - 5, GetLabel());
 
 }
 
@@ -158,7 +158,7 @@ void LogicEngine::SetInOutValues(Gdiplus::REAL angle)
 		}
 	}
 	//클럭, 입력일 때
-	if (name == "CLK" || name == "입력") {
+	if (name == "CLK" || name == "Input") {
 		switch ((int)angle % 360) {
 		case 0:
 			//사각형 영역 지정
@@ -419,7 +419,7 @@ void LogicEngine::SetRect()
 	CMainFrame *pFrame = (CMainFrame *)AfxGetMainWnd();
 	name = pFrame->m_pLogisimView->gatename;
 	//NOT게이트, 출력 램프일 때
-	if (name == "NOT" || name == "BITLAMP" || name == "입력" || name == "CLK") {
+	if (name == "NOT" || name == "LAMP" || name == "Input" || name == "CLK") {
 		MRect = CRect(MPoint.x, MPoint.y, MPoint.x + 24, MPoint.y + 24);
 	}
 	//나머지 게이트들

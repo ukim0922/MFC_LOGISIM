@@ -235,6 +235,7 @@ public:
 	FilpFlopEngine(CPoint MPoint, UINT BITMAPID) {
 		this->MPoint = MPoint;
 		this->BITMAPID = BITMAPID;
+		this->angle = 0;
 	}
 	~FilpFlopEngine();
 	void Paint(CClientDC & dc);
@@ -249,6 +250,8 @@ public:
 	~DFF() {}
 	DFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
 		this->gatenumber = D_FF;
+		SetRect();
+		SetInOutValues(0);
 	}
 	void FlipFlopLogic();
 
@@ -260,6 +263,8 @@ public:
 	~TFF() {}
 	TFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
 		this->gatenumber = T_FF;
+		SetRect();
+		SetInOutValues(0);
 	}
 	void FlipFlopLogic();
 };
@@ -270,6 +275,8 @@ public:
 	~JKFF() {}
 	JKFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
 		this->gatenumber = JK_FF;
+		SetRect();
+		SetInOutValues(0);
 	}
 	void FlipFlopLogic();
 };

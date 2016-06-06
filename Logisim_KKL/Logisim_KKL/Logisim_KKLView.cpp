@@ -648,6 +648,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			dff = new DFF(point, IDB_BITMAP_DFF);
 			dffs.Add(*dff);
 			dff->Paint(dc);
+			dff->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 
@@ -656,6 +657,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			jkff = new JKFF(point, IDB_BITMAP_JKFF);
 			jkffs.Add(*jkff);
 			jkff->Paint(dc);
+			jkff->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -663,6 +665,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			tff = new TFF(point, IDB_BITMAP_TFF);
 			tffs.Add(*tff);
 			tff->Paint(dc);
+			tff->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -674,10 +677,11 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			gatename = "";
 			selected = FALSE;
 		}
-		else if (gatename == "ют╥б") {
+		else if (gatename == "Input") {
 			bitinput = new BITINPUT(point, IDB_BITMAP_BITINPUT_0);
 			bitinputs.Add(*bitinput);
 			bitinput->SmallPaint(dc);
+			bitinput->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
