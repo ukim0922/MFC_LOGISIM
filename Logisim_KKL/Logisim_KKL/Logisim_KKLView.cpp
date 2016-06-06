@@ -568,7 +568,8 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	NANDGATE* nand;
 	NORGATE* nor;
 	XORGATE* xor;
-
+	
+	Seven* seven;
 	CLOCK_SIGNAL* clock;
 	BITINPUT* bitinput;
 	BITLAMP* lamp;
@@ -663,14 +664,12 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			gatename = "";
 			selected = FALSE;
 		}
-		/*else if (gatename == "7-segment") {
-			gate = new Seven(point, );
-			gates.Add(*gate);
-			gate->SmallPaint(dc);
-			gatename = "";
+		else if (gatename == "7-segment") {
+			seven = new Seven(point);
+			seven->Print_7_segment(dc);
 			selected = FALSE;
 		}
-		*/
+		
 		CView::OnLButtonUp(nFlags, point);
 	}
 }

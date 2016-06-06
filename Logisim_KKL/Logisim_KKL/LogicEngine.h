@@ -36,10 +36,10 @@ public:
 	InOutValues output[2];
 
 
-
 	//출력
 	void Paint(CClientDC &dc);
 	void SmallPaint(CClientDC &dc); //not, input, clock signal, ouputlamp
+
 	//회전
 	void Rotate(CClientDC &dc, Gdiplus::REAL angle);
 	void SmallRotate(CClientDC &dc, Gdiplus::REAL angle); //not
@@ -191,8 +191,10 @@ private:
 class Seven {
 public:
 	CPoint point;
-	bool input_a, input_b, input_c, input_d, input_e, input_f, input_g;
+	CRect rect[7];
+	void Set_7Rect();
+	bool input_a=true, input_b = true, input_c = true, input_d = true, input_e = true, input_f = true, input_g = true;
 	Seven(CPoint &point);
 	void Paint(CClientDC &dc, int num);
-	void Print_7_segment(CClientDC &dc, bool input_a, bool input_b, bool input_c, bool input_d, bool input_e, bool input_f, bool input_g);
+	void Print_7_segment(CClientDC &dc);
 };
