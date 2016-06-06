@@ -595,6 +595,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			and = new ANDGATE(point,IDB_BITMAP_AND);
 			andgates.Add(*and);
 			and->Paint(dc);
+			and->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -602,6 +603,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			or = new ORGATE(point, IDB_BITMAP_OR);
 			orgates.Add(*or );
 			or ->Paint(dc);
+			or->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -609,6 +611,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			not = new NOTGATE(point,IDB_BITMAP_NOT);
 			notgates.Add(*not);
 			not->SmallPaint(dc);
+			not->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -616,6 +619,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			nand = new NANDGATE(point, IDB_BITMAP_NAND);
 			nandgates.Add(*nand);
 			nand->Paint(dc);
+			nand->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -623,6 +627,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			nor = new NORGATE(point, IDB_BITMAP_NOR);
 			norgates.Add(*nor);
 			nor->Paint(dc);
+			nor->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -630,6 +635,7 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			xor = new XORGATE(point, IDB_BITMAP_XOR);
 			xorgates.Add(*xor);
 			xor->Paint(dc);
+			xor->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
