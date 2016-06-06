@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LogicEngine">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAACEAAABgAAAAABCAARGAABABAIAQAABABIAQA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Line">
+    <Position X="16.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAEAAAAAAAAAAAAIAAAAACAAAAAAAAAAAABgAA=</HashCode>
+      <FileName>Line.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InOutValues">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAIAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>InOutValues.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLogisim_KKLView">
+    <Position X="29.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAgwCAAQAAIABCkBQiADEgBSAAJiBAAgCAmAxCAA=</HashCode>
+      <FileName>Logisim_KKLView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGateTreeView">
+    <Position X="18" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAQAiAAAgCAAAAAAAAEAAAAggAA=</HashCode>
+      <FileName>GateTreeView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="GateSelect">
+    <Position X="32.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAGAAAAgACAAgAAAAAAAAAAAAAgIAAgAAAAAAACAACA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Facing">
+    <Position X="27" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAABAAAQAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>
