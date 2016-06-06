@@ -61,6 +61,12 @@ public:
 	void GateLogic() {};
 
 
+	virtual void serialize(CArchive& ar) {
+		ar << MPoint << BITMAPID << MPoint << angle << MRect << gatenumber;
+	}
+	virtual void deserialize(CArchive& ar) {
+		ar >> MPoint >> BITMAPID >> MPoint >> angle >> MRect >> gatenumber;
+	}
 private:
 	
 	CString Label;
@@ -71,12 +77,11 @@ class ANDGATE : public LogicEngine {
 public :
 	ANDGATE() {};
 	~ANDGATE() {};
-	ANDGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint,BITMAPID){
+	ANDGATE(CPoint MPoint, UINT BITMAPID) : LogicEngine(MPoint, BITMAPID) {
 		this->gatenumber = AND;
 		SetRect();
 		SetInOutValues(0);
 	}
-	
 	void GateLogic();
 };
 
@@ -102,6 +107,7 @@ public:
 		SetInOutValues(0);
 	}
 	void GateLogic();
+
 };
 
 class NANDGATE : public LogicEngine {
@@ -114,6 +120,7 @@ public:
 		SetInOutValues(0);
 	}
 	void GateLogic();
+
 };
 
 class NORGATE : public LogicEngine {
@@ -126,6 +133,7 @@ public:
 		SetInOutValues(0);
 	}
 	void GateLogic();
+
 };
 class XORGATE : public LogicEngine {
 public:
@@ -137,6 +145,7 @@ public:
 		SetInOutValues(0);
 	}
 	void GateLogic();
+
 };
 
 

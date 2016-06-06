@@ -37,6 +37,8 @@ public:
 //플립플롭
 class DFF : public FilpFlopEngine {
 public:
+	DFF() {};
+	~DFF() {};
 	DFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
 		this->gatenumber = D_FF;
 	}
@@ -46,6 +48,8 @@ public:
 
 class TFF : public FilpFlopEngine {
 public:
+	TFF() {};
+	~TFF() {};
 	TFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
 		this->gatenumber = T_FF;
 	}
@@ -54,6 +58,8 @@ public:
 
 class JKFF : public FilpFlopEngine {
 public:
+	JKFF() {};
+	~JKFF() {};
 	JKFF(CPoint MPoint, UINT BITMAPID) : FilpFlopEngine(MPoint, BITMAPID) {
 		this->gatenumber = JK_FF;
 	}

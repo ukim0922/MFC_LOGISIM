@@ -4,10 +4,15 @@
 
 
 #pragma once
-
+#include "LogicEngine.h"
+//#include "FilpFlopEngine.h"
+#include "Line.h"
 
 class CLogisim_KKLDoc : public CDocument
 {
+private:
+	CPtrList m_Objs;
+	LogicEngine* m_Cur;
 protected: // serialization에서만 만들어집니다.
 	CLogisim_KKLDoc();
 	DECLARE_DYNCREATE(CLogisim_KKLDoc)
@@ -22,6 +27,18 @@ public:
 public:
 	virtual BOOL OnNewDocument();
 	virtual void Serialize(CArchive& ar);
+	CPtrList& getLogicEngine();
+	ANDGATE* getAndGates(bool bNew = FALSE);
+	ORGATE* getOrGates(bool bNew = FALSE);
+	NOTGATE* getNotGates(bool bNew = FALSE);
+	NORGATE* getNorGates(bool bNew = FALSE);
+	NANDGATE* getNandGates(bool bNew = FALSE);
+	XORGATE* getXorGates(bool bNew = FALSE);
+	//TFF* getTff(bool bNew = FALSE);
+	//DFF* getDff(bool bNew = FALSE);
+	//JKFF* getJkff(bool bNew = FALSE);
+	//Line* getLine(bool bNew = FALSE);
+
 #ifdef SHARED_HANDLERS
 	virtual void InitializeSearchContent();
 	virtual void OnDrawThumbnail(CDC& dc, LPRECT lprcBounds);

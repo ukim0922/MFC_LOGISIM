@@ -15,6 +15,7 @@ protected: // serialization에서만 만들어집니다.
 public:
 	bool check_OutputArray(CPoint point, Line& temp);
 	bool check_InputArray(CPoint point, Line& temp);
+	int check_line(CPoint point);
 	void rotate(CClientDC & dc, CPoint point);
 	CLogisim_KKLDoc* GetDocument() const;
 	CArray<LogicEngine, LogicEngine&> gates;
@@ -35,6 +36,7 @@ public:
 
 
 	bool mouse_check = false;  //마우스 드래그된 상태 체크
+	CPoint selected_point;
 	CPoint m_prev_pos; //드래그 시작 좌표 저장
 	CPoint m_start_pos;
 // 작업입니다. 

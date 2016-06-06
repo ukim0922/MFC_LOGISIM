@@ -74,7 +74,7 @@ void LogicEngine::SmallRotate(CClientDC & dc, Gdiplus::REAL angle)
 
 void LogicEngine::PrintLabel(CClientDC &dc,CString Label) {
 	SetLabel(Label);
-	dc.TextOutW(MPoint.x - 20, MPoint.y - 20, GetLabel());
+	dc.TextOutW(MRect.BottomRight().x, MRect.BottomRight().y - 20, GetLabel());
 
 }
 
