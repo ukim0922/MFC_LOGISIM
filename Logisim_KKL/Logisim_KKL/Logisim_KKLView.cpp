@@ -17,12 +17,13 @@
 
 CArray < Line, Line& > LineArray;
 Line* temp;
-int check_line(CPoint point)
+int CLogisim_KKLView::check_line(CPoint point)
 {
 	int array_size = LineArray.GetSize();
 	for (int i = 0; i < array_size; i++)
 	{
 		if (PtInRect(LineArray.GetAt(i).rect, point))
+			selected_point = LineArray.GetAt(i).rect.CenterPoint();
 			return i;
 	}
 	return -1;
@@ -36,6 +37,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(andgates.GetAt(i).output[0].rectState, point))
 		{
 			temp.statu = andgates.GetAt(i).output[0].boolState;
+			selected_point = andgates.GetAt(i).output[0].pointState;
 			return true;
 		}
 		
@@ -45,6 +47,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(orgates.GetAt(i).output[0].rectState, point))
 		{
 			temp.statu = orgates.GetAt(i).output[0].boolState;
+			selected_point = orgates.GetAt(i).output[0].pointState;
 			return true;
 		}
 	}
@@ -53,6 +56,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(notgates.GetAt(i).output[0].rectState, point))
 		{
 			temp.statu = notgates.GetAt(i).output[0].boolState;
+			selected_point = notgates.GetAt(i).output[0].pointState;
 			return true;
 		}
 
@@ -62,6 +66,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(norgates.GetAt(i).output[0].rectState, point))
 		{
 			temp.statu = norgates.GetAt(i).output[0].boolState;
+			selected_point = norgates.GetAt(i).output[0].pointState;
 			return true;
 		}
 
@@ -71,6 +76,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(nandgates.GetAt(i).output[0].rectState, point))
 		{
 			temp.statu = nandgates.GetAt(i).output[0].boolState;
+			selected_point = nandgates.GetAt(i).output[0].pointState;
 			return true;
 		}
 
@@ -80,6 +86,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(xorgates.GetAt(i).output[0].rectState, point))
 		{
 			temp.statu = xorgates.GetAt(i).output[0].boolState;
+			selected_point = xorgates.GetAt(i).output[0].pointState;
 			return true;
 		}
 
@@ -90,11 +97,13 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(dffs.GetAt(i).output[0].rectState, point))
 		{
 			temp.statu = dffs.GetAt(i).output[0].boolState;
+			selected_point = dffs.GetAt(i).output[0].pointState;
 			return true;
 		}
 		else if (PtInRect(dffs.GetAt(i).output[1].rectState, point))
 		{
 			temp.statu = dffs.GetAt(i).output[1].boolState;
+			selected_point = dffs.GetAt(i).output[0].pointState;
 			return true;
 		}
 
@@ -104,11 +113,13 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(tffs.GetAt(i).output[0].rectState, point))
 		{
 			temp.statu = tffs.GetAt(i).output[0].boolState;
+			selected_point = tffs.GetAt(i).output[0].pointState;
 			return true;
 		}
 		else if (PtInRect(tffs.GetAt(i).output[1].rectState, point))
 		{
 			temp.statu = tffs.GetAt(i).output[1].boolState;
+			selected_point = tffs.GetAt(i).output[0].pointState;
 			return true;
 		}
 
@@ -118,11 +129,13 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(jkffs.GetAt(i).output[0].rectState, point))
 		{
 			temp.statu = jkffs.GetAt(i).output[0].boolState;
+			selected_point = jkffs.GetAt(i).output[0].pointState;
 			return true;
 		}
 		else if (PtInRect(jkffs.GetAt(i).output[1].rectState, point))
 		{
 			temp.statu = jkffs.GetAt(i).output[1].boolState;
+			selected_point = jkffs.GetAt(i).output[0].pointState;
 			return true;
 		}
 
@@ -133,6 +146,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(clocks.GetAt(i).output[0].rectState, point))
 		{
 			temp.statu = clocks.GetAt(i).output[0].boolState;
+			selected_point = clocks.GetAt(i).output[0].pointState;
 			return true;
 		}
 
@@ -142,6 +156,7 @@ bool CLogisim_KKLView::check_OutputArray(CPoint point, Line& temp)
 		if (PtInRect(bitinputs.GetAt(i).output[0].rectState, point))
 		{
 			temp.statu = bitinputs.GetAt(i).output[0].boolState;
+			selected_point = bitinputs.GetAt(i).output[0].pointState;
 			return true;
 		}
 
@@ -579,7 +594,6 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			and = new ANDGATE(point,IDB_BITMAP_AND);
 			andgates.Add(*and);
 			and->Paint(dc);
-			and->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -587,7 +601,6 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			or = new ORGATE(point, IDB_BITMAP_OR);
 			orgates.Add(*or );
 			or ->Paint(dc);
-			or->PrintLabel(dc, gatename);
 			gatename = "";
 			selected = FALSE;
 		}
@@ -693,11 +706,21 @@ void CLogisim_KKLView::OnMouseMove(UINT nFlags, CPoint point)
 
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CClientDC dc(this);
+	CPen pen;
+	pen.CreatePen(PS_SOLID, 3, RGB(0, 0, 0));    // 검은색 펜 생성
+	CPen* oldPen = dc.SelectObject(&pen);
 	if (mouse_check)
 	{
-		if (point.x == m_start_pos.x || point.y == m_start_pos.y)
+		if (point.x == m_start_pos.x)
 		{
-			dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
+			//dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
+			dc.MoveTo(point.x, selected_point.y);
+			dc.LineTo(point.x, point.y);
+			m_prev_pos = point;
+		}else if (point.y == m_start_pos.y)
+		{
+			//dc.MoveTo(m_prev_pos.x, m_prev_pos.y);
+			dc.MoveTo(selected_point.x, point.y);
 			dc.LineTo(point.x, point.y);
 			m_prev_pos = point;
 		}
