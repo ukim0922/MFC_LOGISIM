@@ -159,7 +159,7 @@ BEGIN
         MENUITEM "실행 취소(&U)\tCtrl+Z",           ID_EDIT_UNDO
         MENUITEM SEPARATOR
         MENUITEM "잘라내기(&T)\tCtrl+X",            ID_EDIT_CUT
-        MENUITEM "복사(&C)\tCtrl+C",              ID_EDIT_COPY
+        MENUITEM "복사(&C)\tCtrl+C",              ID_EDIT_COPY, INACTIVE
         MENUITEM "붙여넣기(&P)\tCtrl+V",            ID_EDIT_PASTE
     END
     POPUP "보기(&V)"
