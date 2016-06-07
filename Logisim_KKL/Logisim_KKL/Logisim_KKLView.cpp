@@ -45,9 +45,10 @@ int CLogisim_KKLView::check_line(CPoint point)
 	int array_size = LineArray.GetSize();
 	for (int i = 0; i < array_size; i++)
 	{
-		if (PtInRect(LineArray.GetAt(i).rect, point))
+		if (PtInRect(LineArray.GetAt(i).rect, point)) {
 			selected_point = LineArray.GetAt(i).rect.CenterPoint();
 			return i;
+		}
 	}
 	return -1;
 }
