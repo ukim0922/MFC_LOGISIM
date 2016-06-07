@@ -18,6 +18,28 @@
 CArray < Line, Line& > LineArray;
 Line* temp;
 
+void CLogisim_KKLView::Copy()  //복사 함수
+{
+	CPtrArray Copy_Array;
+	CRect cutRect;
+	cutRect.SetRect(m_start_pos, m_final_pos);
+	for (int i = 0; i < LineArray.GetSize(); i++)
+	{
+		if (PtInRect(cutRect, LineArray.GetAt(i).start_pt))
+		{
+			Copy_Array.Add(&LineArray.GetAt(i));
+		}
+	}
+	for (int i = 0; i < ALL.GetSize(); i++)
+	{
+		if (PtInRect(cutRect, ALL.GetAt(i).MPoint))
+		{
+			Copy_Array.Add(&ALL.GetAt(i));
+		}
+	}
+
+}
+
 int CLogisim_KKLView::check_line(CPoint point)
 {
 	int array_size = LineArray.GetSize();
@@ -430,6 +452,7 @@ BEGIN_MESSAGE_MAP(CLogisim_KKLView, CView)
 	ON_UPDATE_COMMAND_UI(ID_HIGH, &CLogisim_KKLView::OnUpdateHigh)
 	ON_UPDATE_COMMAND_UI(ID_LOW, &CLogisim_KKLView::OnUpdateLow)
 	ON_WM_LBUTTONDBLCLK()
+	ON_COMMAND(ID_EDIT_COPY, &CLogisim_KKLView::OnEditCopy)
 END_MESSAGE_MAP()
 
 // CLogisim_KKLView 생성/소멸
@@ -546,13 +569,13 @@ void CLogisim_KKLView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	CClientDC dc(this);
 	/*if (selected == true) {*/
-	dc.TextOut(200, 250, gatename);
+	/*dc.TextOut(200, 250, gatename);
 
 	if (selected) {
 		dc.TextOutW(200, 300, _T("TRUE"));
 	}
 	else
-		dc.TextOutW(200, 300, _T("FALSE"));
+		dc.TextOutW(200, 300, _T("FALSE"));*/
 
 
 	CView::OnLButtonDown(nFlags, point);
@@ -564,11 +587,18 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	//마우스 드래그 flag 변경
 	
-	if (mouse_check)
+
+	if (mouse_check && m_copy)
+	{
+		mouse_check = false;
+		m_final_pos = point;
+		Copy();
+		m_copy = false;
+	}
+	else if (mouse_check)
 	{
 		mouse_check = false;
 		(*temp).desti_pt = point;
-
 		check_InputArray(point, *temp);
 		(*temp).setLineRect();
 		LineArray.Add(*temp);
@@ -702,13 +732,15 @@ void CLogisim_KKLView::OnLButtonUp(UINT nFlags, CPoint point)
 			gatename = "";
 			selected = FALSE;
 		}
-		/*
+		
 		else if (gatename == "7-segment") {
 			seven = new Seven(point);
 			seven->Print_7_segment(dc);
+			//ALL.Add(*seven);
+			gatename = "";
 			selected = FALSE;
 		}
-		*/
+		
 		CView::OnLButtonUp(nFlags, point);
 	}
 }
@@ -775,6 +807,7 @@ void CLogisim_KKLView::OnUpdateLow(CCmdUI *pCmdUI)
 	// TODO: 여기에 명령 업데이트 UI 처리기 코드를 추가합니다.
 }
 
+
 bool CLogisim_KKLView::CheckInput(CPoint point ,int& i)
 {
 	for (i = 0; i < bitinputs.GetSize(); i++) {
@@ -786,32 +819,10 @@ bool CLogisim_KKLView::CheckInput(CPoint point ,int& i)
 	return false;
 }
 
-/*
-CRectTracker함수
-
-void CLogisim_KKLView::Cut(CPoint point)
-{
-	CPtrArray cut_Array;
-	CRect cutRect;
-	cutRect.SetRect(m_start_pos, point);
-	for (int i = 0; i < LineArray.GetSize();; i++)
-	{
-		if (PtInRect(cutRect, LineArray.GetAt(i).start_pt))
-		{
-			cut_Array.Add(&LineArray.GetAt(i));
-		}
-	}
-	for (int i = 0; i < ALL.GetSize(); i++)
-	{
-		if (PtInRect(cutRect, ALL.GetAt(i).MPoint))
-		{
-			cut_Array.Add(&ALL.GetAt(i));
-		}
-	}
 
 
-}
-*/
+
+
 
 bool CLogisim_KKLView::CheckCLK(CPoint point, int& i)
 {
@@ -863,4 +874,10 @@ void CLogisim_KKLView::OnLButtonDblClk(UINT nFlags, CPoint point)
 	}
 
 	CView::OnLButtonDblClk(nFlags, point);
+}
+
+void CLogisim_KKLView::OnEditCopy()
+{
+	m_copy = true;
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }

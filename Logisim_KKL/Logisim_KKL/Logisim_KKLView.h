@@ -34,11 +34,12 @@ public:
 	CArray<BITINPUT, BITINPUT&> bitinputs;
 	CArray<BITLAMP, BITLAMP&> lamps;
 
-
+	bool m_copy = false;
 	bool mouse_check = false;  //마우스 드래그된 상태 체크
 	CPoint selected_point;
-	CPoint m_prev_pos; //드래그 시작 좌표 저장
-	CPoint m_start_pos;
+	CPoint m_prev_pos; //드래그 시 임시 저장용
+	CPoint m_start_pos;//드래그 시작 좌표 저장
+	CPoint m_final_pos;//드래그 마지막 좌표 저장
 // 작업입니다. 
 public:
 
@@ -80,8 +81,11 @@ public:
 	afx_msg void OnUpdateLow(CCmdUI *pCmdUI);
 	bool CheckInput(CPoint point, int& i);
 	bool CheckCLK(CPoint point, int & i);
-	void Cut(CPoint point);
+	void Copy();
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
+//	afx_msg void COPYCHECK();
+//	afx_msg void On32778();
+	afx_msg void OnEditCopy();
 };
 
 #ifndef _DEBUG  // Logisim_KKLView.cpp의 디버그 버전
