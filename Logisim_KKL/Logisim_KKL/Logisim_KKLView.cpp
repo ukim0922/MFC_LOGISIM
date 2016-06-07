@@ -475,19 +475,19 @@ void CLogisim_KKLView::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 	//TEST
-	BITINPUT a, b;
-	a.output[0].boolState = TRUE;
-	b.output[0].boolState = FALSE;
+	//BITINPUT a, b;
+	//a.output[0].boolState = TRUE;
+	//b.output[0].boolState = FALSE;
 
-	ORGATE c;
-	c.input[0].boolState = a.output[0].boolState;
-	c.input[1].boolState = b.output[0].boolState;
-	c.GateLogic();
+	//ORGATE c;
+	//c.input[0].boolState = a.output[0].boolState;
+	//c.input[1].boolState = b.output[0].boolState;
+	//c.GateLogic();
 
-	CString str;
-	str.Format(_T("output : %d"),c.output[0].boolState);
-	//str.Format(_T("Array Size : %d"), gates.GetSize());
-	pDC->TextOut(200, 200, str);
+	//CString str;
+	//str.Format(_T("output : %d"),c.output[0].boolState);
+	////str.Format(_T("Array Size : %d"), gates.GetSize());
+	//pDC->TextOut(200, 200, str);
 
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
@@ -842,6 +842,7 @@ void CLogisim_KKLView::OnLButtonDblClk(UINT nFlags, CPoint point)
 			bitinputs.GetAt(i).BITMAPID = IDB_BITMAP_BITINPUT_1;
 			bitinputs.GetAt(i).SmallPaint(dc);
 		}
+
 	}
 
 	
@@ -861,6 +862,5 @@ void CLogisim_KKLView::OnLButtonDblClk(UINT nFlags, CPoint point)
 			clocks.GetAt(i).SmallPaint(dc);
 		}
 	}
-
 	CView::OnLButtonDblClk(nFlags, point);
 }

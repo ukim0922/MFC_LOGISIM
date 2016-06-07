@@ -1,2 +1,186 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CAboutDlg" Collapsed="true">
+    <Position X="35.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logisim_KKL.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFixedSplitterWnd" Collapsed="true">
+    <Position X="37.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABEABAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>FixedSplitterWnd.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGateTreeView" Collapsed="true">
+    <Position X="39.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAQAiAAAgCAAAAAAAAEAAAAggAA=</HashCode>
+      <FileName>GateTreeView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InOutValues">
+    <Position X="48.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAIAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>InOutValues.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Line">
+    <Position X="44.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAEAAAAAAAAAAAAIAAAAACAAAAAAAAAAAABgAA=</HashCode>
+      <FileName>Line.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LogicEngine" Collapsed="true">
+    <Position X="20.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAACEAAABgAAAAABKAARGAABABAIQQAABABIAQA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANDGATE" Collapsed="true">
+    <Position X="19.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAQAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ORGATE" Collapsed="true">
+    <Position X="24.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NOTGATE" Collapsed="true">
+    <Position X="28.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAACAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NANDGATE" Collapsed="true">
+    <Position X="33.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NORGATE" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="XORGATE" Collapsed="true">
+    <Position X="17.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAACAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BITLAMP" Collapsed="true">
+    <Position X="22" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BITINPUT" Collapsed="true">
+    <Position X="26.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLOCK_SIGNAL" Collapsed="true">
+    <Position X="31" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAUAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Seven" Collapsed="true">
+    <Position X="34" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAADALwAAAAgAIIAAAQAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FilpFlopEngine" Collapsed="true">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAgAAAAAAAAABAAAAIAAQEAgAAQAAAAAAAAAoAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DFF" Collapsed="true">
+    <Position X="10.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAQBAAAAAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TFF" Collapsed="true">
+    <Position X="13" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAEAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JKFF" Collapsed="true">
+    <Position X="15.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAEAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLogisim_KKLApp" Collapsed="true">
+    <Position X="41" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAABAAAAAAQAAAABAAAAQAA=</HashCode>
+      <FileName>Logisim_KKL.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLogisim_KKLDoc" Collapsed="true">
+    <Position X="35.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABCAAAAQCACAgCAAAgAAgASggIJAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logisim_KKLDoc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLogisim_KKLView" Collapsed="true">
+    <Position X="39.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAgyCQAQAAIABCkDQiADEgBSAAJiBAAgCAmAxCAA=</HashCode>
+      <FileName>Logisim_KKLView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMainFrame" Collapsed="true">
+    <Position X="39.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACBAAAAAAAIQBCAAAiAAAgCAAAgAAAAAAAAAAABA=</HashCode>
+      <FileName>MainFrm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Facing" Collapsed="true">
+    <Position X="35.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAABAAAQAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GateSelect" Collapsed="true">
+    <Position X="37.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAGAAAAgACAAgAAAAAAAAAAAAAgIAAgAAAAAAACAACA=</HashCode>
+      <FileName>LogicEngine.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>
